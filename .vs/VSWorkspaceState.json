@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Battleship",
+    "\\Battleship\\src",
+    "\\Battleship\\src\\Controllers",
+    "\\Battleship\\src\\Controllers\\Ships"
   ],
-  "SelectedNode": "\\C:\\Users\\imnot\\Source\\Repos\\_BattleShip",
   "PreviewInSolutionExplorer": false
 }

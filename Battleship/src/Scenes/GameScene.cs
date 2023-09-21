@@ -3,6 +3,7 @@ using Battleship.src.Controllers.Ships;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
+using System.ComponentModel;
 
 namespace Battleship.src.Scenes
 {
@@ -21,6 +22,11 @@ namespace Battleship.src.Scenes
             _textureLoader = new TextureLoader(Content);
             _textureLoader.loadTexture("Sprites/Celda");
             _textureLoader.loadTexture("Sprites/ship_BattleShip");
+            _textureLoader.loadTexture("Sprites/ship_Carrier");
+            _textureLoader.loadTexture("Sprites/ship_Cruiser");
+            _textureLoader.loadTexture("Sprites/ship_PatrolBoat");
+
+
 
 
             /* Game */
@@ -30,6 +36,7 @@ namespace Battleship.src.Scenes
         public override void Update()
         {
             base.Update();
+            _game.Update();
         }
     }
 }

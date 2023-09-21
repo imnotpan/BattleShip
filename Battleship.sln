@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleship", "Battleship\Battleship.csproj", "{F711A864-EBEB-4463-BF10-B6AB063C56A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship", "Battleship\Battleship.csproj", "{F711A864-EBEB-4463-BF10-B6AB063C56A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez", "E:\Monogame\Nez\Nez.Portable\Nez.csproj", "{0B2F543F-9FD7-439B-AA27-7D71F1CCE919}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteNetLib", "LiteNetLib\LiteNetLib\LiteNetLib.csproj", "{4F103428-E35B-4715-AA8D-95DB5C8D4C75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteNetLib", "E:\Monogame\LiteNetLib\LiteNetLib\LiteNetLib.csproj", "{04E693F2-D0FE-4644-B850-991AE1D72D05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez", "Nez\Nez.Portable\Nez.csproj", "{46D35974-00C1-44F7-A200-BEAE53AD6610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{F711A864-EBEB-4463-BF10-B6AB063C56A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F711A864-EBEB-4463-BF10-B6AB063C56A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F711A864-EBEB-4463-BF10-B6AB063C56A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B2F543F-9FD7-439B-AA27-7D71F1CCE919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B2F543F-9FD7-439B-AA27-7D71F1CCE919}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B2F543F-9FD7-439B-AA27-7D71F1CCE919}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B2F543F-9FD7-439B-AA27-7D71F1CCE919}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04E693F2-D0FE-4644-B850-991AE1D72D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04E693F2-D0FE-4644-B850-991AE1D72D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04E693F2-D0FE-4644-B850-991AE1D72D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04E693F2-D0FE-4644-B850-991AE1D72D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F103428-E35B-4715-AA8D-95DB5C8D4C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F103428-E35B-4715-AA8D-95DB5C8D4C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F103428-E35B-4715-AA8D-95DB5C8D4C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F103428-E35B-4715-AA8D-95DB5C8D4C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D35974-00C1-44F7-A200-BEAE53AD6610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D35974-00C1-44F7-A200-BEAE53AD6610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D35974-00C1-44F7-A200-BEAE53AD6610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D35974-00C1-44F7-A200-BEAE53AD6610}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,8 +14,9 @@ namespace Battleship.src.Controllers
     {
         public int[,] playerMatrix = new int[10, 10]; // Matriz para almacenar las celdas
         public int[,] enemyMatrix = new int[10, 10]; // Matriz para almacenar las celdas
-        //public List<Grid> gridCells = new List<Grid>(); // Lista para almacenar las celdas
-        //public List<shipBattle> boatsArray = new List<shipBattle>(); // Lista para almacenar las celdas
+        public List<Grid> GridsList = new List<Grid>();
+        public List<ShipBase> ShipList = new List<ShipBase>();
+
 
         // Lista de selecciones temporales de la matriz
         public List<Vector2> tempArray = new List<Vector2>();
@@ -29,13 +30,26 @@ namespace Battleship.src.Controllers
 
 
         // General Controller
-        private Board _board;
-        private TextureLoader _textureLoader;
-        private Scene _game;
+        public Board _board;
+        public TextureLoader _textureLoader;
+        public Scene _game;
+
+        /* Game States */
+        public int gameState = 0;
+        public ShipBase inDragShip;
+        public bool shipsReady = true;
+        /* Game States
+         * 0 -> Game Starting
+         * 1 -> Ship positioning
+         * 2 -> grid selection missile launch
+         * 3 -> Attack
+         * -------------
+         * 5 -> Pause game ...
+        */
 
         /* MATRIX STATES 
-         *  0 -> Destroy
-         *  1 -> Avaiable
+         *  0 -> Nothing
+         *  1 -> Bomb
          *  2 -> ShipExistsAtPosition
          */
 
@@ -45,24 +59,66 @@ namespace Battleship.src.Controllers
             this._textureLoader = _textureLoader;
             this._game = _game;
 
+            InitializeMatrix(playerMatrix);
+            InitializeMatrix(enemyMatrix);
+            
             /* Tablero */
             _board = new Board(_game, _textureLoader, this);
 
-            InitializeMatrix(playerMatrix);
-            InitializeMatrix(enemyMatrix);
+        }
+
+        public void Update()
+        {
+            /* Positions SHIPS */
+            if (gameState == 0)
+            {
+                foreach (var entity in _game.FindEntitiesWithTag(1))
+                {
+                    if (entity is ShipBase ship)
+                    {
+                        if (!ship.isReady)
+                        {
+                            shipsReady = false;
+                            break;
+                        }
+                        if (shipsReady)
+                        {
+                            gameState = 1;
+                        }
+                    }
+                }
+            }
+
+            if (Input.IsKeyPressed(Keys.Space))
+            {
+                PrintMatrix(playerMatrix);
+            }
+            if (Input.IsKeyPressed(Keys.R))
+            {
+                foreach (var entity in _game.FindEntitiesWithTag(1))
+                {
+                    if (entity is ShipBase ship)
+                    {
+                        ship.StartShipInBoard();
+                    }
+                }
+            }
         }
 
         public void PrintMatrix(int[,] Matrix)
         {
+            Console.WriteLine();
+
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    // Por ejemplo, inicializamos todas las celdas del jugador a 'false' (no golpeadas).
-                    Console.Write(Matrix[i, j] + " ");
+                    Console.Write(Matrix[j, i] + " ");
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine();
+
         }
         private void InitializeMatrix(int[,] Matrix)
         {
@@ -70,8 +126,7 @@ namespace Battleship.src.Controllers
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    // Por ejemplo, inicializamos todas las celdas del jugador a 'false' (no golpeadas).
-                    playerMatrix[i, j] = 1;
+                    playerMatrix[i, j] = 0;
                 }
             }
         }
@@ -83,6 +138,7 @@ namespace Battleship.src.Controllers
             }
             Console.WriteLine();
         }
+
         public void GenerateRandomBoard()
         {
             Dictionary<string, int> ships = new Dictionary<string, int>

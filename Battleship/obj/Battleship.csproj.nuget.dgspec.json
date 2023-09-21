@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj": {}
+    "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj": {}
   },
   "projects": {
-    "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj": {
+    "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj",
+        "projectUniqueName": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
         "projectName": "Battleship",
-        "projectPath": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj",
+        "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
         "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\obj\\",
+        "outputPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
-                "projectPath": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+              "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+                "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
               },
-              "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj": {
-                "projectPath": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj"
+              "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+                "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+    "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
+        "projectUniqueName": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
         "projectName": "LiteNetLib",
-        "projectPath": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
+        "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
         "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\obj\\",
+        "outputPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -282,14 +282,14 @@
         }
       }
     },
-    "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj": {
+    "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj",
+        "projectUniqueName": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
         "projectName": "Nez",
-        "projectPath": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj",
+        "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
         "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "E:\\Monogame\\Nez\\Nez.Portable\\obj\\Nez\\",
+        "outputPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\obj\\Nez\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

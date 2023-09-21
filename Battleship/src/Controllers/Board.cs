@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Buffers.Text;
 using System.Collections.Generic;
+using System.Security.Principal;
 using Battleship.src.Controllers.Ships;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Battleship.src.Controllers
 {
     public class Board
     {
         // Var's
-        private const int BOARD_DIM = 10;
+        public const int BOARD_DIM = 10;
         private const int CELL_SPACE = 1;
         private const int BOARD_SPACING = 16;
-
 
         //General Controllers
         private TextureLoader _textureLoader;
@@ -47,21 +48,33 @@ namespace Battleship.src.Controllers
             const int cellCounts = BOARD_DIM * BOARD_DIM;
             for (int i = 0; i < cellCounts; i++)
             {
-                //var x = (distanceCell * (i % BOARD_DIM)) + BOARD_SPACING;
-                //var y = (distanceCell * (i / BOARD_DIM)) + BOARD_SPACING;
                 var x = startX + (distanceCell * (i % BOARD_DIM));
                 var y = startY + (distanceCell * (i / BOARD_DIM));
-                var _grid = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
+                var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
 
-                _scene.AddEntity(_grid);
+                _scene.AddEntity(gridEntity);
+                _gameManager.GridsList.Add(gridEntity);
             }
+            // Definir las posiciones de las naves en la parte derecha de la pantalla
+            Vector2 positionBattleShip = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
+            Vector2 positionCarrier = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
+            Vector2 positionCruiser = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
+            Vector2 positionPatrolBoat = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
 
-            /* Deploy ships */
-            shipBattle ship = new shipBattle(_textureLoader._gameTextures["ship_BattleShip"], new Vector2(30, 30), _gameManager);
-            _scene.AddEntity(ship);
+            // Crear y agregar las naves al escenario
+            ShipBase shipBattleShip = new ShipBase(_textureLoader._gameTextures["ship_BattleShip"], positionBattleShip, _gameManager);
+            _scene.AddEntity(shipBattleShip);
 
-            shipBattle shipA = new shipBattle(_textureLoader._gameTextures["ship_BattleShip"], new Vector2(120, 120), _gameManager);
-            _scene.AddEntity(shipA);
+            ShipBase shipCarrier = new ShipBase(_textureLoader._gameTextures["ship_Carrier"], positionCarrier, _gameManager);
+            _scene.AddEntity(shipCarrier);
+
+            ShipBase shipCruiser = new ShipBase(_textureLoader._gameTextures["ship_Cruiser"], positionCruiser, _gameManager);
+            _scene.AddEntity(shipCruiser);
+
+            ShipBase shipPatrolBoat = new ShipBase(_textureLoader._gameTextures["ship_PatrolBoat"], positionPatrolBoat, _gameManager);
+            _scene.AddEntity(shipPatrolBoat);
+
+
         }
     }
 }

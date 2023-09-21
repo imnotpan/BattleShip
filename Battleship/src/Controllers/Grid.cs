@@ -17,10 +17,14 @@ namespace Battleship.src.Controllers
 
         public bool _onClick = true;
         private SpriteRenderer SpriteRenderer { get; set; }
-
-        private Vector2 _relativePosition;
-        private bool isOnTempArray = false;
         private GameManager _gameManager;
+
+        public Vector2 _relativePosition;
+        
+        /* Logic Properties */
+        private bool isOnTempArray = false;
+        public bool isInUse = false;
+       
 
         public Grid(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameManager _gameManager)
         {
@@ -42,58 +46,48 @@ namespace Battleship.src.Controllers
         {
             base.Update();
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
-            mouseController(mousePosition);
-        }
 
-        public void mouseController(Vector2 mousePosition)
-        {
             if (Collider.Bounds.Contains(mousePosition))
             {
                 _gameManager._MouseInGrid = this;
-                if (Input.LeftMouseButtonPressed)
-                {
-                    SpriteRenderer.Color = (SpriteRenderer.Color == Color.White) ? Color.Red : Color.White;
-                    isOnTempArray = (isOnTempArray == false) ? true : false;
+                if(_gameManager.gameState == 2) ClickeableGridSystem(mousePosition);
+            }
+        }
+        public void ClickeableGridSystem(Vector2 mousePosition)
+        {
+            if (Input.LeftMouseButtonPressed)
+            {
+                SpriteRenderer.Color = (SpriteRenderer.Color == Color.White) ? Color.Red : Color.White;
+                isOnTempArray = (isOnTempArray == false) ? true : false;
 
-                    _onClick = false;
-                    this.TweenLocalScaleTo(new Vector2(1.25f, 1.25f), 0.05f)
-                    .SetEaseType(EaseType.ExpoOut)
+                _onClick = false;
+                this.TweenLocalScaleTo(new Vector2(1.25f, 1.25f), 0.05f)
+                .SetEaseType(EaseType.ExpoOut)
+                .SetCompletionHandler((x) =>
+                {
+                    this.TweenLocalScaleTo(new Vector2(1f, 1f), 0.05f)
+                    .SetEaseType(EaseType.ExpoIn)
                     .SetCompletionHandler((x) =>
                     {
-                        this.TweenLocalScaleTo(new Vector2(1f, 1f), 0.05f)
-                        .SetEaseType(EaseType.ExpoIn)
-                        .SetCompletionHandler((x) =>
+                            
+                        _onClick = true;
+                        if (isOnTempArray)
                         {
+                            isOnTempArray = true;
+                            _gameManager.tempArray.Add(_relativePosition);
+                        }
+                        else
+                        {
+                            isOnTempArray = false;
+                            _gameManager.tempArray.Remove(_relativePosition);
+                        }
+                        _gameManager.printTempArray();
                             
-                            _onClick = true;
-                            if (isOnTempArray)
-                            {
-                                isOnTempArray = true;
-                                _gameManager.tempArray.Add(_relativePosition);
-                            }
-                            else
-                            {
-                                isOnTempArray = false;
-                                _gameManager.tempArray.Remove(_relativePosition);
-                            }
-                            _gameManager.printTempArray();
-                            
-                        })
-                        .Start();
                     })
                     .Start();
-                }
-                else if (Input.LeftMouseButtonDown)
-                {
-
-                }
-                else if (Input.LeftMouseButtonReleased)
-                {
-
-                }
-           
+                })
+                .Start();
             }
-
         }
     }
 }

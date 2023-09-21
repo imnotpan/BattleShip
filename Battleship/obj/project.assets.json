@@ -264,13 +264,13 @@
     },
     "LiteNetLib/1.1.0": {
       "type": "project",
-      "path": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
-      "msbuildProject": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+      "path": "../LiteNetLib/LiteNetLib/LiteNetLib.csproj",
+      "msbuildProject": "../LiteNetLib/LiteNetLib/LiteNetLib.csproj"
     },
     "Nez/1.0.0": {
       "type": "project",
-      "path": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj",
-      "msbuildProject": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj"
+      "path": "../Nez/Nez.Portable/Nez.csproj",
+      "msbuildProject": "../Nez/Nez.Portable/Nez.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -288,11 +288,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj",
+      "projectUniqueName": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
       "projectName": "Battleship",
-      "projectPath": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\Battleship.csproj",
+      "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
       "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\imnot\\Source\\Repos\\_BattleShip\\Battleship\\obj\\",
+      "outputPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -314,11 +314,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
-              "projectPath": "E:\\Monogame\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+            "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+              "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
             },
-            "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj": {
-              "projectPath": "E:\\Monogame\\Nez\\Nez.Portable\\Nez.csproj"
+            "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+              "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
             }
           }
         }
