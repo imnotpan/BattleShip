@@ -75,3 +75,4 @@ C:\Users\imnot\source\repos\_BattleShip\Battleship\obj\Debug\net6.0\ref\Battlesh
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ship_Carrier.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ship_Cruiser.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\ship_PatrolBoat.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\GridEnemy.xnb

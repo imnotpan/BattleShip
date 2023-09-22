@@ -5,12 +5,14 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/Celda.png</File>
+    <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/GridEnemy.png</File>
     <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/ship_BattleShip.png</File>
     <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/Ship_Carrier.png</File>
     <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/Ship_Cruiser.png</File>
     <File>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/ship_PatrolBoat.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
