@@ -2,6 +2,7 @@
 using Nez;
 using Microsoft.Xna.Framework;
 using System;
+using Battleship.src.Controllers.Grids;
 
 namespace Battleship.src.Controllers.Ships
 {
@@ -18,7 +19,7 @@ namespace Battleship.src.Controllers.Ships
         public void OnDragStart()
         {
             ShipBase.isDragging = true;
-            ShipBase._gameManager.inDragShip = ShipBase;
+            ShipBase.GameManager.inDragShip = ShipBase;
             ShipBase.startDragPosition = ShipBase.Position;
 
         }
@@ -26,7 +27,7 @@ namespace Battleship.src.Controllers.Ships
         public void OnDragEnd(Vector2 mousePosition)
         {
             ShipBase.isDragging = false;
-            ShipBase._gameManager.inDragShip = null;
+            ShipBase.GameManager.inDragShip = null;
             var collisionSystem = ShipBase.ShipCollisionSystem;
             var setInArray = ShipBase.ShipSetArrayPositions;
 
@@ -35,15 +36,15 @@ namespace Battleship.src.Controllers.Ships
                 returnToStartDragPosition();
                 return;
             }
-            if (collisionSystem.CollisionWithBoundsArray(ShipBase._gameManager._MouseInGrid, ShipBase.Rotation) &&
-                                                        ShipBase._gameManager._MouseInGrid != null)
+            if (collisionSystem.CollisionWithBoundsArray(ShipBase.GameManager._MouseInGrid, ShipBase.Rotation) &&
+                                                        ShipBase.GameManager._MouseInGrid != null)
             {
                 returnToStartDragPosition();
                 return;
             }
             else
             {
-                var FutureGridLinked = ShipBase._gameManager._MouseInGrid;
+                var FutureGridLinked = ShipBase.GameManager._MouseInGrid;
                 /* Detections to future */
                 
                 var futurePositionArray = setInArray.PositionValuesList(ShipBase.Rotation, FutureGridLinked);
@@ -55,21 +56,21 @@ namespace Battleship.src.Controllers.Ships
                 }
                 
 
-                ShipBase.GridLinkedToShip = ShipBase._gameManager._MouseInGrid;
+                ShipBase.GridLinkedToShip = ShipBase.GameManager._MouseInGrid;
 
                 foreach (var item in ShipBase.inUsePositions) {
-                    ShipBase._gameManager.playerMatrix[(int)item.X, (int)item.Y] = 0;
+                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = 0;
                 }
 
                 foreach (var item in futurePositionArray)
                 {
-                    ShipBase._gameManager.playerMatrix[(int)item.X, (int)item.Y] = 2;
+                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = 2;
                 }
 
                 ShipBase.inUsePositions.Clear();
                 ShipBase.inUsePositions = futurePositionArray;
 
-                ShipBase.TweenLocalPositionTo(ShipBase._gameManager._MouseInGrid.Position, 0.05f)
+                ShipBase.TweenLocalPositionTo(ShipBase.GameManager._MouseInGrid.Position, 0.05f)
                     .SetEaseType(EaseType.SineOut)
                     .Start();
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Battleship.src.Controllers.Grids;
 
 namespace Battleship.src.Controllers.Ships
 {
@@ -66,7 +67,7 @@ namespace Battleship.src.Controllers.Ships
 
             foreach (var positions in usePositions)
             {
-                if (ShipBase._gameManager.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
+                if (ShipBase.GameManager.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
                 {
                     return true;
                 }

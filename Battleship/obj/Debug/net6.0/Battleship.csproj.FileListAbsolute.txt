@@ -76,3 +76,13 @@ C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Spri
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ship_Cruiser.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\ship_PatrolBoat.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\GridEnemy.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\Mouse.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\MainMenu\Multiplayer.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\MainMenu\SinglePlayer.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Flag.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Shaders\ScribbleEffect.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Shaders\Textures\NoiseTexture.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Shaders\WavyTexture.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\AttackButton.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\ShipsInPositionButton.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Fonts\rockinRecordFont.xnb

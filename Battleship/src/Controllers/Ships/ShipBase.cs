@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Battleship.src.Controllers.Grids;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Nez;
@@ -15,7 +16,7 @@ namespace Battleship.src.Controllers.Ships
         /* Components */
         public SpriteRenderer SpriteRenderer { get; set; }
         public Collider Collider { get; set; }
-        public GameManager _gameManager;
+        public GameManager GameManager;
 
         public Texture2D _texture;
 
@@ -35,13 +36,17 @@ namespace Battleship.src.Controllers.Ships
         internal ShipRotateSystem ShipRotateSystem { get; set; }
         internal ShipDragAndDropSystem ShipDragAndDropSystem { get; set; }
         internal ShipCollisionSystem ShipCollisionSystem { get; set; }
-        internal ShipSetArrayPositions ShipSetArrayPositions { get; set; } 
+        internal ShipSetArrayPositions ShipSetArrayPositions { get; set; }
+
+
+        Effect doodleEffect;
+
 
         public ShipBase(Texture2D shipTexture, Vector2 position, GameManager _gameManager) {
             SetTag(1);
             this._texture = shipTexture;
             this.Position = position;
-            this._gameManager = _gameManager;
+            this.GameManager = _gameManager;
 
             var textureHeight = _texture.Height;
             var yOffset = (textureHeight / 32) % 2 == 0 ? -16 : 0;
@@ -60,14 +65,16 @@ namespace Battleship.src.Controllers.Ships
             ShipDragAndDropSystem = new ShipDragAndDropSystem(this);
             ShipCollisionSystem = new ShipCollisionSystem(this);
             ShipSetArrayPositions = new ShipSetArrayPositions(this);
+
+
         }
 
         public override void Update()
         {
             base.Update();
+
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
-            if (_gameManager.gameState == 0) StartShipInBoard();
-            if (_gameManager.gameState == 1) shipControllers(mousePosition);
+            if (GameManager.GameState == "PREPARATION") shipControllers(mousePosition);
   
         }
         public void shipControllers(Vector2 mousePosition)
@@ -81,7 +88,7 @@ namespace Battleship.src.Controllers.Ships
                     ShipRotateSystem.RotateShip();
                 }
 
-                else if (Input.LeftMouseButtonDown && !isDragging && _gameManager.inDragShip == null)
+                else if (Input.LeftMouseButtonDown && !isDragging && GameManager.inDragShip == null)
                 {
                     ShipDragAndDropSystem.OnDragStart();
                 }
@@ -96,7 +103,7 @@ namespace Battleship.src.Controllers.Ships
         {
             if (!isReady)
             {
-                var gridList = _gameManager.GridsList;
+                var gridList = GameManager.GridsList;
                 int randomIndex = Nez.Random.NextInt(gridList.Count);
                 GridLinkedToShip = gridList[randomIndex];
                 this.LocalPosition = GridLinkedToShip.LocalPosition;
@@ -108,7 +115,7 @@ namespace Battleship.src.Controllers.Ships
                 // Comprobaciones
                 if(ShipCollisionSystem.CollisionWithBoundsArray(GridLinkedToShip, this.LocalRotation))
                 {
-                    StartShipInBoard();
+                    //StartShipInBoard();
                     return;
                 }
 
@@ -116,16 +123,9 @@ namespace Battleship.src.Controllers.Ships
                 inUsePositions.Clear();
                 inUsePositions = listPositions;
 
-
-                foreach (var i in inUsePositions)
-                {
-                    Console.Write(i.ToString() + " ");
-                }
-                Console.WriteLine();
-                
                 if (ShipCollisionSystem.collisionDetection(inUsePositions))
                 {
-                    StartShipInBoard();
+                    //StartShipInBoard();
                     return;
                 }
 

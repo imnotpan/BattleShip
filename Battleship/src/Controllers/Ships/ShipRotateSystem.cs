@@ -81,7 +81,7 @@ namespace Battleship.src.Controllers.Ships
             {
                 foreach (var item in positions)
                 {
-                    ShipBase._gameManager.playerMatrix[(int)item.X, (int)item.Y] = 0;
+                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = 0;
                 }
             }
 
@@ -90,7 +90,7 @@ namespace Battleship.src.Controllers.Ships
             {
                 foreach (var item in positions)
                 {
-                    ShipBase._gameManager.playerMatrix[(int)item.X, (int)item.Y] = value;
+                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = value;
                 }
             }
         }

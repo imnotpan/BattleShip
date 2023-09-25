@@ -1,7 +1,9 @@
 ﻿using Battleship.src.Scenes;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Nez;
-using System;
+using System.Drawing;
 
 namespace Battleship
 {
@@ -12,6 +14,7 @@ namespace Battleship
         public Game1() : base(1280, 720)
         {
             IsMouseVisible = true;
+            DefaultSamplerState = SamplerState.PointClamp;
 
             //DebugRenderEnabled = true;
         }
@@ -19,11 +22,17 @@ namespace Battleship
         protected override void Initialize()
         {
             base.Initialize();
+            Texture2D pixCursor = Content.Load<Texture2D>("Sprites/HUD/Mouse");
+            int cursorWidth = pixCursor.Width;
+            int cursorHeight = pixCursor.Height;
+            var mouse = MouseCursor.FromTexture2D(pixCursor, cursorWidth / 2, cursorHeight / 2 - 32);
+            Mouse.SetCursor(mouse);
 
             Scene.SetDefaultDesignResolution(720, 576, Scene.SceneResolutionPolicy.NoBorderPixelPerfect);
             Scene = new GameScene();
+
         }
-        
+
 
     }
 

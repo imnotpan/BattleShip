@@ -2,6 +2,8 @@
 using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Security.Principal;
+using Battleship.src.Controllers.Enemy;
+using Battleship.src.Controllers.Grids;
 using Battleship.src.Controllers.Ships;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +12,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Battleship.src.Controllers
 {
-    public class Board
+    public class playerBoard
     {
         // Var's
         public const int BOARD_DIM = 10;
@@ -22,7 +24,7 @@ namespace Battleship.src.Controllers
         private Scene _scene;
         private GameManager _gameManager;
 
-        public Board(Scene _scene, TextureLoader _textureLoader, GameManager _gameManager)
+        public playerBoard(Scene _scene, TextureLoader _textureLoader, GameManager _gameManager)
         {
             this._gameManager = _gameManager;
             this._textureLoader = _textureLoader;
@@ -31,18 +33,17 @@ namespace Battleship.src.Controllers
             InitializeBoard();
             
         }
+
         public void InitializeBoard()
         {
             /* Textures */
             var _gridTexture = _textureLoader._gameTextures["Celda"];
-
             var distanceCell = _gridTexture.Width + CELL_SPACE;
 
             /* Start at middle Screen */
             var boardWidth = BOARD_DIM * distanceCell;
             var boardHeight = BOARD_DIM * distanceCell;
-            Console.WriteLine(Constants.PIX_SCREEN_WIDTH);
-            var startX = (Constants.PIX_SCREEN_WIDTH - boardWidth) / 1.5f;
+            var startX = (Constants.PIX_SCREEN_WIDTH - boardWidth) / 3f;
             var startY = (Constants.PIX_SCREEN_HEIGHT - boardHeight) / 2 + 15;
 
             /* Create Main Board board */
@@ -54,26 +55,22 @@ namespace Battleship.src.Controllers
                 var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
                 
                 _scene.AddEntity(gridEntity);
-                _gameManager.GridsList.Add(gridEntity);
             }
 
             /* TinyBoard */
             var _gridTinyBoard = _textureLoader._gameTextures["GridEnemy"];
             var distanceCellTinyBoard = _gridTinyBoard.Width + CELL_SPACE;
-
-            var startXTinyBoard = (Constants.PIX_SCREEN_WIDTH - boardWidth) / 3;
-            var startYTinyBoard = (Constants.PIX_SCREEN_HEIGHT - boardHeight) / 2 + 5;
+            var boardWidthTiny = BOARD_DIM * distanceCellTinyBoard;
+            var boardHeightTiny = BOARD_DIM * distanceCellTinyBoard;
+            var startXTinyBoard = (Constants.PIX_SCREEN_WIDTH - boardWidthTiny) / 1.15f;
+            var startYTinyBoard = (Constants.PIX_SCREEN_HEIGHT - boardHeightTiny) / 1.45f + 10;
             for (int i = 0; i < cellCounts; i++)
             {
                 var x = startXTinyBoard + (distanceCellTinyBoard * (i % BOARD_DIM));
                 var y = startYTinyBoard + (distanceCellTinyBoard * (i / BOARD_DIM));
                 var tinyGridEntity = new GridTiny(_gridTinyBoard, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
 
-
                 _scene.AddEntity(tinyGridEntity);
-                _gameManager.tinyBoardGrids.Add(tinyGridEntity);
-
-
             }
 
             // Definir las posiciones de las naves en la parte derecha de la pantalla
@@ -103,7 +100,7 @@ namespace Battleship.src.Controllers
             {
                 if (_gameManager.playerMatrix[(int)grid._relativePosition.X, (int)grid._relativePosition.Y] == 2)
                 {
-                    grid.shipInGrid = true;
+                    grid.currentColor = Color.Blue;
                 }
             }
         }

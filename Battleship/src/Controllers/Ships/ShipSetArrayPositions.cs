@@ -1,4 +1,5 @@
 ﻿
+using Battleship.src.Controllers.Grids;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
@@ -20,7 +21,6 @@ namespace Battleship.src.Controllers.Ships
             var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 32);
             var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 32);
             var orientation = (int)Math.Ceiling(Mathf.Degrees(_rotation) / 90);
-            Console.WriteLine("Orientation: " + orientation );
 
             var relativePosition = new Vector2(gridLinked._relativePosition.X,
                                                 gridLinked._relativePosition.Y);
@@ -95,7 +95,7 @@ namespace Battleship.src.Controllers.Ships
         {
             foreach (var shipPosition in ShipBase.inUsePositions)
             {
-                ShipBase._gameManager.playerMatrix[(int)shipPosition.X, (int)shipPosition.Y] = value;
+                ShipBase.GameManager.playerMatrix[(int)shipPosition.X, (int)shipPosition.Y] = value;
             }
         }
     }
