@@ -9,13 +9,19 @@ using System.Diagnostics;
 
 namespace Battleship.src.Networking
 {
-    public class Servidor
+    public class Server
     {
+        public ServerListener ServerListener;    
+        public NetManager server;
         public void Start()
         {
+            ServerListener = new ServerListener();
+
             EventBasedNetListener listener = new EventBasedNetListener();
 
-            NetManager server = new NetManager(listener);
+            server = new NetManager(listener);
+
+
             server.Start(9050); // -> Set Port
 
             listener.ConnectionRequestEvent += request =>
@@ -34,12 +40,20 @@ namespace Battleship.src.Networking
                 peer.Send(writer, DeliveryMethod.ReliableOrdered);             // Send with reliability
             };
 
-            while (!Console.KeyAvailable)
-            {
-                server.PollEvents();
-                Thread.Sleep(15);
-            }
+        }
 
+        public void Update()
+        {
+            server.PollEvents();
+            if (server.ConnectedPeersCount < 1)
+            {
+                Console.WriteLine("Waiting For Connections");
+            }
+            Thread.Sleep(15);
+        }
+
+        public void ServerStop()
+        {
             server.Stop();
         }
        

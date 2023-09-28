@@ -1,5 +1,4 @@
-﻿using Battleship.src.Controllers.UI.Buttons;
-using Battleship.src.Networking;
+﻿using Battleship.src.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
@@ -8,8 +7,8 @@ namespace Battleship.src.Scenes
 {
     public class MenuScene : Scene
     {
-        Servidor _servidor;
-        Cliente _cliente;
+        Server _servidor;
+        Client _cliente;
 
         public override void Initialize()
         {

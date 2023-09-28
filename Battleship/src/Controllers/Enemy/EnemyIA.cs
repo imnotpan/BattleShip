@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
@@ -10,14 +8,17 @@ namespace Battleship.src.Controllers.Enemy
     {
         public bool isReady;
         private GameManager GameManager;
+        private GameControllers GameControllers;
+
         private List<int> ships = new List<int>() {5, 4, 3, 3, 2};
         private List<int> listRotations = new List<int>() { 0, 1};
-        private int BOARDDIM = 10;
+        private int BOARDDIM = 20;
         private int BOMBCOUNT = 3;
 
-        public EnemyIA(GameManager _gameManager)
+        public EnemyIA(GameControllers GameController)
         {
-            this.GameManager = _gameManager;
+            this.GameControllers = GameController;
+            this.GameManager = GameController.GameManager;
             StartShipsInBoard();
         }
 
@@ -30,6 +31,7 @@ namespace Battleship.src.Controllers.Enemy
         }
         public void GenerateIAShip(int shipSize)
         {
+            /*
             var randomPositionGridX = Nez.Random.NextInt(10);
             var randomPositionGridY = Nez.Random.NextInt(10);
             var orientation = Nez.Random.NextInt(listRotations.Count);
@@ -41,7 +43,7 @@ namespace Battleship.src.Controllers.Enemy
                 {
                     var posx = (int)shipPosition.X;
                     var posy = (int)shipPosition.Y+i;
-                    if(GameManager.enemyMatrix[posx, posy] == 2) { 
+                    if(GameControllers.PlayerBoard.enemyMatrix[posx, posy] == 2) { 
                         GenerateIAShip(shipSize);
                         return;
                     }
@@ -68,7 +70,7 @@ namespace Battleship.src.Controllers.Enemy
                 GenerateIAShip(shipSize);
                 return;
             }
-
+            */
 
         }
         public List<GridTiny> generateBombList()
@@ -84,8 +86,8 @@ namespace Battleship.src.Controllers.Enemy
 
         public GridTiny bomb()
         {
-
-            var tinyBoardGrids = GameManager.tinyBoardGrids;
+            /*
+            var tinyBoardGrids = GameControllers.PlayerBoard.tinyBoardGrids;
             var randomGridTiny = Nez.Random.NextInt(tinyBoardGrids.Count);
             var tinyGridRandom = tinyBoardGrids[randomGridTiny];
 
@@ -95,7 +97,10 @@ namespace Battleship.src.Controllers.Enemy
                 tinyGridRandom = tinyBoardGrids[randomGridTiny];
             }
             return tinyGridRandom;
-          
+          */
+            return null;
         }
+
+
     }
 }

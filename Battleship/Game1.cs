@@ -15,8 +15,8 @@ namespace Battleship
         {
             IsMouseVisible = true;
             DefaultSamplerState = SamplerState.PointClamp;
-
-            //DebugRenderEnabled = true;
+            
+            DebugRenderEnabled = true;
         }
 
         protected override void Initialize()
@@ -27,6 +27,7 @@ namespace Battleship
             int cursorHeight = pixCursor.Height;
             var mouse = MouseCursor.FromTexture2D(pixCursor, cursorWidth / 2, cursorHeight / 2 - 32);
             Mouse.SetCursor(mouse);
+            
 
             Scene.SetDefaultDesignResolution(720, 576, Scene.SceneResolutionPolicy.NoBorderPixelPerfect);
             Scene = new GameScene();
@@ -41,5 +42,6 @@ namespace Battleship
         public static int SCALE_WIDTH = 2;
         public static int PIX_SCREEN_WIDTH = 720;
         public static int PIX_SCREEN_HEIGHT = 576;
+
     }
 }

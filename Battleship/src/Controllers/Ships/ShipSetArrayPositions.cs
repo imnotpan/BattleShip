@@ -88,15 +88,5 @@ namespace Battleship.src.Controllers.Ships
             return positionList;
         }
 
-
-
-
-        public void matrixInShipPosition(int value)
-        {
-            foreach (var shipPosition in ShipBase.inUsePositions)
-            {
-                ShipBase.GameManager.playerMatrix[(int)shipPosition.X, (int)shipPosition.Y] = value;
-            }
-        }
     }
 }

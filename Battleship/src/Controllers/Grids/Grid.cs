@@ -6,6 +6,7 @@ using System;
 using Nez.Tweens;
 using System.Xml.Linq;
 using System.Reflection.Metadata;
+using Battleship.src.Scenes;
 
 namespace Battleship.src.Controllers.Grids
 {
@@ -20,7 +21,6 @@ namespace Battleship.src.Controllers.Grids
         private SpriteRenderer SpriteRenderer { get; set; }
         private GameManager GameManager;
 
-
         public Vector2 _relativePosition;
 
         /* Logic Properties */
@@ -30,11 +30,10 @@ namespace Battleship.src.Controllers.Grids
         public Color currentColor = Color.White;
 
         public bool isDestroy = false;
-        Effect doodleEffect;
 
-        public Grid(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameManager _gameManager)
+        public Grid(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameManager GameManager)
         {
-            GameManager = _gameManager;
+            this.GameManager = GameManager;
             SpriteRenderer = new SpriteRenderer(cellTexture);
             SpriteRenderer.RenderLayer = 1;
             SpriteRenderer.Origin = new Vector2(cellTexture.Width / 2, cellTexture.Height / 2);
@@ -46,17 +45,6 @@ namespace Battleship.src.Controllers.Grids
 
             AddComponent(Collider);
             AddComponent(SpriteRenderer);
-            _gameManager.GridsList.Add(this);
-            /*
-            doodleEffect = GameManager.Scene.Content.Load<Effect>("Shaders/ScribbleEffect");
-            doodleEffect.Parameters["doodleMaxOffset"].SetValue(new Vector2(0.005f, 0.005f));
-            doodleEffect.Parameters["doodleNoiseScale"].SetValue(new Vector2(6f, 8f));
-            doodleEffect.Parameters["doodleFrameCount"].SetValue(6);
-            doodleEffect.Parameters["doodleFrameTime"].SetValue(0.2f);
-            Material renderMaterial = new Material(doodleEffect);
-            SpriteRenderer.Material = renderMaterial;
-            */
-
 
         }
 
@@ -67,23 +55,26 @@ namespace Battleship.src.Controllers.Grids
            // doodleEffect.Parameters["time"].SetValue(Time.TotalTime);
 
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
-            if(GameManager.GameState == "PREPARATION" || GameManager.GameState == "PLAYERTURN" )
-            if (Collider.Bounds.Contains(mousePosition))
+            if (GameManager != null)
             {
-                GameManager._MouseInGrid = this;
-                if (SpriteRenderer.Color != overColor)
-                {
-                    SpriteRenderer.Color = overColor;
-                }
+                if (GameManager.GameState == "PREPARATION" || GameManager.GameState == "PLAYERTURN")
+                    if (Collider.Bounds.Contains(mousePosition))
+                    {
+                        GameManager._MouseInGrid = this;
+                        if (SpriteRenderer.Color != overColor)
+                        {
+                            SpriteRenderer.Color = overColor;
+                        }
 
-                if (GameManager.GameState == "PLAYERTURN") ClickeableGridSystem(mousePosition);
-            }
-            else
-            {
-                if (SpriteRenderer.Color != currentColor)
-                {
-                    SpriteRenderer.Color = currentColor;
-                }
+                        if (GameManager.GameState == "PLAYERTURN") ClickeableGridSystem(mousePosition);
+                    }
+                    else
+                    {
+                        if (SpriteRenderer.Color != currentColor)
+                        {
+                            SpriteRenderer.Color = currentColor;
+                        }
+                    }
             }
         }
 

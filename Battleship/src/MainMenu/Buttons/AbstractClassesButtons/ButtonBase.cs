@@ -5,7 +5,7 @@ using Nez.Sprites;
 using Nez.Tweens;
 using System;
 
-namespace Battleship.src.Controllers.UI.Buttons
+namespace Battleship.src.MainMenu.Buttons.AbstractClasses
 {
     public class ButtonBase : Entity
     {
@@ -25,10 +25,11 @@ namespace Battleship.src.Controllers.UI.Buttons
         Effect wavyShader;
 
 
-        public ButtonBase(Texture2D buttonTexture, Vector2 _position) { 
-        
+        public ButtonBase(Texture2D buttonTexture, Vector2 _position)
+        {
+
             this.buttonTexture = buttonTexture;
-             
+
             SpriteRenderer = new SpriteRenderer(buttonTexture);
             SpriteRenderer.Origin = new Vector2(buttonTexture.Width / 2, buttonTexture.Height / 2);
 
@@ -45,7 +46,7 @@ namespace Battleship.src.Controllers.UI.Buttons
         }
         public void onApper()
         {
- 
+
             this.TweenLocalScaleTo(originalScale, 0.05f)
             .SetEaseType(EaseType.ExpoOut)
             .SetCompletionHandler((x) =>
@@ -60,7 +61,7 @@ namespace Battleship.src.Controllers.UI.Buttons
           .SetEaseType(EaseType.ExpoOut)
           .SetCompletionHandler((x) =>
           {
-              this.Destroy();
+              Destroy();
           })
           .Start();
         }

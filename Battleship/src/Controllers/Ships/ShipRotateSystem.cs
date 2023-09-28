@@ -19,6 +19,7 @@ namespace Battleship.src.Controllers.Ships
 
         public void RotateShip()
         {
+            /*
             var nextRotation = MathHelper.ToDegrees(ShipBase.Rotation) + 90;
             var collisionSystem = ShipBase.ShipCollisionSystem;
             var setInArray = ShipBase.ShipSetArrayPositions;
@@ -75,24 +76,8 @@ namespace Battleship.src.Controllers.Ships
                         })
                         .Start();
                 }
-            }
-            // Función para limpiar las posiciones en la matriz de jugador
-            void ClearPlayerMatrix(List<Vector2> positions)
-            {
-                foreach (var item in positions)
-                {
-                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = 0;
-                }
-            }
-
-            // Función para establecer las posiciones en la matriz de jugador con un valor dado
-            void SetPlayerMatrix(List<Vector2> positions, int value)
-            {
-                foreach (var item in positions)
-                {
-                    ShipBase.GameManager.playerMatrix[(int)item.X, (int)item.Y] = value;
-                }
-            }
+            */
+            
         }
     }
 }

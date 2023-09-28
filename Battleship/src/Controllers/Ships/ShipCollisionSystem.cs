@@ -28,10 +28,10 @@ namespace Battleship.src.Controllers.Ships
              * HorizontalRight  -> 3
              * */
             var gridRelativePosition = _grid._relativePosition;
-            var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 32);
-            var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 32);
+            var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 16);
+            var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 16);
             var orientation = (int)Math.Ceiling(Mathf.Degrees(_rotation) / 90);
-            var BOARDDIM = 10;
+            var BOARDDIM = 20;
 
 
             if (orientation == 0 &&
@@ -62,16 +62,19 @@ namespace Battleship.src.Controllers.Ships
             }
             return true;
         }
+
+
         public bool collisionDetection(List<Vector2> usePositions)
         {
-
+            /*
             foreach (var positions in usePositions)
             {
-                if (ShipBase.GameManager.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
+                if (ShipBase.GameC.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
                 {
                     return true;
                 }
             }
+            */
             return false;
         }
     }

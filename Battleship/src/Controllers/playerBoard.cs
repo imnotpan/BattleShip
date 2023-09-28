@@ -1,62 +1,69 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Security.Principal;
-using Battleship.src.Controllers.Enemy;
+﻿using Battleship.src.Controllers.Enemy;
 using Battleship.src.Controllers.Grids;
 using Battleship.src.Controllers.Ships;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Nez;
-using static System.Formats.Asn1.AsnWriter;
+using System;
+using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace Battleship.src.Controllers
 {
     public class playerBoard
     {
         // Var's
-        public const int BOARD_DIM = 10;
+        public const int BOARD_DIM = 20;
         private const int CELL_SPACE = 1;
-        private const int BOARD_SPACING = 16;
 
         //General Controllers
-        private TextureLoader _textureLoader;
-        private Scene _scene;
-        private GameManager _gameManager;
+        TextureLoader _textureLoader;
+        Scene _Scene;
+        GameControllers GameControllers;
 
-        public playerBoard(Scene _scene, TextureLoader _textureLoader, GameManager _gameManager)
+        // Grids
+        public List<Grid> GridsList = new List<Grid>();
+        public List<GridTiny> tinyBoardGrids = new List<GridTiny>();
+
+        // Boards 
+        public int[,] playerMatrix = new int[20, 20]; 
+        public int[,] enemyMatrix = new int[20, 20];
+
+        public playerBoard(GameControllers GameControllers)
         {
-            this._gameManager = _gameManager;
-            this._textureLoader = _textureLoader;
-            this._scene = _scene;
+            this.GameControllers = GameControllers;
+            this._Scene = GameControllers._Scene;
+            this._textureLoader = GameControllers.TextureLoader;
 
-            InitializeBoard();
-            
+
+            InitializeMatrix(playerMatrix);
+            InitializeMatrix(enemyMatrix);
         }
 
-        public void InitializeBoard()
+
+        public void InitializeBoard(GameManager GameManager)
         {
-            /* Textures */
+            /* Board */
             var _gridTexture = _textureLoader._gameTextures["Celda"];
             var distanceCell = _gridTexture.Width + CELL_SPACE;
 
-            /* Start at middle Screen */
             var boardWidth = BOARD_DIM * distanceCell;
             var boardHeight = BOARD_DIM * distanceCell;
-            var startX = (Constants.PIX_SCREEN_WIDTH - boardWidth) / 3f;
-            var startY = (Constants.PIX_SCREEN_HEIGHT - boardHeight) / 2 + 15;
-
-            /* Create Main Board board */
+            var startX = (Constants.PIX_SCREEN_WIDTH - boardWidth) / 3f - 10;
+            var startY = (Constants.PIX_SCREEN_HEIGHT - boardHeight) / 2 + 7;
+            
             const int cellCounts = BOARD_DIM * BOARD_DIM;
             for (int i = 0; i < cellCounts; i++)
             {
                 var x = startX + (distanceCell * (i % BOARD_DIM));
                 var y = startY + (distanceCell * (i / BOARD_DIM));
-                var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
-                
-                _scene.AddEntity(gridEntity);
+                var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), GameManager);
+                GridsList.Add(gridEntity);
+                _Scene.AddEntity(gridEntity);
             }
+        }        
 
+        public void InitializeTinyBoard(GameManager GameManager)
+        {
             /* TinyBoard */
             var _gridTinyBoard = _textureLoader._gameTextures["GridEnemy"];
             var distanceCellTinyBoard = _gridTinyBoard.Width + CELL_SPACE;
@@ -64,46 +71,44 @@ namespace Battleship.src.Controllers
             var boardHeightTiny = BOARD_DIM * distanceCellTinyBoard;
             var startXTinyBoard = (Constants.PIX_SCREEN_WIDTH - boardWidthTiny) / 1.15f;
             var startYTinyBoard = (Constants.PIX_SCREEN_HEIGHT - boardHeightTiny) / 1.45f + 10;
+
+            const int cellCounts = BOARD_DIM * BOARD_DIM;
+
             for (int i = 0; i < cellCounts; i++)
             {
                 var x = startXTinyBoard + (distanceCellTinyBoard * (i % BOARD_DIM));
                 var y = startYTinyBoard + (distanceCellTinyBoard * (i / BOARD_DIM));
-                var tinyGridEntity = new GridTiny(_gridTinyBoard, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), _gameManager);
-
-                _scene.AddEntity(tinyGridEntity);
+                var tinyGridEntity = new GridTiny(_gridTinyBoard, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), GameManager);
+                tinyBoardGrids.Add(tinyGridEntity);
+                _Scene.AddEntity(tinyGridEntity);
             }
-
-            // Definir las posiciones de las naves en la parte derecha de la pantalla
-            Vector2 positionBattleShip = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionCarrier = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionCruiser = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionPatrolBoat = new Vector2(Constants.PIX_SCREEN_WIDTH/2, Constants.PIX_SCREEN_HEIGHT);
-
-            // Crear y agregar las naves al escenario
-            ShipBase shipBattleShip = new ShipBase(_textureLoader._gameTextures["ship_BattleShip"], positionBattleShip, _gameManager);
-            _scene.AddEntity(shipBattleShip);
-
-            ShipBase shipCarrier = new ShipBase(_textureLoader._gameTextures["ship_Carrier"], positionCarrier, _gameManager);
-            _scene.AddEntity(shipCarrier);
-
-            ShipBase shipPatrolBoat = new ShipBase(_textureLoader._gameTextures["ship_PatrolBoat"], positionPatrolBoat, _gameManager);
-            _scene.AddEntity(shipPatrolBoat);
-
-            ShipBase shipCruiser = new ShipBase(_textureLoader._gameTextures["ship_Cruiser"], positionCruiser, _gameManager);
-            _scene.AddEntity(shipCruiser);
-
         }
 
-        public void setTinyBoard()
+        public void InitializeMatrix(int[,] Matrix)
         {
-            foreach(var grid in _gameManager.tinyBoardGrids)
+            for (int i = 0; i < 10; i++)
             {
-                if (_gameManager.playerMatrix[(int)grid._relativePosition.X, (int)grid._relativePosition.Y] == 2)
+                for (int j = 0; j < 10; j++)
                 {
-                    grid.currentColor = Color.Blue;
+                    playerMatrix[i, j] = 0;
                 }
             }
+            Console.WriteLine("[ x ] Matrix Initialize");
         }
+
+
+
+        // Función para establecer las posiciones en la matriz de jugador con un valor dado
+        public int[,] SetPlayerMatrix(int[,] Matrix, List<Vector2> positions, int value)
+        {
+            var tempMatrix = Matrix;
+            foreach (var item in positions)
+            {
+                tempMatrix[(int)item.X, (int)item.Y] = value;
+            }
+            return tempMatrix;
+        }
+
 
     }
 }

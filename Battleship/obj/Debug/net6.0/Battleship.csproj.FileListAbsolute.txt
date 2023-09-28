@@ -86,3 +86,5 @@ C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Shad
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\AttackButton.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\ShipsInPositionButton.xnb
 C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Fonts\rockinRecordFont.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\CircleBlue.xnb
+C:\Users\imnot\source\repos\_BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\GameHud\CircleRed.xnb

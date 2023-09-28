@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Battleship.src.Networking
 {
-    public class Cliente
+    public class Client
     {
         public void Connection()
         {

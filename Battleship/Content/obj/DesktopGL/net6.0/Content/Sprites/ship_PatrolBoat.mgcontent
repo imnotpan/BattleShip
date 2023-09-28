@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/ship_PatrolBoat.png</SourceFile>
-  <SourceTime>2023-09-20T12:47:13.5051657-03:00</SourceTime>
+  <SourceTime>2023-09-27T01:42:59.6069477-03:00</SourceTime>
   <DestFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/bin/DesktopGL/Content/Sprites/ship_PatrolBoat.xnb</DestFile>
-  <DestTime>2023-09-20T12:47:57.6278696-03:00</DestTime>
+  <DestTime>2023-09-27T01:43:02.9823952-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

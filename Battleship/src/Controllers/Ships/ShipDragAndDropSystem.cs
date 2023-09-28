@@ -18,14 +18,16 @@ namespace Battleship.src.Controllers.Ships
 
         public void OnDragStart()
         {
+            /*
             ShipBase.isDragging = true;
             ShipBase.GameManager.inDragShip = ShipBase;
             ShipBase.startDragPosition = ShipBase.Position;
-
+            */
         }
 
         public void OnDragEnd(Vector2 mousePosition)
         {
+            /*
             ShipBase.isDragging = false;
             ShipBase.GameManager.inDragShip = null;
             var collisionSystem = ShipBase.ShipCollisionSystem;
@@ -45,7 +47,6 @@ namespace Battleship.src.Controllers.Ships
             else
             {
                 var FutureGridLinked = ShipBase.GameManager._MouseInGrid;
-                /* Detections to future */
                 
                 var futurePositionArray = setInArray.PositionValuesList(ShipBase.Rotation, FutureGridLinked);
                 
@@ -75,12 +76,16 @@ namespace Battleship.src.Controllers.Ships
                     .Start();
 
             }
+            */
         }
+
         public void returnToStartDragPosition()
         {
+            /*
             ShipBase.TweenLocalPositionTo(ShipBase.startDragPosition, 0.05f)
                 .SetEaseType(EaseType.SineOut)
                 .Start();
+            */
         }
 
 
