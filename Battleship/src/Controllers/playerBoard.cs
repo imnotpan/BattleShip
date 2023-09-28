@@ -56,7 +56,7 @@ namespace Battleship.src.Controllers
             {
                 var x = startX + (distanceCell * (i % BOARD_DIM));
                 var y = startY + (distanceCell * (i / BOARD_DIM));
-                var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), GameManager);
+                var gridEntity = new Grid(_gridTexture, new(x, y), new((int)(i % BOARD_DIM), (int)(i / BOARD_DIM)), GameControllers);
                 GridsList.Add(gridEntity);
                 _Scene.AddEntity(gridEntity);
             }
@@ -108,6 +108,7 @@ namespace Battleship.src.Controllers
             }
             return tempMatrix;
         }
+
 
 
     }

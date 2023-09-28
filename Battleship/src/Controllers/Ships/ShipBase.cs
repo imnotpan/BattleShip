@@ -7,7 +7,7 @@ using Nez.Sprites;
 using Nez.Tweens;
 using System;
 using System.Collections.Generic;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace Battleship.src.Controllers.Ships
 {
@@ -36,12 +36,21 @@ namespace Battleship.src.Controllers.Ships
         internal ShipCollisionSystem ShipCollisionSystem { get; set; }
         internal ShipSetArrayPositions ShipSetArrayPositions { get; set; }
 
+        public int _shipRotation;
+        public bool canMove = true;
+
+        public GameControllers GameControllers;
+        public GameManager GameManager;
 
 
-        public ShipBase(Texture2D shipTexture, Vector2 position) {
+        public ShipBase(Texture2D shipTexture, GameControllers GameControllers)
+        {
+
+            this.GameControllers = GameControllers;
+            this.GameManager = GameControllers.GameManager;
             SetTag(1);
             this._texture = shipTexture;
-            this.Position = position;
+            //this.Position = position;
 
             var textureHeight = _texture.Height;
             var yOffset = (textureHeight / 16) % 2 == 0 ? -8 : 0;
@@ -67,104 +76,39 @@ namespace Battleship.src.Controllers.Ships
         public override void Update()
         {
             base.Update();
+            this.LocalRotationDegrees = _shipRotation;
 
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
 
-            /*
-            if (GameManager != null)
-            {
-                if (GameManager.GameState == "PREPARATION") shipControllers(mousePosition);
-            }
-            */
+            if (canMove) { shipControllers(mousePosition); }
+            if (GameControllers.inDragShip == this) { this.Position = mousePosition; }
+
         }
 
-        /*
+
         public void shipControllers(Vector2 mousePosition)
         {
             // Game state Ship controller
-
-            if (isDragging) { Position = mousePosition; }
             if (Collider.Bounds.Contains(mousePosition))
             {
-                if (Input.RightMouseButtonPressed)
-                {
-                    ShipRotateSystem.RotateShip();
-                }
-
-                else if (Input.LeftMouseButtonDown && !isDragging && GameManager.inDragShip == null)
+                if (Input.LeftMouseButtonDown && GameControllers.inDragShip == null)
                 {
                     ShipDragAndDropSystem.OnDragStart();
-                }
-                else if (Input.LeftMouseButtonReleased && isDragging)
-                {
-                    ShipDragAndDropSystem.OnDragEnd(mousePosition);
+                    startDragPosition = mousePosition;
+                    GameControllers.inDragShip = this;
                 }
             }
-        }
-        */
-      
-        public void StartShipInBoard(playerBoard playerBoard)
-        {
 
-            if (!isReady)
+            if (Input.LeftMouseButtonReleased && GameControllers.inDragShip == this)
             {
-                // Se selecciona una casilla al azar
-                var gridList = playerBoard.GridsList;
-                int randomIndex = Nez.Random.NextInt(gridList.Count);
-                GridLinkedToShip = gridList[randomIndex];
-                this.LocalPosition = GridLinkedToShip.LocalPosition;
-
-                //  Se selecciona una rotacion al azar
-                var listRotations = new List<int>() { 0, 90, 180, 360 };
-                var randRotation = Nez.Random.NextInt(listRotations.Count);
-                this.LocalRotationDegrees = listRotations[randRotation];
-
-                // Se comprueba collision respecto a casilla
-                if (ShipCollisionSystem.CollisionWithBoundsArray(GridLinkedToShip, this.LocalRotation))
-                {
-                    return;
-                }
-
-                var listPositions = ShipSetArrayPositions.PositionValuesList(this.LocalRotation, GridLinkedToShip);
-                inUsePositions.Clear();
-                inUsePositions = listPositions;
-
-                isReady = true;
+                ShipDragAndDropSystem.OnDragEnd(mousePosition, GameControllers.PlayerBoard);
+                GameControllers.inDragShip = null;
             }
-
-
-            /*
-            if (!isReady)
-            {
-
-
-
-
-                // Comprobaciones
-                if(ShipCollisionSystem.CollisionWithBoundsArray(GridLinkedToShip, this.LocalRotation))
-                {
-                    //StartShipInBoard();
-                    return;
-                }
-
-                var listPositions = ShipSetArrayPositions.PositionValuesList(this.LocalRotation, GridLinkedToShip);
-                inUsePositions.Clear();
-                inUsePositions = listPositions;
-
-                if (ShipCollisionSystem.collisionDetection(inUsePositions))
-                {
-                    //StartShipInBoard();
-                    return;
-                }
-
-                ShipSetArrayPositions.matrixInShipPosition(2);
-
-                isReady = true;
-            }   
-            */
         }
-      
     }
+}
+        
+      
 
     
-}
+

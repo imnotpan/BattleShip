@@ -38,9 +38,13 @@ namespace Battleship.src.Controllers
 
         /* Game States */
         public string GameState = "MAINMENU";
-        public ShipBase inDragShip;
-        public bool shipsReady = true;
 
+        // Ships
+        public ShipBase inDragShip = null;
+
+
+        //Grids
+        public bool canClickGrid = false;
 
         // Bullets
         public int bulletCount = 4;
@@ -78,41 +82,8 @@ namespace Battleship.src.Controllers
                 Console.Write("[ x ] Is Enemy Turn");
             }
 
-            foreach (ShipBase ship in GameControllers.ShipsDeploy.ShipsList)
-            {
-                while (!ship.isReady)
-                {
-                    ship.StartShipInBoard(GameControllers.PlayerBoard);
-                }
-                if (ship.isReady)
-                {
-                    Console.WriteLine(ship.inUsePositions);
-
-                }
-            }
-
-
-
-
-
-            /*
-            foreach (var entity in _Scene.FindEntitiesWithTag(1))
-            {
-                if (entity is ShipBase ship)
-                {
-                    ship.SpriteRenderer.Color = new Color(0.25f, 0.25f, 0.25f, 0.25f);
-
-                    foreach (var pos in ship.inUsePositions)
-                    {
-                        playerShipsPositions.Add(pos);
-                    }
-                }
-            }
-            /*
-            
-            GameState = "PREPARATION";
-            */
-            //setTinyBoard();
+            GameControllers.ShipsDeploy.deploy(GameControllers);
+            GameControllers.ShipsDeploy.canMove();
         }
 
 

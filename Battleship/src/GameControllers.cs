@@ -1,5 +1,6 @@
 ﻿using Battleship.src.Controllers;
 using Battleship.src.Controllers.Enemy;
+using Battleship.src.Controllers.Grids;
 using Battleship.src.Controllers.Ships;
 using Battleship.src.Controllers.UI.GameHud;
 using Battleship.src.MainMenu;
@@ -11,13 +12,15 @@ namespace Battleship.src
     public class GameControllers
     {
 
+        public ShipBase inDragShip = null;
+        public Grid MouseInGrid = null;
 
         public GameManager GameManager;
         public TextureLoader TextureLoader;
         public MainMenuController MainMenuController;
         public GameHud GameHud;
         public GameNetworking GameNetworking;
-        public ShipsDeploy ShipsDeploy;
+        public ShipsSystem ShipsDeploy;
 
         //GameController
         public playerBoard PlayerBoard;
@@ -33,8 +36,8 @@ namespace Battleship.src
 
             // Logica del juego
             PlayerBoard = new playerBoard(this);
-            ShipsDeploy = new ShipsDeploy(this);
-
+            ShipsDeploy = new ShipsSystem(this);
+            
 
             //EnemyIA = new EnemyIA(this);
             //MainMenuController = new MainMenuController(this);

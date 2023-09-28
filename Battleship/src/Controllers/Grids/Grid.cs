@@ -30,10 +30,12 @@ namespace Battleship.src.Controllers.Grids
         public Color currentColor = Color.White;
 
         public bool isDestroy = false;
+        GameControllers GameControllers;
 
-        public Grid(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameManager GameManager)
+        public Grid(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameControllers GameControllers)
         {
-            this.GameManager = GameManager;
+            this.GameControllers = GameControllers;
+            this.GameManager = GameControllers.GameManager;
             SpriteRenderer = new SpriteRenderer(cellTexture);
             SpriteRenderer.RenderLayer = 1;
             SpriteRenderer.Origin = new Vector2(cellTexture.Width / 2, cellTexture.Height / 2);
@@ -52,15 +54,14 @@ namespace Battleship.src.Controllers.Grids
         public override void Update()
         {
             base.Update();
-           // doodleEffect.Parameters["time"].SetValue(Time.TotalTime);
 
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
             if (GameManager != null)
             {
-                if (GameManager.GameState == "PREPARATION" || GameManager.GameState == "PLAYERTURN")
+                if (GameManager.canClickGrid)
                     if (Collider.Bounds.Contains(mousePosition))
                     {
-                        GameManager._MouseInGrid = this;
+                        GameControllers.MouseInGrid = this;
                         if (SpriteRenderer.Color != overColor)
                         {
                             SpriteRenderer.Color = overColor;
@@ -75,6 +76,10 @@ namespace Battleship.src.Controllers.Grids
                             SpriteRenderer.Color = currentColor;
                         }
                     }
+            }
+            else
+            {
+                Console.WriteLine("GameManager null");
             }
         }
 

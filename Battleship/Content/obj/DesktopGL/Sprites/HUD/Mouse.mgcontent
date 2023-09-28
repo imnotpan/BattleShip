@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/HUD/Mouse.png</SourceFile>
-  <SourceTime>2023-09-23T23:26:33.1409812-03:00</SourceTime>
-  <DestFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/bin/DesktopGL/Sprites/HUD/Mouse.xnb</DestFile>
-  <DestTime>2023-09-25T15:03:05.6409111-03:00</DestTime>
+  <SourceFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/Mouse.png</SourceFile>
+  <SourceTime>2023-09-28T08:21:37.8169239-04:00</SourceTime>
+  <DestFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/bin/DesktopGL/Sprites/HUD/Mouse.xnb</DestFile>
+  <DestTime>2023-09-28T08:38:24.1240644-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -30,9 +30,11 @@ namespace Battleship.src.Controllers.Ships
             var gridRelativePosition = _grid._relativePosition;
             var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 16);
             var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 16);
-            var orientation = (int)Math.Ceiling(Mathf.Degrees(_rotation) / 90);
+            var orientation = (int)Math.Ceiling(_rotation / 90);
+            
             var BOARDDIM = 20;
 
+            Console.WriteLine("\nCheking Collision for:" + (fromButtom + fromOrigin) + "  orientation:  " + orientation);
 
             if (orientation == 0 &&
                 (gridRelativePosition.Y - fromButtom >= 0 &&
@@ -40,6 +42,7 @@ namespace Battleship.src.Controllers.Ships
             {
                 return false;
             }
+
             else if (orientation == 1 &&
                 (gridRelativePosition.X - fromOrigin + 1 >= 0) &&
                 (gridRelativePosition.X + fromButtom < BOARDDIM))
@@ -64,17 +67,18 @@ namespace Battleship.src.Controllers.Ships
         }
 
 
-        public bool collisionDetection(List<Vector2> usePositions)
+        public bool collisionDetection(List<Vector2> usePositions, playerBoard playerBoard)
         {
-            /*
+            
             foreach (var positions in usePositions)
             {
-                if (ShipBase.GameC.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
+                Console.WriteLine("AT POSITION: " + playerBoard.playerMatrix[(int)positions.X, (int)positions.Y]);
+                if (playerBoard.playerMatrix[(int)positions.X, (int)positions.Y] == 2)
                 {
                     return true;
                 }
             }
-            */
+            
             return false;
         }
     }
