@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Nez;
+using Nez.Tweens;
 using System;
 using System.Collections.Generic;
 
@@ -10,16 +12,17 @@ namespace Battleship.src.Controllers.Ships
 
         TextureLoader TextureLoader;
         Scene _Scene;
+        public GameControllers GameControllers;
+
         public List<ShipBase> ShipsList = new List<ShipBase>();
 
         public bool isDraggingShip = false;
 
         public ShipsSystem(GameControllers GameControllers) {
 
+            this.GameControllers = GameControllers;
             this.TextureLoader = GameControllers.TextureLoader;
-            this._Scene = GameControllers._Scene;
-
-
+            this._Scene = GameControllers.Scene;
 
             // Definir las posiciones de las naves en la parte derecha de la pantalla
             Vector2 positionBattleShip = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
@@ -28,33 +31,47 @@ namespace Battleship.src.Controllers.Ships
             Vector2 positionPatrolBoat = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
 
             // Crear y agregar las naves al escenario
-            ShipBase shipBattleShip = new ShipBase(TextureLoader._gameTextures["ship_BattleShip"], GameControllers);
-            ShipsList.Add(shipBattleShip);
 
-            ShipBase shipCarrier = new ShipBase(TextureLoader._gameTextures["ship_Carrier"], GameControllers);
+            /*
+            ShipBase shipCarrier = new ShipBase(TextureLoader._gameTextures["ship_Carrier"], this);
             ShipsList.Add(shipCarrier);
+            
+            ShipBase shipCruiser = new ShipBase(TextureLoader._gameTextures["ship_Cruiser"], this);
+            ShipsList.Add(shipCruiser);
 
-            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], GameControllers);
+            ShipBase shipBattleShip = new ShipBase(TextureLoader._gameTextures["ship_BattleShip"], this);
+            ShipsList.Add(shipBattleShip);
+            */
+
+            // Patrol 1 GRID
+            // Destructor 2 GRIDS
+            // Submarine 3 GRIDS
+
+            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], this);
             ShipsList.Add(shipPatrolBoat);
 
-            ShipBase shipCruiser = new ShipBase(TextureLoader._gameTextures["ship_Cruiser"], GameControllers);
-            ShipsList.Add(shipCruiser);
+            ShipBase shipDestructor = new ShipBase(TextureLoader._gameTextures["ship_Destructor"], this);
+            ShipsList.Add(shipDestructor);
+            ShipBase shipSubmarine = new ShipBase(TextureLoader._gameTextures["ship_submarine"], this);
+            ShipsList.Add(shipSubmarine);
 
         }
 
-        public void deploy(GameControllers GameControllers)
+        public void deploy()
         {
+            
             foreach (ShipBase ship in ShipsList)
             {
                 while (!ship.isReady)
                 {
-                   StartShipInBoard(ship, GameControllers.PlayerBoard);
+                   StartShipInBoard(ship);
                 }
                 if (ship.isReady)
                 {
-                    GameControllers._Scene.AddEntity(ship);
+                    _Scene.AddEntity(ship);
                 }
             }
+            
 
         }
         public void canMove()
@@ -68,19 +85,19 @@ namespace Battleship.src.Controllers.Ships
                 }
             }
 
-            Console.WriteLine("[ x ] Ships can move");
         }
 
         // Linked to ship
-        public void StartShipInBoard(ShipBase ship, playerBoard playerBoard)
+        public void StartShipInBoard(ShipBase ship)
         {
+            
             var CollisionSystem = ship.ShipCollisionSystem;
             var ArraySystem = ship.ShipSetArrayPositions;
 
             if (!ship.isReady)
             {
                 // Se selecciona una casilla al azar
-                var gridList = playerBoard.GridsList;
+                var gridList = GameControllers.GridsList;
                 int randomIndex = Nez.Random.NextInt(gridList.Count);
                 ship.GridLinkedToShip = gridList[randomIndex];
                 ship.LocalPosition = ship.GridLinkedToShip.LocalPosition;
@@ -88,35 +105,61 @@ namespace Battleship.src.Controllers.Ships
                 //  Se selecciona una rotacion al azar
                 var listRotations = new List<int>() { 0, 90, 180, 270 };
                 var randRotation = Nez.Random.NextInt(listRotations.Count);
-                ship._shipRotation = listRotations[randRotation];
+                var tempRotation = listRotations[randRotation];
 
                 // Se comprueba collision respecto a casilla
-                if (CollisionSystem.CollisionWithBoundsArray(ship.GridLinkedToShip,ship._shipRotation))
+                if (CollisionSystem.CollisionWithBoundsArray(ship.GridLinkedToShip, tempRotation))
                 {
                     return;
                 }
 
-
-
-                var listPositions = ArraySystem.PositionValuesList(ship._shipRotation, ship.GridLinkedToShip);
+                var listPositions = ArraySystem.PositionValuesList(tempRotation, ship.GridLinkedToShip);
                 ship.inUsePositions.Clear();
                 ship.inUsePositions = listPositions;
                 Console.WriteLine("\n" + ship.Name);
 
 
-                if (CollisionSystem.collisionDetection(ship.inUsePositions, playerBoard))
+                if (CollisionSystem.collisionDetection(ship.inUsePositions))
                 {
                     return;
                 }
 
-                playerBoard.SetPlayerMatrix(playerBoard.playerMatrix, ship.inUsePositions, 2);
-
-                foreach (var position in listPositions)
+                foreach (Vector2 i in ship.inUsePositions)
                 {
-                    Console.WriteLine(position.ToString());
+                    GameControllers.playerShipsPositions.Add(i);
                 }
+
+                GameControllers.SetMatrixValue(GameControllers.playerMatrix, ship.inUsePositions, 2);
+
+
                 ship.Position = ship.GridLinkedToShip.Position;
+
+                // Solucion temporal
+                ship.TweenRotationDegreesTo(tempRotation, 0.001f)
+                    .SetEaseType(EaseType.Linear)
+                    .SetCompletionHandler((x) =>
+                    {
+                        if (ship.RotationDegrees >= 360) { ship.RotationDegrees = 0; }
+                        ship.RotationDegrees = tempRotation;
+                        Console.WriteLine(ship.RotationDegrees);
+                    })
+                    .Start();
+
                 ship.isReady = true;
+            }
+        }
+
+        public void ShipsReadyOnBoard()
+        {
+            foreach (ShipBase ship in ShipsList)
+            {
+
+                if (ship.canMove)
+                {
+                    ship.canMove = false;
+                    ship.SpriteRenderer.Color = new Color(0f, 0f, 0f, 0.25f);
+
+                }
             }
         }
 

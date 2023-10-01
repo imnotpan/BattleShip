@@ -13,13 +13,12 @@ namespace Battleship.src.Controllers.Enemy
         private List<int> ships = new List<int>() {5, 4, 3, 3, 2};
         private List<int> listRotations = new List<int>() { 0, 1};
         private int BOARDDIM = 20;
-        private int BOMBCOUNT = 3;
+        private int BOMBCOUNT = Constants.TOTALBOMBCOUNT;
 
         public EnemyIA(GameControllers GameController)
         {
             this.GameControllers = GameController;
             this.GameManager = GameController.GameManager;
-            StartShipsInBoard();
         }
 
         public void StartShipsInBoard()
@@ -29,11 +28,11 @@ namespace Battleship.src.Controllers.Enemy
                 GenerateIAShip(shipSize);
             }
         }
+
         public void GenerateIAShip(int shipSize)
         {
-            /*
-            var randomPositionGridX = Nez.Random.NextInt(10);
-            var randomPositionGridY = Nez.Random.NextInt(10);
+            var randomPositionGridX = Nez.Random.NextInt(BOARDDIM);
+            var randomPositionGridY = Nez.Random.NextInt(BOARDDIM);
             var orientation = Nez.Random.NextInt(listRotations.Count);
             var shipPosition = new Vector2(randomPositionGridX, randomPositionGridY);
 
@@ -43,12 +42,12 @@ namespace Battleship.src.Controllers.Enemy
                 {
                     var posx = (int)shipPosition.X;
                     var posy = (int)shipPosition.Y+i;
-                    if(GameControllers.PlayerBoard.enemyMatrix[posx, posy] == 2) { 
+                    if(GameControllers.enemyMatrix[posx, posy] == 2) { 
                         GenerateIAShip(shipSize);
                         return;
                     }
-                    GameManager.enemyMatrix[posx, posy] = 2;
-                    GameManager.enemyShipsPositions.Add(new Vector2(posx, posy));
+                    GameControllers.enemyMatrix[posx, posy] = 2;
+                    GameControllers.enemyShipsPositions.Add(new Vector2(posx, posy));
                 }
             } else if (orientation == 1 && (shipPosition.X - shipSize) >= 0)
             {
@@ -56,13 +55,13 @@ namespace Battleship.src.Controllers.Enemy
                 {
                     var posx = (int)shipPosition.X-i;
                     var posy = (int)shipPosition.Y;
-                    if (GameManager.enemyMatrix[posx, posy] == 2)
+                    if (GameControllers.enemyMatrix[posx, posy] == 2)
                     {
                         GenerateIAShip(shipSize);
                         return;
                     }
-                    GameManager.enemyMatrix[posx, posy] = 2;
-                    GameManager.enemyShipsPositions.Add(new Vector2(posx, posy));
+                    GameControllers.enemyMatrix[posx, posy] = 2;
+                    GameControllers.enemyShipsPositions.Add(new Vector2(posx, posy));
                 }
             }
            else
@@ -70,13 +69,14 @@ namespace Battleship.src.Controllers.Enemy
                 GenerateIAShip(shipSize);
                 return;
             }
-            */
 
         }
-        public List<GridTiny> generateBombList()
+
+
+        public List<Vector2> generateBombList()
         {
-            var bombsList = new List<GridTiny>();
-            for(int i = 0; i < BOMBCOUNT; i++)
+            var bombsList = new List<Vector2>();
+            for(int i = 0; i <= BOMBCOUNT; i++)
             {
                 bombsList.Add(bomb());
             }
@@ -84,22 +84,22 @@ namespace Battleship.src.Controllers.Enemy
             return bombsList;
         }
 
-        public GridTiny bomb()
+        public Vector2 bomb()
         {
-            /*
-            var tinyBoardGrids = GameControllers.PlayerBoard.tinyBoardGrids;
+            
+            var tinyBoardGrids = GameControllers.tinyBoardGrids;
             var randomGridTiny = Nez.Random.NextInt(tinyBoardGrids.Count);
             var tinyGridRandom = tinyBoardGrids[randomGridTiny];
 
-            while(GameManager.playerMatrix[(int)tinyGridRandom._relativePosition.X, (int)tinyGridRandom._relativePosition.Y] == 1)
+            while(GameControllers.playerMatrix[(int)tinyGridRandom._relativePosition.X, (int)tinyGridRandom._relativePosition.Y] == 1)
             {
                 randomGridTiny = Nez.Random.NextInt(tinyBoardGrids.Count);
                 tinyGridRandom = tinyBoardGrids[randomGridTiny];
             }
-            return tinyGridRandom;
-          */
-            return null;
+            return tinyGridRandom._relativePosition;
+            
         }
+
 
 
     }

@@ -22,8 +22,6 @@ namespace Battleship.src.Scenes
 
             GameControllers = new GameControllers(this);
 
-
-
         }
         public override void Update()
         {

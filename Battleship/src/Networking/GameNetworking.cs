@@ -8,32 +8,23 @@ namespace Battleship.src.Networking
     {
         public Client Client;
         public Server Server;
+        public GameControllers GameControllers;
 
-        public GameNetworking(GameScene GameScene) {
 
-            Client = new Client();
-            Server = new Server();
 
-        }
 
-        public void HostServer()
-        {
-            Server.Start();
-        }
+        public GameNetworking(GameControllers GameControllers) {
+            this.GameControllers = GameControllers;
 
-        public void ConnectToServer() 
-        {
-            Client.Connection();
-            Console.WriteLine("Connected Success");
+            Client = new Client(GameControllers);
+            Server = new Server(GameControllers);
+
         }
 
         public void Update()
         {
-            if (Server.server.IsRunning)
-            {
-                Server.Update();
-            }
+            Server.Update();
+            Client.Update();
         }
-
     }
 }

@@ -7,20 +7,20 @@ namespace Battleship.src.Controllers.UI.GameLoopButtons
 {
     public class RedyButton : TextButtonBase
     {
-        GameManager GameManager;
+        GameControllers GameControllers;
 
         public RedyButton(string Text, Vector2 _position, GameControllers GameControllers) : base(Text, _position, GameControllers)
         {
-            this.GameManager = GameControllers.GameManager;
-            Console.WriteLine("REDY BUTTON");
+            this.GameControllers = GameControllers;
         }
 
         public override void onClick()
         {
             base.onClick();
-            GameManager.StartGame();
+            GameControllers.GameStatesSystem.ShipsReady();
             Destroy();
 
         }
+
     }
 }

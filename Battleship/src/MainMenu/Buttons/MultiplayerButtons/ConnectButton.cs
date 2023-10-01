@@ -1,26 +1,38 @@
-﻿using Battleship.src.Controllers;
-using Battleship.src.MainMenu.Buttons.AbstractClasses;
-using Battleship.src.Scenes;
+﻿using Battleship.src.MainMenu.Buttons.AbstractClasses;
 using Microsoft.Xna.Framework;
-using Nez;
 using System;
+using System.Collections.Generic;
 
 namespace Battleship.src.MainMenu.Buttons.Multiplayer
 {
     public class ConnectButton : TextButtonBase
     {
-        GameManager GameManager;
+        GameControllers GameControllers;
         public ConnectButton(string Text, Vector2 _position, GameControllers GameControllers)
                         : base(Text, _position, GameControllers)
         {
-            GameManager = GameControllers.GameManager;
+            this.GameControllers = GameControllers;
         }
 
         public override void onClick()
         {
+            var IP = GameControllers.MainMenuController.IP_CONNECTION;
+            var PORT = 0;
+            try
+            {
+                PORT = int.Parse(GameControllers.MainMenuController.PORT_CONNECTION);
+            }
+            catch (Exception ex) {
+                Console.WriteLine("Error de conexión: " + ex.Message);
+                return;
+            }
 
-            Console.WriteLine(GameManager.IPCONNECTION);
-
+            if (IP == "")
+            {
+                IP = "localhost";
+            }
+            Console.WriteLine("IP: { " + IP + " }" + " PORT { " + PORT + " }");
+            GameControllers.GameNetworking.Client.Connection(IP, PORT);
 
         }
     }

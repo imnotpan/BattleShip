@@ -28,6 +28,8 @@ namespace Battleship.src.Controllers.Ships
             var fromOriginPosition = relativePosition;
             positionList.Add(relativePosition);
 
+            Console.WriteLine("ORINTATION SET ARRAY POS: " + orientation);
+
             if (orientation == 0)
             {
                 for (int i = 0; i < fromButtom; i++)
@@ -83,7 +85,10 @@ namespace Battleship.src.Controllers.Ships
                     fromOriginPosition += new Vector2(1, 0);
                     positionList.Add(fromOriginPosition);
                 }
+
             }
+
+
 
             return positionList;
         }

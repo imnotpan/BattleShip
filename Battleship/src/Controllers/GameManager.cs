@@ -15,77 +15,25 @@ namespace Battleship.src.Controllers
 
 
 
-        //IA Grids
-        public List<Grid> enemySelectedGrids = new List<Grid>();
-        public List<Vector2> enemyShipsPositions = new List<Vector2>();
-
-        // Lista de selecciones temporales de la matriz
-        public List<Grid> playerSelectedGrids = new List<Grid>();
-        public List<Vector2> playerShipsPositions = new List<Vector2>();
-
-        /* Mouse Controllers */
-        public Vector2 mousePosition;
-        public Grid _MouseInGrid;
 
         // Enemy Boards
-        public playerBoard PlayerBoard;
+        public Board Board;
         public EnemyIA EnemyIA;
 
         // General Controller
-        TextureLoader TextureLoader;
         GameControllers GameControllers;
-        Scene _Scene;
 
-        /* Game States */
+        // Game States
         public string GameState = "MAINMENU";
 
-        // Ships
-        public ShipBase inDragShip = null;
-
-
-        //Grids
-        public bool canClickGrid = false;
 
         // Bullets
         public int bulletCount = 4;
 
-        // IP CONNECTION
-        public string IPCONNECTION;
-
 
         public GameManager(GameControllers GameControllers) {
-
             this.GameControllers = GameControllers;
-            this.TextureLoader = GameControllers.TextureLoader;
-            this._Scene = GameControllers._Scene;
-
-
         }
-
-
-        public void StartGame()
-        {
-            Console.WriteLine("[ x ] Game Starting");
-            GameControllers.PlayerBoard.InitializeBoard(this);
-            GameControllers.PlayerBoard.InitializeTinyBoard(this);
-
-            // Probabilidad Inicial
-            var startProbability = Nez.Random.NextInt(100);
-            if (startProbability <= 50)
-            {
-                GameState = "PLAYERTURN";
-                Console.Write("[ x ] Is Player Turn");
-            }
-            else
-            {
-                GameState = "ENEMYTURN";
-                Console.Write("[ x ] Is Enemy Turn");
-            }
-
-            GameControllers.ShipsDeploy.deploy(GameControllers);
-            GameControllers.ShipsDeploy.canMove();
-        }
-
 
         public void EndTurn()
         {

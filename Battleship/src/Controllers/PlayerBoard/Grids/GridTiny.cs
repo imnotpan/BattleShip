@@ -9,7 +9,7 @@ namespace Battleship.src.Controllers.Enemy
     public class GridTiny : Entity
     {
         GameManager GameManager { get; set; }
-        playerBoard playerBoard;
+        Board Board;
         SpriteRenderer SpriteRenderer { get; set; }
         public Vector2 _relativePosition;
 
@@ -19,7 +19,7 @@ namespace Battleship.src.Controllers.Enemy
 
         public Color currentColor = Color.White;
 
-        public GridTiny(Texture2D cellTexture, Vector2 position, Vector2 relativePosition, GameManager GameManager)
+        public GridTiny(Texture2D cellTexture, Vector2 position, Vector2 relativePosition)
         {
             this.GameManager = GameManager;
             SpriteRenderer = new SpriteRenderer(cellTexture);

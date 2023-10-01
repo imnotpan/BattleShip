@@ -24,7 +24,7 @@ namespace Battleship.src.Controllers.Ships
 
         /* Rotation Properties */
         public bool isRotating;
-        public bool isReady;
+        public bool isReady = false;
 
         /* Ship Properties*/
         public Vector2 startDragPosition;
@@ -36,17 +36,16 @@ namespace Battleship.src.Controllers.Ships
         internal ShipCollisionSystem ShipCollisionSystem { get; set; }
         internal ShipSetArrayPositions ShipSetArrayPositions { get; set; }
 
-        public int _shipRotation;
+        public int SHIPROTATION;
         public bool canMove = true;
 
         public GameControllers GameControllers;
         public GameManager GameManager;
 
 
-        public ShipBase(Texture2D shipTexture, GameControllers GameControllers)
+        public ShipBase(Texture2D shipTexture, ShipsSystem shipsSystem)
         {
-
-            this.GameControllers = GameControllers;
+            this.GameControllers = shipsSystem.GameControllers;
             this.GameManager = GameControllers.GameManager;
             SetTag(1);
             this._texture = shipTexture;
@@ -59,9 +58,10 @@ namespace Battleship.src.Controllers.Ships
             SpriteRenderer = new SpriteRenderer(shipTexture);
             SpriteRenderer.RenderLayer = -1;
             SpriteRenderer.Origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2 + yOffset);
-            Collider = new BoxCollider();
 
             AddComponent(SpriteRenderer);
+
+            Collider = new BoxCollider();
             AddComponent(Collider);
 
             /* Systems */
@@ -76,7 +76,6 @@ namespace Battleship.src.Controllers.Ships
         public override void Update()
         {
             base.Update();
-            this.LocalRotationDegrees = _shipRotation;
 
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
 
@@ -86,24 +85,32 @@ namespace Battleship.src.Controllers.Ships
         }
 
 
+
         public void shipControllers(Vector2 mousePosition)
         {
+            
             // Game state Ship controller
-            if (Collider.Bounds.Contains(mousePosition))
+            if (Collider.Bounds.Contains(mousePosition) && GameControllers.inDragShip == null)
             {
-                if (Input.LeftMouseButtonDown && GameControllers.inDragShip == null)
+                if (Input.LeftMouseButtonPressed)
                 {
                     ShipDragAndDropSystem.OnDragStart();
-                    startDragPosition = mousePosition;
+                    startDragPosition = GridLinkedToShip.Position;
                     GameControllers.inDragShip = this;
+                }
+                if (Input.RightMouseButtonPressed)
+                {
+                    ShipRotateSystem.RotateShip();
                 }
             }
 
             if (Input.LeftMouseButtonReleased && GameControllers.inDragShip == this)
             {
-                ShipDragAndDropSystem.OnDragEnd(mousePosition, GameControllers.PlayerBoard);
+                ShipDragAndDropSystem.OnDragEnd(mousePosition);
                 GameControllers.inDragShip = null;
             }
+
+
         }
     }
 }

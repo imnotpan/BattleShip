@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Fonts/rockinRecordFont.spritefont</SourceFile>
-  <SourceTime>2023-09-28T08:43:21.113338-04:00</SourceTime>
-  <DestFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/bin/DesktopGL/Content/Fonts/rockinRecordFont.xnb</DestFile>
-  <DestTime>2023-09-28T08:48:50.9117301-04:00</DestTime>
+  <SourceFile>E:/Proyectos/Source/BattleShip/Battleship/Content/Fonts/rockinRecordFont.spritefont</SourceFile>
+  <SourceTime>2023-09-28T13:20:48.4122499-03:00</SourceTime>
+  <DestFile>E:/Proyectos/Source/BattleShip/Battleship/Content/bin/DesktopGL/Content/Fonts/rockinRecordFont.xnb</DestFile>
+  <DestTime>2023-09-28T13:23:22.7670263-03:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

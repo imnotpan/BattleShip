@@ -17,19 +17,14 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClassesButtons
 
         public Entity _Entity { get; set; }
 
-        public TextEntity(string Text, Vector2 StartPosition, GameControllers GameControllers)
+        public TextEntity(string Text, Vector2 StartPosition, SpriteFont font)
         {
             //Interface
             _Entity = this;
 
-            //Controllers
-            _Scene = GameControllers._Scene;
 
             //Font
-            var font = _Scene.Content.Load<SpriteFont>("Fonts/rockinRecordFont");
             var NezSprite = new NezSpriteFont(font);
-
-            //Properties
             this.Text = Text;
 
             Position = StartPosition;
@@ -62,14 +57,16 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClassesButtons
         public void GenerateShadowClone()
         {
             // Crea la entidad de sombra
-            shadowClone = new TextEntity(Text, Position + new Vector2(-2f, 2f), GameControllers);
+            /*
+            shadowClone = new TextEntity(Text, Position + new Vector2(-2f, 2f));
             shadowClone._textComponent.Color = Color.Black;
             shadowClone._textComponent.RenderLayer = _textComponent.RenderLayer + 1;
 
             _Scene.AddEntity(shadowClone);
+            */
         }
 
-        public void AddOnScene()
+        public void AddOnScene(Scene _Scene)
         {
             _Scene.AddEntity(this);
             Console.WriteLine("Añadido a escena");
@@ -78,6 +75,11 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClassesButtons
         public void DestroyFromScene()
         {
             this.Destroy();
+        }
+
+        public void setSceneState(bool state)
+        {
+            this.Enabled = state;
         }
     }
 }

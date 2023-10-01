@@ -15,8 +15,8 @@ namespace Battleship
         {
             IsMouseVisible = true;
             DefaultSamplerState = SamplerState.PointClamp;
-            
-            DebugRenderEnabled = true;
+            PauseOnFocusLost = false;
+            //DebugRenderEnabled = true;
         }
 
         protected override void Initialize()
@@ -42,6 +42,7 @@ namespace Battleship
         public static int SCALE_WIDTH = 2;
         public static int PIX_SCREEN_WIDTH = 720;
         public static int PIX_SCREEN_HEIGHT = 576;
+        public static int TOTALBOMBCOUNT = 4;
 
     }
 }

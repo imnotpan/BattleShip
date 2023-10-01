@@ -10,6 +10,7 @@ namespace Battleship.src.Controllers.Ships
     {
         ShipBase ShipBase;
         Grid FutureGridLinked;
+        Board Board;
     
         public ShipDragAndDropSystem(ShipBase _ship) 
         { 
@@ -22,61 +23,47 @@ namespace Battleship.src.Controllers.Ships
             ShipBase.isDragging = true;
         }
 
-        public void OnDragEnd(Vector2 mousePosition, playerBoard playerBoard)
+        public void OnDragEnd(Vector2 mousePosition)
         {
             
             var collisionSystem = ShipBase.ShipCollisionSystem;
             var setInArray = ShipBase.ShipSetArrayPositions;
 
-            if (!ShipBase.Collider.CollidesWithAny(out CollisionResult result))
+            if (collisionSystem.CollisionWithBoundsArray(ShipBase.GameControllers.MouseInGrid, ShipBase.RotationDegrees) &&
+                                                         ShipBase.GameControllers.MouseInGrid != null)
             {
-                returnToStartDragPosition();
-                return;
-            }
-
-
-            if (collisionSystem.CollisionWithBoundsArray(ShipBase.GameControllers.MouseInGrid, ShipBase.Rotation) &&
-                                                        ShipBase.GameControllers.MouseInGrid != null)
-            {
+                Console.WriteLine("COLLIDES WITH BOUNDS  ORIENTATION: " + ShipBase.RotationDegrees/9);
                 returnToStartDragPosition();
                 return;
             }
             else
             {
                 var FutureGridLinked = ShipBase.GameControllers.MouseInGrid;
+                var futurePositionArray = setInArray.PositionValuesList(ShipBase.RotationDegrees, FutureGridLinked);
+                ShipBase.GameControllers.SetMatrixValue(ShipBase.GameControllers.playerMatrix, ShipBase.inUsePositions, 0);
 
-                var futurePositionArray = setInArray.PositionValuesList(ShipBase.Rotation, FutureGridLinked);
-
-
-                if (ShipBase.ShipCollisionSystem.collisionDetection(futurePositionArray, playerBoard))
+                if (ShipBase.ShipCollisionSystem.collisionDetection(futurePositionArray))
                 {
+                    Console.WriteLine("COLLIDES WITH SHIP");
                     returnToStartDragPosition();
                     return;
                 }
 
-
                 ShipBase.GridLinkedToShip = ShipBase.GameControllers.MouseInGrid;
-
-
-                playerBoard.SetPlayerMatrix(playerBoard.playerMatrix, ShipBase.inUsePositions, 0);
-                playerBoard.SetPlayerMatrix(playerBoard.playerMatrix, futurePositionArray, 2);
-
-
-
+                ShipBase.GameControllers.SetMatrixValue(ShipBase.GameControllers.playerMatrix, futurePositionArray, 2);
                 ShipBase.inUsePositions.Clear();
                 ShipBase.inUsePositions = futurePositionArray;
-
-                ShipBase.TweenLocalPositionTo(ShipBase.GameControllers.MouseInGrid.Position, 0.05f)
-                    .SetEaseType(EaseType.SineOut)
-                    .Start();
-
+                ShipBase.TweenLocalPositionTo(ShipBase.GridLinkedToShip.Position, 0.05f)
+                        .SetEaseType(EaseType.SineOut)
+                        .Start();
             }
         }
             
 
         public void returnToStartDragPosition()
         {
-            
+            ShipBase.GameControllers.SetMatrixValue(ShipBase.GameControllers.playerMatrix, ShipBase.inUsePositions, 2);
+
             ShipBase.TweenLocalPositionTo(ShipBase.startDragPosition, 0.05f)
                 .SetEaseType(EaseType.SineOut)
                 .Start();

@@ -1,6 +1,7 @@
 ﻿using Battleship.src.Controllers;
 using Battleship.src.MainMenu.Buttons.AbstractClasses;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Battleship.src.MainMenu.Buttons.MainMenuButtons
 {
@@ -18,6 +19,7 @@ namespace Battleship.src.MainMenu.Buttons.MainMenuButtons
         {
             base.onClick();
             GameControllers.MainMenuController.StartGame();
+            GameControllers.GameStatesSystem.StartGame();
         }
     }
 }

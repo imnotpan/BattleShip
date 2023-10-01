@@ -6,18 +6,19 @@ using System;
 
 namespace Battleship.src.Controllers.UI.GameLoopButtons
 {
-    public class AttackButton : ButtonBase
+    public class AttackButton : TextButtonBase
     {
-        GameManager GameManager;
-        public AttackButton(Texture2D buttonTexture, Vector2 _position, GameManager GameManager)
-                : base(buttonTexture, _position)
+        GameControllers GameControllers;
+
+        public AttackButton(string Text, Vector2 _position, GameControllers GameControllers) : base(Text, _position, GameControllers)
         {
-            this.GameManager = GameManager;
+            this.GameControllers = GameControllers;
         }
+
         public override void onClick()
         {
             base.onClick();
-            GameManager.EndTurn();
+            GameControllers.GameStatesSystem.PlayerEndTurn();
         }
     }
 }

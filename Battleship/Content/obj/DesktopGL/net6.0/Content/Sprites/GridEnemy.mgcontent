@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/GridEnemy.png</SourceFile>
-  <SourceTime>2023-09-28T08:21:37.8169239-04:00</SourceTime>
-  <DestFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/bin/DesktopGL/Content/Sprites/GridEnemy.xnb</DestFile>
-  <DestTime>2023-09-28T08:24:50.6883597-04:00</DestTime>
+  <SourceFile>E:/Proyectos/Source/BattleShip/Battleship/Content/Sprites/GridEnemy.png</SourceFile>
+  <SourceTime>2023-10-01T00:48:01.9562519-03:00</SourceTime>
+  <DestFile>E:/Proyectos/Source/BattleShip/Battleship/Content/bin/DesktopGL/Content/Sprites/GridEnemy.xnb</DestFile>
+  <DestTime>2023-10-01T00:49:46.3284306-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
