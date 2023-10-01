@@ -20,7 +20,7 @@ namespace Battleship.src.Networking
 
 
 
-        public string ClientJSON(string _action, int _bot, List<Vector3>? _shipsPositions = null, Vector2? _ataque = null)
+        public string ClientJSON(int _gameID, string _action, int _bot, List<Vector3>? _shipsPositions = null, Vector2? _ataque = null)
         {
 
             Ship miBarco = new Ship();
@@ -29,6 +29,7 @@ namespace Battleship.src.Networking
             if (_shipsPositions != null)
             {
                 int count = _shipsPositions.Count;
+                miBarco.p = new int[] { (int)_shipsPositions[0].X, (int)_shipsPositions[0].Y, (int)_shipsPositions[0].Z };
 
                 if (count >= 1)
                 {
@@ -51,13 +52,15 @@ namespace Battleship.src.Networking
                 ataqueJson = new int[] { (int)_ataque.Value.X, (int)_ataque.Value.Y };
 
             }
+
     
             var json = new
             {
+                gameID = _gameID,
                 action = _action,
                 bot = _bot,
                 ships = miBarco,
-                position = ataqueJson
+                position = ataqueJson,
             };
 
 

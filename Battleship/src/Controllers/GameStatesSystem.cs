@@ -53,23 +53,42 @@ namespace Battleship.src.Controllers
 
         }
 
-        public void multiplayerSavePosition(int[] shipsPosition)
+        //MULTIPLAYER
+        public void playerOneSetPositions(int[] shipsPosition)  // ENEMY SHIPS
         {
-            GameControllers.enemyMatrix[shipsPosition[0], shipsPosition[1]] = 2;
-            GameControllers.enemyShipsPositions.Add(new Vector2(shipsPosition[0], shipsPosition[1]));
-            Console.WriteLine(" [ " + SIDE +  "] " + "X: " + shipsPosition[0] + " Y: " + shipsPosition[1]);
-
+            Console.WriteLine(" [ " + SIDE + "] " + "X: " + shipsPosition[0] + " Y: " + shipsPosition[1]);
+            if (shipsPosition != null)
+            {
+                GameControllers.enemyMatrix[shipsPosition[0], shipsPosition[1]] = 2;
+                GameControllers.enemyShipsPositions.Add(new Vector2(shipsPosition[0], shipsPosition[1]));
+            }
         }
+
+
+        public void playerTwoSetPositions(int[] shipsPosition)  // PLAYER SHIPS
+        {
+            if (shipsPosition != null)
+            {
+                GameControllers.playerMatrix[shipsPosition[0], shipsPosition[1]] = 2;
+                GameControllers.playerShipsPositions.Add(new Vector2(shipsPosition[0], shipsPosition[1]));
+                Console.WriteLine(" [ " + SIDE + "] " + "X: " + shipsPosition[0] + " Y: " + shipsPosition[1]);
+
+            }
+        }
+
+
+
+
 
         public void ShipsReady()
         {
+            /*
             var ShipsSystem = GameControllers.ShipsDeploy;
             ShipsSystem.ShipsReadyOnBoard();
             GameControllers.setTinyBoardShipsReady();
+            GameControllers.GameHud.RedyButton.setSceneState(false);
 
-            
-
-            foreach(ShipBase ship in ShipsSystem.ShipsList)
+            foreach (ShipBase ship in ShipsSystem.ShipsList)
             {
 
                 var Vector3List = new List<Vector3>();
@@ -77,17 +96,18 @@ namespace Battleship.src.Controllers
                 {
                     Vector3List.Add(new Vector3(pos.X, pos.Y, 0));
                 }
-                var JSON = GameControllers.GameDataJSON.ClientJSON("b", 0, Vector3List);
+                var JSON = GameControllers.GameDataJSON.ClientJSON(,"b", 0, Vector3List);
                 GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                Console.WriteLine("[ CLIENT ] " + JSON);
             }
-            Console.WriteLine("[ CLIENT ] SHIPS SENT");
+            */
 
-
+            /*
             if (!MultiplayerMode)
             {
                 GameControllers.EnemyIA.StartShipsInBoard(); // IA STARTING SHIP
-
             }
+            */
 
 
             /*
@@ -121,7 +141,8 @@ namespace Battleship.src.Controllers
 
         public void StartMultiplayerGame()
         {
-
+            Board.setGridsState(true);
+            GameControllers.GameHud.AttackButton.setSceneState(true);
         }
 
         public void PlayerStartTurn()
@@ -132,6 +153,21 @@ namespace Battleship.src.Controllers
 
         public void PlayerEndTurn()
         {
+            if (GameControllers.playerSelectedGrids.Count > Constants.TOTALBOMBCOUNT)
+            {
+                foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
+                {
+                    var JSON = GameControllers.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
+                    GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                }
+                Board.setGridsState(false);
+                GameControllers.GameHud.AttackButton.setSceneState(false);
+
+            }
+
+
+
+            /*
             GameControllers.GameHud.AttackButton.setSceneState(false);
             foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
             {
@@ -158,10 +194,11 @@ namespace Battleship.src.Controllers
             }
 
 
-         
 
-            GameControllers.playerSelectedGrids.Clear();
-            EnemyTurn();
+
+                GameControllers.playerSelectedGrids.Clear();
+                EnemyTurn();
+                */
         }
 
         public void EnemyTurn()

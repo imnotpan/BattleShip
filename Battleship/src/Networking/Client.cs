@@ -1,7 +1,9 @@
 ﻿
 using Battleship.src.Controllers;
+using Battleship.src.Controllers.Grids;
 using LiteNetLib;
 using LiteNetLib.Utils;
+using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -24,6 +26,10 @@ namespace Battleship.src.Networking
         NetManager client;
         EventBasedNetListener listener;
         GameControllers GameControllers;
+        public int gameID { get; set; }
+        private System.Timers.Timer disconnectTimer;
+
+
         public Client(GameControllers GameControllers)
         {
             this.GameControllers = GameControllers;
@@ -71,16 +77,33 @@ namespace Battleship.src.Networking
 
                     if (receivedStringData.action == "b")
                     {
-                        GameControllers.GameStatesSystem.StartGame();
-                        GameControllers.MainMenuController.StartGame();
-                        Console.WriteLine("[ Client ] StartingGame");
+                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        GameControllers.GameHud.CircleEntityEnemy.AddEntityOnScene(GameControllers.Scene);
+                        GameControllers.enemyCountShips = 6;
                     }
+                    if (receivedStringData.action == "a")
+                    {
+                        foreach (Grid grid in GameControllers.GridsList)
+                        {
+                            if (grid._relativePosition == new Vector2(receivedStringData.position[0], receivedStringData.position[1]))
+                            {
+                                grid.currentColor = Color.Red;
+                                grid.isDestroy = true;
 
-
-
-                    Console.WriteLine("[ CLIENT ] Packet receive: " + receivedJsonString);
-
-
+                                //Perfect Attack
+                                if (receivedStringData.status == 1)
+                                {
+                                    var flagPosition = grid.Position;
+                                    var flagEntity = new Flag(GameControllers.TextureLoader._gameTextures["Flag"], flagPosition);
+                                    GameControllers.Scene.AddEntity(flagEntity);
+                                    GameControllers.enemyCountShips--;
+                                }
+                            }
+                        }
+                        GameControllers.playerSelectedGrids.Clear();
+                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        Console.WriteLine("[ CLIENT ] Packet receive: " + receivedJsonString);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -102,6 +125,8 @@ namespace Battleship.src.Networking
             if (client != null)
             {
                 client.PollEvents();
+
+
 
             }
 

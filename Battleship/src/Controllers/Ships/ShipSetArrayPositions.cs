@@ -22,6 +22,11 @@ namespace Battleship.src.Controllers.Ships
             var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 16);
             var orientation = (int)Math.Ceiling(_rotation / 90);
 
+            if((fromButtom + fromOrigin) == 0)
+            {
+                fromButtom = 1;
+            }
+
             var relativePosition = new Vector2(gridLinked._relativePosition.X,
                                                 gridLinked._relativePosition.Y);
             var fromButtonPosition = relativePosition;

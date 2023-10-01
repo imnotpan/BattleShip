@@ -15,8 +15,17 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Battleship.src
 {
+
+
+
+
     public class GameControllers
     {
+
+        // MULTIPLES PARTIDAS
+        
+
+
         // Game Properties General
         public ShipBase inDragShip = null;
         public Grid MouseInGrid = null;
@@ -65,8 +74,8 @@ namespace Battleship.src
         public List<Vector2> playerShipsPositions = new List<Vector2>();
 
 
-        public int playerCountShips;
-        public int enemyCountShips;
+        public int playerCountShips = -999;
+        public int enemyCountShips = -999;
 
         public List<Flag> flagList = new List<Flag>();
         public GameDataJSON GameDataJSON;
