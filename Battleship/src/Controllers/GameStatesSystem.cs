@@ -30,6 +30,9 @@ namespace Battleship.src.Controllers
             this.GameDataJSON = new GameDataJSON();
         }
 
+
+
+
         public void StartGame()
         {
             Console.WriteLine("[ x ] Game Starting");
@@ -157,8 +160,8 @@ namespace Battleship.src.Controllers
             {
                 foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
                 {
-                    var JSON = GameControllers.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
-                    GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                    //var JSON = GameControllers.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
+                    //GameControllers.GameNetworking.Client.SendDataToServer(JSON);
                 }
                 Board.setGridsState(false);
                 GameControllers.GameHud.AttackButton.setSceneState(false);

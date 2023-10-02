@@ -4,47 +4,82 @@ using LiteNetLib;
 
 namespace Battleship.src.Networking
 {
-    public class GameSessionManager
+
+    public class GameSession
     {
+        public int GameId { get; }
+
+        public List<NetPeer> Players;
+        public int[,] playerOneMatrix = new int[20, 20];
+        public int[,] playerTwoMatrix = new int[20, 20];
+        public int enemyCountShips = -999;
+        public int playerCountShips = -999;
+        public GameControllers GameControllers;
 
 
-
-        public class GameSession
+        public GameSession(int gameId, int[,] playerOneMatrix, int[,] playerTwoMatrix, GameControllers GameControllers)
         {
-            public int GameId { get; }
-            public NetPeer PlayerOne { get; }
-            public NetPeer PlayerTwo { get; }
-            public int[,] playerOneMatrix = new int[20, 20];
-            public int[,] playerTwoMatrix = new int[20, 20];
+            this.GameControllers = GameControllers;
+            this.playerOneMatrix = playerOneMatrix;
+            this.playerTwoMatrix = playerTwoMatrix;
+            Players = new List<NetPeer>();
 
-            public GameSession(NetPeer playerOne, NetPeer playerTwo, int gameId, int[,] playerOneMatrix, int[,] playerTwoMatrix)
-            {
-                PlayerOne = playerOne;
-                PlayerTwo = playerTwo;
-                this.playerOneMatrix = playerOneMatrix;
-                this.playerTwoMatrix = playerTwoMatrix;
-
-                GameId = gameId;
-                
-                // Initialize game state and other properties.
-
-
-            }
+            GameId = gameId;
         }
 
+        public void addPlayerToSession(NetPeer peer)
+        {
+            if(Players.Count < 2)
+            {
+                Players.Add(peer);
+                Console.WriteLine("[ GAME SESSION] Jugador añadido correctamente");
 
+            }
+
+            if(Players.Count == 2)
+            {
+                var JSON = GameControllers.GameDataJSON.ServerJSON("c", 1);
+                foreach(var _peer in Players)
+                {
+                    GameControllers.GameNetworking.Server.SendDataToClient(_peer, JSON);
+
+                }
+
+                Console.WriteLine("Two ships are ready ");
+            }
+
+        }
+
+        public void disconnectPlayerFromSession(NetPeer peer)
+        {
+            Players.Remove(peer);
+        }
+
+    }
+
+
+    public class GameSessionManager
+    {
         private Dictionary<int, GameSession> activeGames = new Dictionary<int, GameSession>();
         private int nextGameId = 1;
         public int[,] playerOneMatrix = new int[20, 20];
         public int[,] playerTwoMatrix = new int[20, 20];
 
 
-        public int CreateNewGame(NetPeer playerOne, NetPeer playerTwo)
+        public void CreateNewGame(GameControllers GameControllers)
         {
             int gameId = nextGameId++;
-            var gameSession = new GameSession(playerOne, playerTwo, gameId, playerOneMatrix, playerTwoMatrix);
+            var gameSession = new GameSession(gameId, playerOneMatrix, playerTwoMatrix, GameControllers);
             activeGames.Add(gameId, gameSession);
-            return gameId;
+            Console.WriteLine("[ Session Manager ] Session Created: " + gameId);   
+        }
+
+        public void CreateNewGame(int _gameID, GameControllers GameControllers)
+        {
+            int gameId = _gameID;
+            var gameSession = new GameSession(gameId, playerOneMatrix, playerTwoMatrix, GameControllers);
+            activeGames.Add(gameId, gameSession);
+            Console.WriteLine("[ Session Manager ] Session Created: " + gameId);
         }
 
         public void RemoveGame(int gameId)
@@ -60,6 +95,6 @@ namespace Battleship.src.Networking
             return activeGames.ContainsKey(gameId) ? activeGames[gameId] : null;
         }
 
-
+     
     }
 }

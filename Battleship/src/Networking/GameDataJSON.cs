@@ -65,6 +65,7 @@ namespace Battleship.src.Networking
 
 
             string jsonString = JsonConvert.SerializeObject(json);
+            Console.WriteLine(jsonString);
             return jsonString;
         }
 

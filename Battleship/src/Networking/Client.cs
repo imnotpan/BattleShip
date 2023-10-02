@@ -23,7 +23,7 @@ namespace Battleship.src.Networking
     public class Client
     {
 
-        NetManager client;
+        public NetManager client;
         EventBasedNetListener listener;
         GameControllers GameControllers;
         public int gameID { get; set; }
@@ -33,41 +33,127 @@ namespace Battleship.src.Networking
         public Client(GameControllers GameControllers)
         {
             this.GameControllers = GameControllers;
+            Connection();
         }
 
-        public void Connection(string IP, int PORT)
+        public void Connection()
         {
             //Controllers
             var MainMenu = GameControllers.MainMenuController;
             var GameSystem = GameControllers.GameStatesSystem;
 
-
             listener = new EventBasedNetListener();
             client = new NetManager(listener);
             client.Start();
-            try
+
+
+            listener.PeerDisconnectedEvent += (peer, disconnectInfo) =>
             {
-                client.Connect(IP, PORT, "BATTLESHIP");
-                GameControllers.MainMenuController.ClientMenuInitialize();
-                GameControllers.GameStatesSystem.SIDE = "CLIENT";
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error de conexión: " + ex.Message);
-                return; 
-            }
+                Console.WriteLine($"Cliente desconectado: {peer.EndPoint}");
+                client.DisconnectPeer(peer);
+            };
 
             listener.NetworkReceiveEvent += (fromPeer, dataReader, channel, deliveryMethod) =>
             {
 
                 try
                 {
-     
+   
                     byte[] receivedBytes = new byte[dataReader.AvailableBytes];
                     dataReader.GetBytes(receivedBytes, dataReader.AvailableBytes);
                     string receivedJsonString = Encoding.UTF8.GetString(receivedBytes);
                     datagramServer receivedStringData = JsonConvert.DeserializeObject<datagramServer>(receivedJsonString);
 
+
+                    if (receivedStringData.action == "c")
+                    {
+                        GameControllers.GameStatesSystem.StartGame();
+                        GameControllers.MainMenuController.StartGame();
+                        Console.WriteLine("[ Client ] StartingGame");
+                    }
+
+
+                    Console.WriteLine(receivedStringData);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al procesar los datos recibidos: " + ex.Message);
+
+                }
+                finally
+                {
+                    dataReader.Recycle();
+                }
+            };
+
+        }
+
+        public void Connect(string IP, int PORT)
+        {
+
+            var GameNetworking = GameControllers.GameNetworking;
+
+            try
+            {
+
+                client.Connect(IP, PORT, "BATTLESHIP");
+                GameControllers.MainMenuController.WaitingForPlayers();
+
+                var JSON = GameControllers.GameDataJSON.ClientJSON(gameID, "c", 0);
+                GameNetworking.Client.SendDataToServer(JSON);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error de conexión: " + ex.Message);
+                return;
+            }
+        }
+
+
+        public void Disconnect()
+        {
+            if (client != null)
+            {
+                var JSON = GameControllers.GameDataJSON.ClientJSON(gameID, "d", 1);
+                GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+            }
+        }
+
+
+        public void Update()
+        {
+            if (client != null)
+            {
+                client.PollEvents();
+            }
+
+        }
+
+
+        public void SendDataToServer(string data)
+        {
+            if (client != null && client.IsRunning)
+            {
+                try
+                {
+
+                    byte[] jsonBytes = Encoding.UTF8.GetBytes(data);
+                    client.FirstPeer.Send(jsonBytes, DeliveryMethod.ReliableOrdered);
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error sending JSON to server: " + ex.Message);
+                }
+            }
+        }
+    }
+}
+
+/*
+ * 
                     if(receivedStringData.action == "c")
                     {
                         GameControllers.GameStatesSystem.StartGame();
@@ -104,63 +190,4 @@ namespace Battleship.src.Networking
                         GameControllers.GameStatesSystem.StartMultiplayerGame();
                         Console.WriteLine("[ CLIENT ] Packet receive: " + receivedJsonString);
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al procesar los datos recibidos: " + ex.Message);
-
-                }
-                finally
-                {
-                    dataReader.Recycle();
-                }
-            };
-
-
-
-        }
-
-        public void Update()
-        {
-            if (client != null)
-            {
-                client.PollEvents();
-
-
-
-            }
-
-        }
-
-
-        public void SendDataToServer(string data)
-        {
-            if (client != null && client.IsRunning)
-            {
-                try
-                {
-
-                    byte[] jsonBytes = Encoding.UTF8.GetBytes(data);
-                    client.FirstPeer.Send(jsonBytes, DeliveryMethod.ReliableOrdered);
-
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error sending JSON to server: " + ex.Message);
-                }
-            }
-        }
-
-
-        public void Disconnect()
-        {
-            if (client != null && client.IsRunning)
-            {
-                client.Stop();
-                Console.WriteLine("[ NETWORK ] Disconnect from servers");
-            }
-        }
-    }
-}
-
+*/

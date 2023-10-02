@@ -29,6 +29,7 @@ namespace Battleship.src.MainMenu
         HostButton HostButton;
         IPTextButton IPTEXT;
         PORTTextButton PORTTEXT;
+        gameIDButton gameIDButton;
         BackTextButton BackButton;
 
         // Connection MENU REQUEST
@@ -37,7 +38,7 @@ namespace Battleship.src.MainMenu
         ClientStartGameButton ClientStartGameButton;
         CloseServerButton CloseServerButton;
             // Host
-        ServerStartGameButton ServerStartGameButton;
+        CreateSession CreateSession;
         public ClientStateText ClientStateText;
 
 
@@ -47,6 +48,7 @@ namespace Battleship.src.MainMenu
 
         public string IP_CONNECTION = "";
         public string PORT_CONNECTION = "";
+        public string GAMESESSIONID = "";
         public string tempText = "";
 
         public TextButtonBase writeTargetButton;
@@ -59,6 +61,8 @@ namespace Battleship.src.MainMenu
         public List<MenuItemsInterface> MultiplayerMenuStack;
         public List<MenuItemsInterface> ClientStack;
         public List<MenuItemsInterface> HostStack;
+        public List<MenuItemsInterface> WaitingStack;
+
 
 
         public string MENUSTATE = "SINGLEPLAYER";
@@ -73,6 +77,8 @@ namespace Battleship.src.MainMenu
             MultiplayerMenuStack = new List<MenuItemsInterface>();
             ClientStack = new List<MenuItemsInterface>();
             HostStack = new List<MenuItemsInterface>();
+            WaitingStack = new List<MenuItemsInterface>();
+
 
 
             Initialize();
@@ -134,7 +140,30 @@ namespace Battleship.src.MainMenu
                     previousKeyboardState = currentKeyboardState;
                     writeTargetButton._textEntity._textComponent.Text = PORT_CONNECTION;
                 }
+                if (ClikedTextButton == "GAMESESSIONID")
+                {
+                    currentKeyboardState = Keyboard.GetState();
+                    if (currentKeyboardState.GetPressedKeys().Length > 0)
+                    {
+                        Keys key = currentKeyboardState.GetPressedKeys()[0];
+                        if (!previousKeyboardState.IsKeyDown(key))
+                        {
+                            char caracterActual = (char)key.GetChar();
 
+                            if (char.IsDigit(caracterActual) || caracterActual == '.')
+                            {
+                                GAMESESSIONID += caracterActual;
+                            }
+                            if (key == Keys.Back && GAMESESSIONID.Length > 0)
+                            {
+                                // Si se presiona la tecla de borrado y hay caracteres en IP_CONNECTION, eliminar el último carácter
+                                GAMESESSIONID = GAMESESSIONID.Substring(0, GAMESESSIONID.Length - 1);
+                            }
+                        }
+                    }
+                    previousKeyboardState = currentKeyboardState;
+                    writeTargetButton._textEntity._textComponent.Text = GAMESESSIONID;
+                }
 
             }
         }
@@ -173,6 +202,11 @@ namespace Battleship.src.MainMenu
             MultiplayerMenuStack.Add(PORTTEXT);
             PORTTEXT.AddOnScene(GameControllers.Scene);
 
+            var GAMESESSIONPOS = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2  - 96);
+            gameIDButton = new gameIDButton("INSERT GAMEID", GAMESESSIONPOS, GameControllers);
+            MultiplayerMenuStack.Add(gameIDButton);
+            gameIDButton.AddOnScene(GameControllers.Scene);
+
             var BACKPOSITION = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2 + 64);
             BackButton = new BackTextButton("BACK", BACKPOSITION, GameControllers);
             MultiplayerMenuStack.Add(BackButton);
@@ -182,6 +216,7 @@ namespace Battleship.src.MainMenu
             var DisconnectButtonPosition = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2);
             DisconnectButton = new DisconnectButton("DISCONNET", DisconnectButtonPosition, GameControllers);
             ClientStack.Add(DisconnectButton);
+            WaitingStack.Add(DisconnectButton);
             DisconnectButton.AddOnScene(GameControllers.Scene);
 
 
@@ -196,16 +231,22 @@ namespace Battleship.src.MainMenu
             HostStack.Add(CloseServerButton);
             CloseServerButton.AddOnScene(GameControllers.Scene);
 
-            /*
-            var ServerStarGamePos = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2 - 32);
-            ServerStartGameButton = new ServerStartGameButton("START GAME", ServerStarGamePos, GameControllers);
-            HostStack.Add(ServerStartGameButton);
-            ServerStartGameButton.AddOnScene(GameControllers.Scene);
-            */
+            
+            var CreateSessionPos = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2 - 32);
+            CreateSession = new CreateSession("CREATE GAME SESSION", CreateSessionPos, GameControllers);
+            HostStack.Add(CreateSession);
+            CreateSession.AddOnScene(GameControllers.Scene);
 
+            /*
             var clientStatusPos = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2 + 64);
             ClientStateText = new ClientStateText("User Connected: ", clientStatusPos, GameControllers.textFont);
             HostStack.Add(ClientStateText);
+            ClientStateText.AddOnScene(GameControllers.Scene);
+            */
+
+            var clientStatusPos = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT / 2 + 64);
+            ClientStateText = new ClientStateText("Waiting for connections...", clientStatusPos, GameControllers.textFont);
+            WaitingStack.Add(ClientStateText);
             ClientStateText.AddOnScene(GameControllers.Scene);
 
 
@@ -219,7 +260,16 @@ namespace Battleship.src.MainMenu
             DisableMenu(MainMenuStack);
             DisableMenu(HostStack);
             DisableMenu(ClientStack);
+            DisableMenu(WaitingStack);
+        }
 
+        public void WaitingForPlayers()
+        {
+            DisableMenu(MultiplayerMenuStack);
+            DisableMenu(MainMenuStack);
+            DisableMenu(HostStack);
+            DisableMenu(ClientStack);
+            GenerateMenu(WaitingStack);
         }
 
         public void MainMenuInitialize()
@@ -228,6 +278,8 @@ namespace Battleship.src.MainMenu
             GenerateMenu(MainMenuStack);
             DisableMenu(HostStack);
             DisableMenu(ClientStack);
+            DisableMenu(WaitingStack);
+
         }
         public void ClientMenuInitialize()
         {

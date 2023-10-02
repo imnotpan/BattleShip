@@ -56,7 +56,7 @@ namespace Battleship.src.Networking
         GameControllers GameControllers;
 
         // Multiple Sessions
-
+        public GameSessionManager GameSessionManager;
 
         public Server(GameControllers GameControllers)
         {
@@ -69,29 +69,16 @@ namespace Battleship.src.Networking
             ServerListener = new ServerListener();
             var listener = new EventBasedNetListener();
             server = new NetManager(listener);
-            server.Start(PORT); // -> Set Port
-            GameControllers.GameStatesSystem.SIDE = "CLIENT";
+            server.Start(PORT);
 
+            GameSessionManager = new GameSessionManager();
+            
 
             listener.ConnectionRequestEvent += request =>
             {
-
-                if(server.ConnectedPeersCount <= 2)
+                if(server.ConnectedPeersCount <= 20)
                 {
                     request.Accept();
-                    if(server.ConnectedPeersCount == 2)
-                    {
-                        /*
-                        Console.WriteLine("[ SERVER ]MAX PLAYER REACHED, GAME STARTING");
-                        var JSON = GameControllers.GameDataJSON.ClientJSON("c", 1);
-                        foreach(var peer in server.ConnectedPeerList)
-                        {
-                            SendDataToClient(peer, JSON);
-
-                        }
-                        */
-
-                    }
                 }
                 else
                 {
@@ -100,28 +87,16 @@ namespace Battleship.src.Networking
                 }
             };
 
+            /*
             listener.PeerConnectedEvent += peer =>
             {
-                if (PeerOne == null)
-                {
-                    PeerOne = peer;
-                    Console.WriteLine("PeerOne connected: {0}", peer.EndPoint);
-                }
-                // Si ya tienes a PeerOne almacenado, almacena a PeerTwo
-                else if (PeerTwo == null)
-                {
-                    PeerTwo = peer;
-                    Console.WriteLine("PeerTwo connected: {0}", peer.EndPoint);
-                }
-                var TextComponent = GameControllers.MainMenuController.ClientStateText._textComponent;
-                TextComponent.Text = TextComponent.Text + "\n" + peer.EndPoint;
+                
+
             };
+            */
 
             listener.PeerDisconnectedEvent += (peer, disconnectInfo) =>
             {
-                Console.WriteLine("We got connection: {0}", peer.EndPoint);
-                var TextComponent = GameControllers.MainMenuController.ClientStateText._textComponent;
-                TextComponent.Text = "User Connected: ";
             };
 
             listener.NetworkReceiveEvent += ( peer, dataReader, channel, delivery) =>
@@ -133,7 +108,22 @@ namespace Battleship.src.Networking
                     string receivedJsonString = Encoding.UTF8.GetString(receivedBytes);
                     myData receivedStringData = JsonConvert.DeserializeObject<myData>(receivedJsonString);
 
+                    Console.WriteLine(receivedJsonString);
+                    if(receivedStringData.action == "c")
+                    {
+                        if(GameSessionManager.GetGame(receivedStringData.gameID) == null)
+                        {
+                            GameSessionManager.CreateNewGame(receivedStringData.gameID, GameControllers);
+                        }
+                        GameSessionManager.GetGame(receivedStringData.gameID).addPlayerToSession(peer);
+                    }
 
+                    if (receivedStringData.action == "d")
+                    {
+                        GameSessionManager.GetGame(receivedStringData.gameID).disconnectPlayerFromSession(peer);
+                        server.DisconnectPeer(peer);
+                        Console.WriteLine("[ SERVER ] Player disconected");
+                    }
 
                 }
                 catch (Exception ex)
