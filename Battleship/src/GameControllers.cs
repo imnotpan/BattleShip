@@ -84,6 +84,29 @@ namespace Battleship.src
         public SpriteFont textFont;
 
 
+        public void DestroyBoardGame()
+        {
+            foreach (Grid grid in GridsList)
+            {
+                grid.Destroy();
+            }
+            foreach(GridTiny tiny in tinyBoardGrids)
+            {
+                tiny.Destroy();
+            }
+            foreach (Flag flag in flagList)
+            {
+                flag.Destroy();
+            }
+            foreach(ShipBase ship in ShipsDeploy.ShipsList)
+            {
+                ship.Destroy();
+            }
+
+            playerShipsPositions.Clear();
+            playerSelectedGrids.Clear();
+        }
+
         public GameControllers(Scene Scene)
         {
             this.Scene = Scene;

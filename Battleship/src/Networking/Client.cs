@@ -26,7 +26,7 @@ namespace Battleship.src.Networking
         public NetManager client;
         EventBasedNetListener listener;
         GameControllers GameControllers;
-        public int gameID { get; set; }
+        public int GAMEID { get; set; }
         private System.Timers.Timer disconnectTimer;
 
 
@@ -51,6 +51,9 @@ namespace Battleship.src.Networking
             {
                 Console.WriteLine($"Cliente desconectado: {peer.EndPoint}");
                 client.DisconnectPeer(peer);
+
+                GameControllers.GameStatesSystem.BackToMainMenu();
+                Console.WriteLine("[ Client ] Back to main menu");
             };
 
             listener.NetworkReceiveEvent += (fromPeer, dataReader, channel, deliveryMethod) =>
@@ -71,9 +74,42 @@ namespace Battleship.src.Networking
                         GameControllers.MainMenuController.StartGame();
                         Console.WriteLine("[ Client ] StartingGame");
                     }
+                    if (receivedStringData.action == "b")
+                    {
+                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        GameControllers.GameHud.CircleEntityEnemy.AddEntityOnScene(GameControllers.Scene);
+                        GameControllers.enemyCountShips = 6;
+                    }
+                    if (receivedStringData.action == "a")
+                    {
+                        foreach (Grid grid in GameControllers.GridsList)
+                        {
+                            if (grid._relativePosition == new Vector2(receivedStringData.position[0], receivedStringData.position[1]))
+                            {
+                                grid.currentColor = Color.Red;
+                                grid.isDestroy = true;
 
+                                //Perfect Attack
+                                if (receivedStringData.status == 1)
+                                {
+                                    var flagPosition = grid.Position;
+                                    var flagEntity = new Flag(GameControllers.TextureLoader._gameTextures["Flag"], flagPosition);
+                                    GameControllers.Scene.AddEntity(flagEntity);
+                                    GameControllers.enemyCountShips--;
+                                }
+                            }
+                        }
+                        GameControllers.playerSelectedGrids.Clear();
+                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        Console.WriteLine("[ CLIENT ] Packet receive: " + receivedJsonString);
+                    }
 
-                    Console.WriteLine(receivedStringData);
+                    if(receivedStringData.action == "w")
+                    {
+                        GameControllers.GameStatesSystem.BackToMainMenu();
+                    }
+
+                    Console.WriteLine(receivedJsonString);
                 }
                 catch (Exception ex)
                 {
@@ -88,18 +124,18 @@ namespace Battleship.src.Networking
 
         }
 
-        public void Connect(string IP, int PORT)
+        public void Connect(string IP, int PORT, int gameID)
         {
 
             var GameNetworking = GameControllers.GameNetworking;
 
             try
             {
-
+                GAMEID = gameID;
                 client.Connect(IP, PORT, "BATTLESHIP");
                 GameControllers.MainMenuController.WaitingForPlayers();
 
-                var JSON = GameControllers.GameDataJSON.ClientJSON(gameID, "c", 0);
+                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "c", 0);
                 GameNetworking.Client.SendDataToServer(JSON);
 
             }
@@ -115,7 +151,7 @@ namespace Battleship.src.Networking
         {
             if (client != null)
             {
-                var JSON = GameControllers.GameDataJSON.ClientJSON(gameID, "d", 1);
+                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "d", 1);
                 GameControllers.GameNetworking.Client.SendDataToServer(JSON);
             }
         }

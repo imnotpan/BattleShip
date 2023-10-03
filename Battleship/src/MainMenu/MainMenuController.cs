@@ -300,6 +300,9 @@ namespace Battleship.src.MainMenu
         }
 
 
+
+
+
         public void GenerateMenu(List<MenuItemsInterface> MenuButtons)
         {
             foreach (var button in MenuButtons)

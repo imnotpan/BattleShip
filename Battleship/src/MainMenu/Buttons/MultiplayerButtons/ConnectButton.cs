@@ -34,8 +34,7 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
             }
             Console.WriteLine("IP: { " + IP + " }" + " PORT { " + PORT + " }");
 
-            GameControllers.GameNetworking.Client.Connect(IP, PORT);
-            GameControllers.GameNetworking.Client.gameID = int.Parse(GameControllers.MainMenuController.GAMESESSIONID);
+            GameControllers.GameNetworking.Client.Connect(IP, PORT, int.Parse(GameControllers.MainMenuController.GAMESESSIONID));
     
 
         }

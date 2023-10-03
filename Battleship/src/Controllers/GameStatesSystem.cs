@@ -85,7 +85,7 @@ namespace Battleship.src.Controllers
 
         public void ShipsReady()
         {
-            /*
+            
             var ShipsSystem = GameControllers.ShipsDeploy;
             ShipsSystem.ShipsReadyOnBoard();
             GameControllers.setTinyBoardShipsReady();
@@ -99,11 +99,13 @@ namespace Battleship.src.Controllers
                 {
                     Vector3List.Add(new Vector3(pos.X, pos.Y, 0));
                 }
-                var JSON = GameControllers.GameDataJSON.ClientJSON(,"b", 0, Vector3List);
+                var GAMEID = GameControllers.GameNetworking.Client.GAMEID;
+                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "b", 0, Vector3List);
                 GameControllers.GameNetworking.Client.SendDataToServer(JSON);
                 Console.WriteLine("[ CLIENT ] " + JSON);
             }
-            */
+
+
 
             /*
             if (!MultiplayerMode)
@@ -113,7 +115,7 @@ namespace Battleship.src.Controllers
             */
 
 
-            /*
+           /*
             GameControllers.setTinyBoardShipsReady();
             GameControllers.GameHud.RedyButton.setSceneState(false);
 
@@ -160,48 +162,14 @@ namespace Battleship.src.Controllers
             {
                 foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
                 {
-                    //var JSON = GameControllers.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
-                    //GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                    var GAMEID = GameControllers.GameNetworking.Client.GAMEID;
+                    var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "a", 0, null, new Vector2(gridPos.X, gridPos.Y));
+                    GameControllers.GameNetworking.Client.SendDataToServer(JSON);
                 }
                 Board.setGridsState(false);
                 GameControllers.GameHud.AttackButton.setSceneState(false);
 
             }
-
-
-
-            /*
-            GameControllers.GameHud.AttackButton.setSceneState(false);
-            foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
-            {
-                foreach(Grid grid in GameControllers.GridsList)
-                {
-                    if (grid._relativePosition == gridPos)
-                    {
-                        grid.currentColor = Color.Red;
-                        grid.isDestroy = true;
-                        foreach (Vector2 ship in GameControllers.enemyShipsPositions)
-                        {
-
-                            if (ship == grid._relativePosition)
-                            {
-                                var flagPosition = grid.Position;
-                                var flagEntity = new Flag(GameControllers.TextureLoader._gameTextures["Flag"], flagPosition);
-                                GameControllers.Scene.AddEntity(flagEntity);
-                                GameControllers.enemyCountShips--;
-
-                            }
-                        }
-                    }
-                }
-            }
-
-
-
-
-                GameControllers.playerSelectedGrids.Clear();
-                EnemyTurn();
-                */
         }
 
         public void EnemyTurn()
@@ -240,12 +208,13 @@ namespace Battleship.src.Controllers
 
 
 
-        public void GameFinish()
+
+        public void BackToMainMenu()
         {
-
+            GameControllers.DestroyBoardGame();
+            GameControllers.GameHud.RedyButton.DestroyFromScene();
+            GameControllers.GameHud.middleTextEntity.DestroyFromScene();
+            GameControllers.MainMenuController.MainMenuInitialize();
         }
-
-      
-
     }
 }

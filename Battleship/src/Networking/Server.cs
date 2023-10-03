@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using Battleship.src.Controllers;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Battleship.src.Controllers.Ships;
 
 namespace Battleship.src.Networking
 {
@@ -108,22 +109,42 @@ namespace Battleship.src.Networking
                     string receivedJsonString = Encoding.UTF8.GetString(receivedBytes);
                     myData receivedStringData = JsonConvert.DeserializeObject<myData>(receivedJsonString);
 
-                    Console.WriteLine(receivedJsonString);
-                    if(receivedStringData.action == "c")
+                    var idGame = receivedStringData.gameID;
+    
+                    // Connectar
+                    if (receivedStringData.action == "c")
                     {
-                        if(GameSessionManager.GetGame(receivedStringData.gameID) == null)
+                        if (GameSessionManager.GetGame(receivedStringData.gameID) == null)
                         {
                             GameSessionManager.CreateNewGame(receivedStringData.gameID, GameControllers);
                         }
                         GameSessionManager.GetGame(receivedStringData.gameID).addPlayerToSession(peer);
                     }
 
+                    var GAMESESSION = GameSessionManager.GetGame(idGame);
+
+
+                    if (receivedStringData.action == "b")
+                    {
+                        GAMESESSION.ShipsOnBoard(peer, receivedStringData.ships.p, receivedStringData.ships.b, receivedStringData.ships.s);
+
+                    }
+
+                    if(receivedStringData.action == "a")
+                    {
+                        GAMESESSION.GameLoop(peer, receivedStringData.position);
+                    }
+
+                    //Desconectar
                     if (receivedStringData.action == "d")
                     {
                         GameSessionManager.GetGame(receivedStringData.gameID).disconnectPlayerFromSession(peer);
                         server.DisconnectPeer(peer);
                         Console.WriteLine("[ SERVER ] Player disconected");
                     }
+                    
+              
+
 
                 }
                 catch (Exception ex)
@@ -142,6 +163,7 @@ namespace Battleship.src.Networking
             GameControllers.MainMenuController.HostMenuInitialize();
 
         }
+
 
         public void Update()
         {
