@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/Sprites/Ship_Cruiser.png</SourceFile>
-  <SourceTime>2023-09-27T01:42:50.7452587-03:00</SourceTime>
-  <DestFile>C:/Users/imnot/source/repos/_BattleShip/Battleship/Content/bin/DesktopGL/Content/Sprites/Ship_Cruiser.xnb</DestFile>
-  <DestTime>2023-09-27T01:43:02.9813956-03:00</DestTime>
+  <SourceFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ship_Cruiser.png</SourceFile>
+  <SourceTime>2023-09-28T08:21:37.8249681-04:00</SourceTime>
+  <DestFile>C:/--PAN/Proyectos/BattleShip/Battleship/Content/bin/DesktopGL/Content/Sprites/Ship_Cruiser.xnb</DestFile>
+  <DestTime>2023-10-03T10:22:59.5915832-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

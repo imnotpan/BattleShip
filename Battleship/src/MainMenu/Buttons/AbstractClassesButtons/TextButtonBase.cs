@@ -21,10 +21,9 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
         Vector2 scaleFactor = new Vector2(0.05f, 0.05f);
 
 
-        TextEntity _textEntity;
+        public TextEntity _textEntity;
         WiggleEffect WiggleEffect;
 
-        Scene _Scene;
 
         public Entity _Entity { get; set; }
 
@@ -32,10 +31,9 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
         public TextButtonBase(string Text, Vector2 _position, GameControllers GameControllers)
         {
             _Entity = this;
-            _Scene = GameControllers._Scene;
 
             // Text entity
-            _textEntity = new TextEntity(Text, _position, GameControllers);
+            _textEntity = new TextEntity(Text, _position, GameControllers.textFont);
             originalScale = _textEntity.Scale;
             scaleOver = originalScale + new Vector2(0.1f, 0.1f);
 
@@ -95,15 +93,22 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
             }
         }
 
-        public void AddOnScene()
+        public void AddOnScene(Scene _Scene)
         {
-            _textEntity.AddOnScene();
+            _textEntity.AddOnScene(_Scene);
             _Scene.AddEntity(this);
         }
+
         public void DestroyFromScene()
         {
             _textEntity.Destroy();
             Destroy();
+        }
+
+        public void setSceneState(bool state)
+        {
+            this.Enabled = state;
+            _textEntity.Enabled = state;
         }
 
         public virtual void onClick()

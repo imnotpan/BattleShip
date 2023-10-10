@@ -86,6 +86,19 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Drawing.Common/5.0.2": {
         "type": "package",
         "dependencies": {
@@ -220,6 +233,36 @@
         "runtimes/win-x86/native/soft_oal.dll"
       ]
     },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "System.Drawing.Common/5.0.2": {
       "sha512": "rvr/M1WPf24ljpvvrVd74+NdjRUJu1bBkspkZcnzSZnmAUQWSvanlQ0k/hVHk+cHufZbZfu7vOh/vYc0q5Uu/A==",
       "type": "package",
@@ -278,27 +321,28 @@
       "LiteNetLib >= 1.1.0",
       "MonoGame.Content.Builder.Task >= 3.8.1.303",
       "MonoGame.Framework.DesktopGL >= 3.8.1.303",
+      "Newtonsoft.Json >= 13.0.3",
       "Nez >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\imnot\\.nuget\\packages\\": {},
+    "C:\\Users\\crist\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
+      "projectUniqueName": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
       "projectName": "Battleship",
-      "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\Battleship.csproj",
-      "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Battleship\\obj\\",
+      "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
+      "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+      "outputPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\imnot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -314,11 +358,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
-              "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+            "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+              "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
             },
-            "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
-              "projectPath": "C:\\Users\\imnot\\source\\repos\\_BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
+            "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+              "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
             }
           }
         }
@@ -340,6 +384,10 @@
           "MonoGame.Framework.DesktopGL": {
             "target": "Package",
             "version": "[3.8.1.303, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.3, )"
           }
         },
         "imports": [
@@ -358,7 +406,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

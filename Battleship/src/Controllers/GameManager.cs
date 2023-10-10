@@ -15,106 +15,25 @@ namespace Battleship.src.Controllers
 
 
 
-        //IA Grids
-        public List<Grid> enemySelectedGrids = new List<Grid>();
-        public List<Vector2> enemyShipsPositions = new List<Vector2>();
-
-        // Lista de selecciones temporales de la matriz
-        public List<Grid> playerSelectedGrids = new List<Grid>();
-        public List<Vector2> playerShipsPositions = new List<Vector2>();
-
-        /* Mouse Controllers */
-        public Vector2 mousePosition;
-        public Grid _MouseInGrid;
 
         // Enemy Boards
-        public playerBoard PlayerBoard;
+        public Board Board;
         public EnemyIA EnemyIA;
 
         // General Controller
-        TextureLoader TextureLoader;
         GameControllers GameControllers;
-        Scene _Scene;
 
-        /* Game States */
+        // Game States
         public string GameState = "MAINMENU";
-        public ShipBase inDragShip;
-        public bool shipsReady = true;
 
 
         // Bullets
         public int bulletCount = 4;
 
-        // IP CONNECTION
-        public string IPCONNECTION;
-
 
         public GameManager(GameControllers GameControllers) {
-
             this.GameControllers = GameControllers;
-            this.TextureLoader = GameControllers.TextureLoader;
-            this._Scene = GameControllers._Scene;
-
-
         }
-
-
-        public void StartGame()
-        {
-            Console.WriteLine("[ x ] Game Starting");
-            GameControllers.PlayerBoard.InitializeBoard(this);
-            GameControllers.PlayerBoard.InitializeTinyBoard(this);
-
-            // Probabilidad Inicial
-            var startProbability = Nez.Random.NextInt(100);
-            if (startProbability <= 50)
-            {
-                GameState = "PLAYERTURN";
-                Console.Write("[ x ] Is Player Turn");
-            }
-            else
-            {
-                GameState = "ENEMYTURN";
-                Console.Write("[ x ] Is Enemy Turn");
-            }
-
-            foreach (ShipBase ship in GameControllers.ShipsDeploy.ShipsList)
-            {
-                while (!ship.isReady)
-                {
-                    ship.StartShipInBoard(GameControllers.PlayerBoard);
-                }
-                if (ship.isReady)
-                {
-                    Console.WriteLine(ship.inUsePositions);
-
-                }
-            }
-
-
-
-
-
-            /*
-            foreach (var entity in _Scene.FindEntitiesWithTag(1))
-            {
-                if (entity is ShipBase ship)
-                {
-                    ship.SpriteRenderer.Color = new Color(0.25f, 0.25f, 0.25f, 0.25f);
-
-                    foreach (var pos in ship.inUsePositions)
-                    {
-                        playerShipsPositions.Add(pos);
-                    }
-                }
-            }
-            /*
-            
-            GameState = "PREPARATION";
-            */
-            //setTinyBoard();
-        }
-
 
         public void EndTurn()
         {

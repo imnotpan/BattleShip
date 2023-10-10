@@ -19,65 +19,56 @@ namespace Battleship.src.Controllers.Ships
 
         public void RotateShip()
         {
-            /*
-            var nextRotation = MathHelper.ToDegrees(ShipBase.Rotation) + 90;
+            
+            var nextRotation = ShipBase.RotationDegrees + 90;
             var collisionSystem = ShipBase.ShipCollisionSystem;
             var setInArray = ShipBase.ShipSetArrayPositions;
+            var GameControllers = ShipBase.GameControllers;
+
 
             if (nextRotation >= 360)
             {
                 nextRotation = 0;
             }
+
+
             if (!ShipBase.isRotating)
             {
-                if (!collisionSystem.CollisionWithBoundsArray(ShipBase.GridLinkedToShip, MathHelper.ToRadians(nextRotation)))
+
+                if (!collisionSystem.CollisionWithBoundsArray(ShipBase.GridLinkedToShip, nextRotation))
                 {
-                    var futurePositionArray = setInArray.PositionValuesList(MathHelper.ToRadians(nextRotation), ShipBase.GridLinkedToShip);
+                    var futurePositionArray = setInArray.PositionValuesList(nextRotation, ShipBase.GridLinkedToShip);
 
                     // Limpiar las posiciones anteriores
-                    ClearPlayerMatrix(ShipBase.inUsePositions);
+                    GameControllers.SetMatrixValue(GameControllers.playerMatrix, ShipBase.inUsePositions, 0);
 
                     if (collisionSystem.collisionDetection(futurePositionArray))
                     {
                         Console.WriteLine("Collision Detection");
                         // Restaurar las posiciones anteriores
-                        SetPlayerMatrix(ShipBase.inUsePositions, 2);
+                        GameControllers.SetMatrixValue(GameControllers.playerMatrix, ShipBase.inUsePositions, 2);
+
                         return;
                     }
 
                     ShipBase.isRotating = true;
 
-                    // Limpiar las posiciones anteriores
-                    ClearPlayerMatrix(ShipBase.inUsePositions);
-                    // Establecer las nuevas posiciones
-                    SetPlayerMatrix(futurePositionArray, 2);
 
                     ShipBase.inUsePositions.Clear();
                     ShipBase.inUsePositions = futurePositionArray;
-
-                    // Animación de escala
-                    ShipBase.TweenLocalScaleTo(1.25f, 0.05f)
-                        .SetEaseType(EaseType.SineOut)
-                        .SetCompletionHandler((x) =>
-                        {
-                            ShipBase.TweenLocalScaleTo(1f, 0.1f)
-                            .SetEaseType(EaseType.SineIn)
-                            .Start();
-                        })
-                        .Start();
+                    GameControllers.SetMatrixValue(GameControllers.playerMatrix, ShipBase.inUsePositions, 2);
 
                     // Animación de rotación
-                    ShipBase.TweenLocalRotationDegreesTo(nextRotation, 0.25f)
-                        .SetEaseType(EaseType.SineInOut)
-                        .SetCompletionHandler((x) =>
-                        {
-                            if (ShipBase.Rotation > 2 * Math.PI) { ShipBase.Rotation = 0; }
-                            ShipBase.isRotating = false;
-                        })
-                        .Start();
+                    ShipBase.TweenRotationDegreesTo(nextRotation, 0.25f)
+                    .SetEaseType(EaseType.SineInOut)
+                    .SetCompletionHandler((x) =>
+                    {
+                        if(ShipBase.RotationDegrees >= 360) {  ShipBase.RotationDegrees = 0; }
+                        ShipBase.isRotating = false;
+                    })
+                    .Start();
                 }
-            */
-            
-        }
+            }
+         }
     }
 }
