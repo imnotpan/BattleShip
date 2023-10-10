@@ -16,7 +16,7 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
 
         public override void onClick()
         {
-
+            
             var IP = GameControllers.MainMenuController.IP_CONNECTION;
             var PORT = 0;
             try
@@ -33,9 +33,10 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
                 IP = "localhost";
             }
             Console.WriteLine("IP: { " + IP + " }" + " PORT { " + PORT + " }");
-
             GameControllers.GameNetworking.Client.Connect(IP, PORT, int.Parse(GameControllers.MainMenuController.GAMESESSIONID));
-    
+            
+
+            //GameControllers.GameNetworking.clientSocket.Connect(GameControllers);
 
         }
     }

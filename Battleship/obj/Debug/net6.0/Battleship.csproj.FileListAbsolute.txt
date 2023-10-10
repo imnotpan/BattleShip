@@ -105,7 +105,6 @@ C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\HUD\Mo
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\ship_BattleShip.xnb
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ship_Carrier.xnb
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ship_Cruiser.xnb
-C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\ship_PatrolBoat.xnb
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Battleship.exe
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Battleship.deps.json
 C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Battleship.runtimeconfig.json
@@ -197,3 +196,7 @@ E:\Proyectos\Source\BattleShip\Battleship\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Proyectos\Source\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_Destructor.xnb
 E:\Proyectos\Source\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_PatrolBoat.xnb
 E:\Proyectos\Source\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_submarine.xnb
+C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_Destructor.xnb
+C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_PatrolBoat.xnb
+C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Content\Sprites\Ships\ship_submarine.xnb
+C:\--PAN\Proyectos\BattleShip\Battleship\bin\Debug\net6.0\Newtonsoft.Json.dll

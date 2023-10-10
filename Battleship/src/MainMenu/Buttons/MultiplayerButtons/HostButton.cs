@@ -19,6 +19,8 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
         public override void onClick()
         {
             base.onClick();
+            
+            
             try
             {
                 var PORT = Convert.ToInt32(GameControllers.MainMenuController.PORT_CONNECTION);
@@ -28,6 +30,9 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
             {
                 Console.WriteLine("Host Error: " + ex.Message);
             }
+            
+            
+            //GameControllers.GameNetworking.serverSocket.Start();
 
 
         }

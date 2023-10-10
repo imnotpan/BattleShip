@@ -33,7 +33,6 @@ namespace Battleship.src.Networking
 
     public class Server
     {
-        public ServerListener ServerListener;    
         public NetManager server;
 
         public bool isClientOneReady;
@@ -67,7 +66,6 @@ namespace Battleship.src.Networking
 
         public void ServerStart(int PORT)
         {
-            ServerListener = new ServerListener();
             var listener = new EventBasedNetListener();
             server = new NetManager(listener);
             server.Start(PORT);

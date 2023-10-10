@@ -11,14 +11,18 @@ namespace Battleship.src.Networking
         public GameControllers GameControllers;
 
 
-
-
+        public clientSocket clientSocket;
+        public ServerSocket serverSocket;
         public GameNetworking(GameControllers GameControllers) {
             this.GameControllers = GameControllers;
 
             Client = new Client(GameControllers);
-            Server = new Server(GameControllers);
+            
+            //clientSocket = new clientSocket();
 
+
+            Server = new Server(GameControllers);
+            //serverSocket = new ServerSocket();
         }
 
         public void Update()

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Proyectos\\Source\\BattleShip\\Battleship\\Battleship.csproj": {}
+    "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj": {}
   },
   "projects": {
-    "E:\\Proyectos\\Source\\BattleShip\\Battleship\\Battleship.csproj": {
+    "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Proyectos\\Source\\BattleShip\\Battleship\\Battleship.csproj",
+        "projectUniqueName": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
         "projectName": "Battleship",
-        "projectPath": "E:\\Proyectos\\Source\\BattleShip\\Battleship\\Battleship.csproj",
-        "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "E:\\Proyectos\\Source\\BattleShip\\Battleship\\obj\\",
+        "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
+        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+        "outputPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\imnot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,11 +33,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
-                "projectPath": "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+              "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+                "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
               },
-              "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
-                "projectPath": "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
+              "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+                "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
               }
             }
           }
@@ -81,25 +81,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+    "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
+        "projectUniqueName": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
         "projectName": "LiteNetLib",
-        "projectPath": "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
-        "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "E:\\Proyectos\\Source\\BattleShip\\LiteNetLib\\LiteNetLib\\obj\\",
+        "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj",
+        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+        "outputPath": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\imnot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -181,7 +181,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         },
         "net5.0": {
           "targetAlias": "net5.0",
@@ -215,7 +215,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         },
         "net6.0": {
           "targetAlias": "net6.0",
@@ -235,11 +235,19 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         },
         "net471": {
           "targetAlias": "net471",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
@@ -262,7 +270,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
@@ -282,24 +290,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+    "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
+        "projectUniqueName": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
         "projectName": "Nez",
-        "projectPath": "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
-        "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-        "outputPath": "E:\\Proyectos\\Source\\BattleShip\\Nez\\Nez.Portable\\obj\\Nez\\",
+        "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj",
+        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+        "outputPath": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\obj\\Nez\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\imnot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -327,6 +335,12 @@
         "net471": {
           "targetAlias": "net471",
           "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            },
             "MonoGame.Framework.Portable": {
               "suppressParent": "All",
               "target": "Package",
@@ -337,7 +351,7 @@
               "version": "[5.0.2, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
