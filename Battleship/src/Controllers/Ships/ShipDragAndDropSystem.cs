@@ -32,7 +32,7 @@ namespace Battleship.src.Controllers.Ships
             if (collisionSystem.CollisionWithBoundsArray(ShipBase.GameControllers.MouseInGrid, ShipBase.RotationDegrees) &&
                                                          ShipBase.GameControllers.MouseInGrid != null)
             {
-                Console.WriteLine("COLLIDES WITH BOUNDS  ORIENTATION: " + ShipBase.RotationDegrees/9);
+                Console.WriteLine("COLLIDES WITH BOUNDS  ORIENTATION: " + ShipBase.RotationDegrees/90);
                 returnToStartDragPosition();
                 return;
             }

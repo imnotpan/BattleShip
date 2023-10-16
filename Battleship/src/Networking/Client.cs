@@ -12,13 +12,6 @@ using System.Threading;
 namespace Battleship.src.Networking
 {
 
-    public class datagramServer
-    {
-        public string action { get; set; }
-        public int status { get; set; }
-        public int[] position { get; set; }
-
-    }
 
     public class Client
     {
@@ -76,7 +69,7 @@ namespace Battleship.src.Networking
                     }
                     if (receivedStringData.action == "b")
                     {
-                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        //GameControllers.GameStatesSystem.StartMultiplayerGame();
                         GameControllers.GameHud.CircleEntityEnemy.AddEntityOnScene(GameControllers.Scene);
                         GameControllers.enemyCountShips = 6;
                     }
@@ -100,7 +93,7 @@ namespace Battleship.src.Networking
                             }
                         }
                         GameControllers.playerSelectedGrids.Clear();
-                        GameControllers.GameStatesSystem.StartMultiplayerGame();
+                        //GameControllers.GameStatesSystem.StartMultiplayerGame();
                         Console.WriteLine("[ CLIENT ] Packet receive: " + receivedJsonString);
                     }
 
@@ -127,23 +120,23 @@ namespace Battleship.src.Networking
         public void Connect(string IP, int PORT, int gameID)
         {
 
-            var GameNetworking = GameControllers.GameNetworking;
+            //var GameNetworking = GameControllers.GameNetworking;
 
-            try
-            {
-                GAMEID = gameID;
-                client.Connect(IP, PORT, "BATTLESHIP");
-                GameControllers.MainMenuController.WaitingForPlayers();
+            //try
+            //{
+            //    GAMEID = gameID;
+            //    client.Connect(IP, PORT, "BATTLESHIP");
+            //    GameControllers.MainMenuController.HostServerWaiting();
 
-                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "c", 0);
-                GameNetworking.Client.SendDataToServer(JSON);
+            //    var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "c", 0);
+            //    GameNetworking.Client.SendDataToServer(JSON);
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error de conexión: " + ex.Message);
-                return;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Error de conexión: " + ex.Message);
+            //    return;
+            //}
         }
 
 
@@ -151,8 +144,8 @@ namespace Battleship.src.Networking
         {
             if (client != null)
             {
-                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "d", 1);
-                GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                //var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "d", 1);
+                //GameControllers.GameNetworking.Client.SendDataToServer(JSON);
             }
         }
 

@@ -12,24 +12,6 @@ using Battleship.src.Controllers.Ships;
 
 namespace Battleship.src.Networking
 {
-    public class Ship
-    {
-
-        public int[] p { get; set; }
-        public int[] b { get; set; }
-        public int[] s { get; set; }
-    }
-
-
-    public class myData
-    {
-        public int gameID { get; set; }
-        public string action { get; set; }
-        public int bot { get; set; }
-        public Ship ships { get; set; }
-        public int[] position { get; set; }
-
-    }
 
     public class Server
     {
@@ -107,39 +89,39 @@ namespace Battleship.src.Networking
                     string receivedJsonString = Encoding.UTF8.GetString(receivedBytes);
                     myData receivedStringData = JsonConvert.DeserializeObject<myData>(receivedJsonString);
 
-                    var idGame = receivedStringData.gameID;
+                    //var idGame = receivedStringData.gameID;
     
-                    // Connectar
-                    if (receivedStringData.action == "c")
-                    {
-                        if (GameSessionManager.GetGame(receivedStringData.gameID) == null)
-                        {
-                            GameSessionManager.CreateNewGame(receivedStringData.gameID, GameControllers);
-                        }
-                        GameSessionManager.GetGame(receivedStringData.gameID).addPlayerToSession(peer);
-                    }
+                    //// Connectar
+                    //if (receivedStringData.action == "c")
+                    //{
+                    //    if (GameSessionManager.GetGame(receivedStringData.gameID) == null)
+                    //    {
+                    //        GameSessionManager.CreateNewGame(receivedStringData.gameID, GameControllers);
+                    //    }
+                    //    GameSessionManager.GetGame(receivedStringData.gameID).addPlayerToSession(peer);
+                    //}
 
-                    var GAMESESSION = GameSessionManager.GetGame(idGame);
+                    //var GAMESESSION = GameSessionManager.GetGame(idGame);
 
 
-                    if (receivedStringData.action == "b")
-                    {
-                        GAMESESSION.ShipsOnBoard(peer, receivedStringData.ships.p, receivedStringData.ships.b, receivedStringData.ships.s);
+                    //if (receivedStringData.action == "b")
+                    //{
+                    //    GAMESESSION.ShipsOnBoard(peer, receivedStringData.ships.p, receivedStringData.ships.b, receivedStringData.ships.s);
 
-                    }
+                    //}
 
-                    if(receivedStringData.action == "a")
-                    {
-                        GAMESESSION.GameLoop(peer, receivedStringData.position);
-                    }
+                    //if(receivedStringData.action == "a")
+                    //{
+                    //    GAMESESSION.GameLoop(peer, receivedStringData.position);
+                    //}
 
-                    //Desconectar
-                    if (receivedStringData.action == "d")
-                    {
-                        GameSessionManager.GetGame(receivedStringData.gameID).disconnectPlayerFromSession(peer);
-                        server.DisconnectPeer(peer);
-                        Console.WriteLine("[ SERVER ] Player disconected");
-                    }
+                    ////Desconectar
+                    //if (receivedStringData.action == "d")
+                    //{
+                    //    GameSessionManager.GetGame(receivedStringData.gameID).disconnectPlayerFromSession(peer);
+                    //    server.DisconnectPeer(peer);
+                    //    Console.WriteLine("[ SERVER ] Player disconected");
+                    //}
                     
               
 
@@ -158,7 +140,7 @@ namespace Battleship.src.Networking
             System.Threading.Thread.Sleep(100);
 
             Console.WriteLine(" [ NETWORK ] Server is waiting for connections");
-            GameControllers.MainMenuController.HostMenuInitialize();
+            //GameControllers.MainMenuController.HostMenuInitialize();
 
         }
 
@@ -170,27 +152,27 @@ namespace Battleship.src.Networking
                 server.PollEvents();
                 if(GameControllers.playerCountShips == 0)
                 {
-                    var JSONPT = GameControllers.GameDataJSON.ServerJSON("l", 0);
-                    var JSONPO = GameControllers.GameDataJSON.ServerJSON("l", 1);
+                    //var JSONPT = GameControllers.GameDataJSON.ServerJSON("l", 0);
+                    //var JSONPO = GameControllers.GameDataJSON.ServerJSON("l", 1);
 
 
                     GameControllers.enemyCountShips = -999;
 
-                    SendDataToClient(PeerTwo, JSONPT);
-                    SendDataToClient(PeerTwo, JSONPO);
+                    //SendDataToClient(PeerTwo, JSONPT);
+                    //SendDataToClient(PeerTwo, JSONPO);
                     ServerStop();
 
                 }
                 else if(GameControllers.enemyCountShips  == 0)
                 {
-                    var JSONPT = GameControllers.GameDataJSON.ServerJSON("l", 1);  // main player
-                    var JSONPO = GameControllers.GameDataJSON.ServerJSON("l", 0);  // enemy player
+                    //var JSONPT = GameControllers.GameDataJSON.ServerJSON("l", 1);  // main player
+                    //var JSONPO = GameControllers.GameDataJSON.ServerJSON("l", 0);  // enemy player
 
                     GameControllers.enemyCountShips = -999;
                     GameControllers.playerCountShips = -999;
 
-                    SendDataToClient(PeerTwo, JSONPT);
-                    SendDataToClient(PeerTwo, JSONPO);
+                    //SendDataToClient(PeerTwo, JSONPT);
+                    //SendDataToClient(PeerTwo, JSONPO);
                     ServerStop();
 
                 }

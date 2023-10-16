@@ -1,8 +1,6 @@
-﻿using Battleship.src.Controllers;
-using Battleship.src.MainMenu.Buttons.AbstractClasses;
+﻿using Battleship.src.MainMenu.Buttons.AbstractClasses;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+
 
 namespace Battleship.src.Controllers.UI.GameLoopButtons
 {
@@ -18,7 +16,10 @@ namespace Battleship.src.Controllers.UI.GameLoopButtons
         public override void onClick()
         {
             base.onClick();
-            GameControllers.GameStatesSystem.PlayerEndTurn();
+            if (GameControllers.playerSelectedGrids.Count > 0)
+            {
+                GameControllers.GameStatesSystem.PlayerEndTurn();
+            }
         }
     }
 }

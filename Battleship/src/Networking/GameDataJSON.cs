@@ -20,7 +20,7 @@ namespace Battleship.src.Networking
 
 
 
-        public string ClientJSON(int _gameID, string _action, int _bot, List<Vector3>? _shipsPositions = null, Vector2? _ataque = null)
+        public string ClientJSON(string _action, int _bot, List<Vector3>? _shipsPositions = null, Vector2? _ataque = null)
         {
 
             Ship miBarco = new Ship();
@@ -56,7 +56,6 @@ namespace Battleship.src.Networking
     
             var json = new
             {
-                gameID = _gameID,
                 action = _action,
                 bot = _bot,
                 ships = miBarco,
@@ -65,7 +64,6 @@ namespace Battleship.src.Networking
 
 
             string jsonString = JsonConvert.SerializeObject(json);
-            Console.WriteLine(jsonString);
             return jsonString;
         }
 

@@ -3,10 +3,14 @@
 using Battleship.src.Controllers.Enemy;
 using Battleship.src.Controllers.Grids;
 using Battleship.src.Controllers.Ships;
+using Battleship.src.Controllers.UI.GameHud;
+using Battleship.src.Controllers.UI.GameLoopButtons;
 using Battleship.src.Networking;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
+using System.Linq;
 
 namespace Battleship.src.Controllers
 {
@@ -15,7 +19,6 @@ namespace Battleship.src.Controllers
 
         GameControllers GameControllers;
         Board Board;
-        GameDataJSON GameDataJSON;
 
         //MULTIPLAYER
         public bool MultiplayerMode = false;
@@ -27,7 +30,6 @@ namespace Battleship.src.Controllers
         
             this.GameControllers = GameControllers;
             this.Board = GameControllers.Board;
-            this.GameDataJSON = new GameDataJSON();
         }
 
 
@@ -35,25 +37,33 @@ namespace Battleship.src.Controllers
 
         public void StartGame()
         {
-            Console.WriteLine("[ x ] Game Starting");
-
+            
             //Ships system and matrix
             GameControllers.Board.InitializeMainBoard();
             GameControllers.Board.InitializeTinyBoard();
             GameControllers.ShipsDeploy.deploy();
 
-            // Se despliegan botones
-            GameControllers.GameHud.RedyButton.AddOnScene(GameControllers.Scene);
-            GameControllers.GameHud.middleTextEntity.AddOnScene(GameControllers.Scene);
+            //GameHUD
+            GameControllers.GameHud.Initialize();
+            GameControllers.GameHud.setRedyViewHUD();
 
-            //Multiplayer Mode
-            if (MultiplayerMode)
-            {
-                GameControllers.MainMenuController.DisableMenu(GameControllers.MainMenuController.MultiplayerMenuStack);
+            // Se desabilitan los Grids
+            GameControllers.Board.setGridsState(false);
 
-            }
-        
 
+        }
+
+
+
+
+
+        public void BackToMainMenu()
+        {
+            GameControllers.DestroyBoardGame();
+            GameControllers.MainMenuController.MainMenuInitialize();
+            GameControllers.GameHud.DisableGameHud();
+
+            GameControllers.ShipsDeploy.createShips();
         }
 
         //MULTIPLAYER
@@ -68,20 +78,6 @@ namespace Battleship.src.Controllers
         }
 
 
-        public void playerTwoSetPositions(int[] shipsPosition)  // PLAYER SHIPS
-        {
-            if (shipsPosition != null)
-            {
-                GameControllers.playerMatrix[shipsPosition[0], shipsPosition[1]] = 2;
-                GameControllers.playerShipsPositions.Add(new Vector2(shipsPosition[0], shipsPosition[1]));
-                Console.WriteLine(" [ " + SIDE + "] " + "X: " + shipsPosition[0] + " Y: " + shipsPosition[1]);
-
-            }
-        }
-
-
-
-
 
         public void ShipsReady()
         {
@@ -91,90 +87,75 @@ namespace Battleship.src.Controllers
             GameControllers.setTinyBoardShipsReady();
             GameControllers.GameHud.RedyButton.setSceneState(false);
 
+            var mainShipPositions = new List<Vector3>();
+
             foreach (ShipBase ship in ShipsSystem.ShipsList)
             {
-
-                var Vector3List = new List<Vector3>();
-                foreach (Vector2 pos in ship.inUsePositions)
+                var mainPosition = new Vector2(0,0);
+                var jsonOrientation = ship.RotationDegrees/90;
+                if(jsonOrientation == 3 )
                 {
-                    Vector3List.Add(new Vector3(pos.X, pos.Y, 0));
+                    jsonOrientation = 1;
                 }
-                var GAMEID = GameControllers.GameNetworking.Client.GAMEID;
-                var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "b", 0, Vector3List);
-                GameControllers.GameNetworking.Client.SendDataToServer(JSON);
-                Console.WriteLine("[ CLIENT ] " + JSON);
+                if(jsonOrientation == -1)
+                {
+                    jsonOrientation = 1;
+                }
+
+
+                if(jsonOrientation == 0)
+                {
+                    jsonOrientation = 1; 
+                } else if(jsonOrientation == 1)
+                {
+                    jsonOrientation = 0;
+                }
+
+
+                if(ship.inUsePositions.Count > 2)
+                {
+                    mainPosition = ship.inUsePositions[1];
+                }
+                else
+                {
+                    mainPosition = ship.inUsePositions[0];
+                }
+                mainShipPositions.Add(new Vector3(mainPosition.X, mainPosition.Y, jsonOrientation));
             }
 
 
+            var msg = GameControllers.GameNetworking.GameDataJSON.ClientJSON("b", 0, mainShipPositions);
+            GameControllers.GameNetworking.clientSocket.sendData(msg);
 
-            /*
-            if (!MultiplayerMode)
-            {
-                GameControllers.EnemyIA.StartShipsInBoard(); // IA STARTING SHIP
-            }
-            */
-
-
-           /*
-            GameControllers.setTinyBoardShipsReady();
-            GameControllers.GameHud.RedyButton.setSceneState(false);
-
-            GameControllers.GameHud.CircleEntityPlayer.AddEntityOnScene(GameControllers.Scene);
-            GameControllers.GameHud.CircleEntityEnemy.AddEntityOnScene(GameControllers.Scene);
-
-            GameControllers.playerCountShips = GameControllers.playerShipsPositions.Count;
-            GameControllers.enemyCountShips = GameControllers.enemyShipsPositions.Count;
-
-            GameControllers.PrintMatrix(GameControllers.enemyMatrix);
-
-            */
-            /*
-            var startProbability = Nez.Random.NextInt(100);
-
-            if (startProbability <= 50)
-            {
-                PlayerStartTurn();
-                Console.Write("[ x ] Is Player Turn");
-            }
-            else
-            {
-                Console.Write("[ x ] Is Enemy Turn");
-                EnemyTurn();
-            }
-            */
         }
 
-        public void StartMultiplayerGame()
+        public void StartAttackTurn()
         {
-            Board.setGridsState(true);
-            GameControllers.GameHud.AttackButton.setSceneState(true);
+            GameControllers.playerSelectedGrids.Clear();
+            GameControllers.Board.setGridsState(true);
+            GameControllers.GameHud.setAttackViewHUD();
         }
 
-        public void PlayerStartTurn()
-        {
-            Board.setGridsState(true);
-            GameControllers.GameHud.AttackButton.setSceneState(true);
-        }
 
         public void PlayerEndTurn()
         {
+            GameControllers.Board.setGridsState(false);
+            GameControllers.GameHud.AttackButton.setSceneState(false);
+
             if (GameControllers.playerSelectedGrids.Count > Constants.TOTALBOMBCOUNT)
             {
                 foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
                 {
-                    var GAMEID = GameControllers.GameNetworking.Client.GAMEID;
-                    var JSON = GameControllers.GameDataJSON.ClientJSON(GAMEID, "a", 0, null, new Vector2(gridPos.X, gridPos.Y));
-                    GameControllers.GameNetworking.Client.SendDataToServer(JSON);
+                    var msg = GameControllers.GameNetworking.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
+                    GameControllers.GameNetworking.clientSocket.sendData(msg);
                 }
-                Board.setGridsState(false);
                 GameControllers.GameHud.AttackButton.setSceneState(false);
-
             }
+
         }
 
         public void EnemyTurn()
         {
-            Board.setGridsState(false);
 
             // Deberia recibir la informacion de la IA
             var bombs = GameControllers.EnemyIA.generateBombList();
@@ -203,18 +184,9 @@ namespace Battleship.src.Controllers
             }
 
             GameControllers.enemySelectedGrids.Clear();
-            PlayerStartTurn();
+            //PlayerStartTurn();
         }
 
 
-
-
-        public void BackToMainMenu()
-        {
-            GameControllers.DestroyBoardGame();
-            GameControllers.GameHud.RedyButton.DestroyFromScene();
-            GameControllers.GameHud.middleTextEntity.DestroyFromScene();
-            GameControllers.MainMenuController.MainMenuInitialize();
-        }
     }
 }

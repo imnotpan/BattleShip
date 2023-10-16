@@ -16,9 +16,6 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Battleship.src
 {
 
-
-
-
     public class GameControllers
     {
 
@@ -78,7 +75,6 @@ namespace Battleship.src
         public int enemyCountShips = -999;
 
         public List<Flag> flagList = new List<Flag>();
-        public GameDataJSON GameDataJSON;
 
         //fonts
         public SpriteFont textFont;
@@ -90,23 +86,44 @@ namespace Battleship.src
             {
                 grid.Destroy();
             }
+
+            GridsList.Clear();
             foreach(GridTiny tiny in tinyBoardGrids)
             {
                 tiny.Destroy();
             }
+            tinyBoardGrids.Clear();
             foreach (Flag flag in flagList)
             {
                 flag.Destroy();
             }
+            flagList.Clear();
             foreach(ShipBase ship in ShipsDeploy.ShipsList)
             {
                 ship.Destroy();
             }
-
+            ShipsDeploy.ShipsList.Clear(); 
             playerShipsPositions.Clear();
             playerSelectedGrids.Clear();
         }
+        public void restartGameplay()
+        {
 
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    playerMatrix[i, j] = 0;
+                    enemyMatrix[i, j] = 0;
+                }
+            }
+            playerShipsPositions.Clear();
+            enemyShipsPositions.Clear();
+
+            playerCountShips = -999;
+            enemyCountShips = -999;
+
+        }
         public GameControllers(Scene Scene)
         {
             this.Scene = Scene;
@@ -114,6 +131,8 @@ namespace Battleship.src
             LoadTextures();
 
             MainMenuController = new MainMenuController(this);
+            MainMenuController.MainMenuInitialize();
+
 
             Board = new Board(this);
             ShipsDeploy = new ShipsSystem(this);
@@ -121,15 +140,9 @@ namespace Battleship.src
             GameStatesSystem = new GameStatesSystem(this);
             EnemyIA = new EnemyIA(this);
 
-            GameDataJSON = new GameDataJSON();
             GameNetworking = new GameNetworking(this);
 
 
-            //Debug
-            inDragShipText = new TextEntity("", new Vector2(64,132), textFont);
-            Scene.AddEntity(inDragShipText);
-            MouseGridText = new TextEntity("", new Vector2(64, 164), textFont);
-            Scene.AddEntity(MouseGridText);
 
 
         }
@@ -178,6 +191,7 @@ namespace Battleship.src
             }
         }
 
+ 
 
         public void LoadTextures()
         {
@@ -213,24 +227,7 @@ namespace Battleship.src
             }
 
 
-            //Debug
-            if (inDragShip != null)
-            {
-                inDragShipText._textComponent.Text = inDragShip.Name;
-            }
-            else
-            {
-                inDragShipText._textComponent.Text = "empty";
-            }
-            if (MouseInGrid != null)
-            {
-                MouseGridText._textComponent.Text = MouseInGrid._relativePosition.ToString();
-            }
-            else
-            {
-                MouseGridText._textComponent.Text = "empty";
-
-            }
+    
         }
 
       

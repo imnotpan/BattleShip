@@ -24,7 +24,10 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
             try
             {
                 var PORT = Convert.ToInt32(GameControllers.MainMenuController.PORT_CONNECTION);
-                GameControllers.GameNetworking.Server.ServerStart(PORT);
+                var IP = GameControllers.MainMenuController.IP_CONNECTION;
+
+                GameControllers.GameNetworking.serverSocket.Start(IP ,PORT);
+                GameControllers.MainMenuController.HostServerWaiting();
             }
             catch (Exception ex)
             {
@@ -32,7 +35,6 @@ namespace Battleship.src.MainMenu.Buttons.Multiplayer
             }
             
             
-            //GameControllers.GameNetworking.serverSocket.Start();
 
 
         }

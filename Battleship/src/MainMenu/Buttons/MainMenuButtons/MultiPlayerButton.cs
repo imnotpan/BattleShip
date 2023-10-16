@@ -19,7 +19,7 @@ namespace Battleship.src.MainMenu.Buttons.MainMenuButtons
         public override void onClick()
         {
             base.onClick();
-            GameControllers.MainMenuController.MultiplayerMenuInitialize();
+            //GameControllers.MainMenuController.MultiplayerMenuInitialize();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
     {
 
         // Components
-        private Collider Collider { get; set; }
+        public Collider Collider { get; set; }
 
         Vector2 scaleOver;
         Vector2 originalScale;
@@ -49,7 +49,6 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
 
         public void onApper()
         {
-
             _textEntity.TweenLocalScaleTo(originalScale, 0.05f)
             .SetEaseType(EaseType.ExpoOut)
             .Start();
@@ -70,7 +69,7 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
             base.Update();
 
             _textEntity.Position = _textEntity.Position + WiggleEffect.WiggleSinWave();
-
+            _textEntity._textComponent.Origin = _textEntity._textComponent.Origin + new Vector2(_textEntity._textComponent.Width * 2, 32); 
             Vector2 mousePosition = Scene.Camera.ScreenToWorldPoint(Input.MousePosition);
             if (Collider.Bounds.Contains(mousePosition))
             {
@@ -91,6 +90,7 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
                     _textEntity.Scale -= scaleFactor;
                 }
             }
+            
         }
 
         public void AddOnScene(Scene _Scene)

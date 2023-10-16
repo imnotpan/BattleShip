@@ -77,7 +77,7 @@ namespace Battleship.src.Controllers.Ships
                     positionList.Add(fromOriginPosition);
                 }
             }
-            else if (orientation == 3)
+            else if (orientation == 3 || orientation == -10)
             {
                 for (int i = 0; i < fromButtom; i++)
                 {

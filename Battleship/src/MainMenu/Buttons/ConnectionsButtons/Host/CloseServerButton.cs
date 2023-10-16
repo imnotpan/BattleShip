@@ -15,7 +15,9 @@ namespace Battleship.src.MainMenu.Buttons.ConnectionsButtons.Host
         public override void onClick()
         {
             GameControllers.MainMenuController.MainMenuInitialize();
-            GameControllers.GameNetworking.Server.ServerStop();
+            GameControllers.GameNetworking.serverSocket.Stop();
+
+            //GameControllers.GameNetworking.Server.ServerStop();
         }
 
     }

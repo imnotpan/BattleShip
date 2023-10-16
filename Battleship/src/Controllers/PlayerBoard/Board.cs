@@ -32,6 +32,8 @@ namespace Battleship.src.Controllers
             InitializeMatrix(GameControllers.enemyMatrix);
         }
 
+        
+
         public void InitializeMatrix(int[,] Matrix)
         {
             for (int i = 0; i < 10; i++)
@@ -62,7 +64,6 @@ namespace Battleship.src.Controllers
                 GameControllers.GridsList.Add(gridEntity);
                 _Scene.AddEntity(gridEntity);
             }
-            Console.WriteLine("[ x ] Initialize Main Board");
 
         }
 
@@ -85,10 +86,7 @@ namespace Battleship.src.Controllers
                 GameControllers.tinyBoardGrids.Add(tinyGridEntity);
                 _Scene.AddEntity(tinyGridEntity);
             }
-
-            Console.WriteLine("[ x ] Initialize Tiny Board");
         }
-
 
 
 
@@ -104,9 +102,6 @@ namespace Battleship.src.Controllers
 
         public void Update()
         {
-           
-            
-
 
             foreach(Grid grid in GameControllers.GridsList)
             {

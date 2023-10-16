@@ -15,7 +15,8 @@ namespace Battleship.src.MainMenu.Buttons.ConnectionsButtons.Client
         {
             base.onClick();
             GameControllers.MainMenuController.MainMenuInitialize();
-            GameControllers.GameNetworking.Client.Disconnect();
+           
+            GameControllers.GameNetworking.clientSocket.Disconnect();
         }
     }
 }

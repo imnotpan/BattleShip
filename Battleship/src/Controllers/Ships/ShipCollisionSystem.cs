@@ -56,7 +56,7 @@ namespace Battleship.src.Controllers.Ships
             {
                 return false;
             }
-            else if (orientation == 3 &&
+            else if ((orientation == 3 || orientation == -1) &&
                     (gridRelativePosition.X - fromButtom >= 0) &&
                     (gridRelativePosition.X + fromOrigin <= BOARDDIM))
             {

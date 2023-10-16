@@ -43,39 +43,39 @@ namespace Battleship.src.Networking
 
         public void addPlayerToSession(NetPeer peer)
         {
-            Console.WriteLine("[GAME SESSION]: " + Players.Count);
+            //Console.WriteLine("[GAME SESSION]: " + Players.Count);
 
-            if (Players.Count == 2)
-            {
-                var JSONA = GameControllers.GameDataJSON.ServerJSON("d", 1);
-                GameControllers.GameNetworking.Server.SendDataToClient(peer, JSONA);
+            //if (Players.Count == 2)
+            //{
+            //    var JSONA = GameControllers.GameDataJSON.ServerJSON("d", 1);
+            //    GameControllers.GameNetworking.Server.SendDataToClient(peer, JSONA);
 
 
-                GameControllers.GameNetworking.Server.server.DisconnectPeer(peer);
-                disconnectPlayerFromSession(peer);
-                Console.WriteLine("Max user per session reached");
-                return;
+            //    GameControllers.GameNetworking.Server.server.DisconnectPeer(peer);
+            //    disconnectPlayerFromSession(peer);
+            //    Console.WriteLine("Max user per session reached");
+            //    return;
 
-            }
+            //}
 
-            if (Players.Count == 0)
-            {
+            //if (Players.Count == 0)
+            //{
 
-                Players.Add(peer);
-                Console.WriteLine("[ GAME SESSION] Jugador añadido correctamente");
+            //    Players.Add(peer);
+            //    Console.WriteLine("[ GAME SESSION] Jugador añadido correctamente");
 
-            }else if(Players.Count == 1)
-            {
-                Players.Add(peer);
-                var JSON = GameControllers.GameDataJSON.ServerJSON("c", 1);
-                foreach(var _peer in Players)
-                {
-                    GameControllers.GameNetworking.Server.SendDataToClient(_peer, JSON);
+            //}else if(Players.Count == 1)
+            //{
+            //    Players.Add(peer);
+            //    var JSON = GameControllers.GameDataJSON.ServerJSON("c", 1);
+            //    foreach(var _peer in Players)
+            //    {
+            //        GameControllers.GameNetworking.Server.SendDataToClient(_peer, JSON);
 
-                }
+            //    }
 
-                Console.WriteLine("Two ships are ready ");
-            }
+            //    Console.WriteLine("Two ships are ready ");
+            //}
         }
 
         public void disconnectPlayerFromSession(NetPeer peer)
@@ -107,11 +107,11 @@ namespace Battleship.src.Networking
 
                 if (PlayerOneCountShips == 6 && PlayerTwoCountShips == 6)
                 {
-                    foreach( var _peer in Players)
-                    {
-                        var JSONA = GameControllers.GameDataJSON.ServerJSON("b", 1);
-                        GameControllers.GameNetworking.Server.SendDataToClient(_peer, JSONA);
-                    }
+                    //foreach( var _peer in Players)
+                    //{
+                    //    var JSONA = GameControllers.GameDataJSON.ServerJSON("b", 1);
+                    //    GameControllers.GameNetworking.Server.SendDataToClient(_peer, JSONA);
+                    //}
 
                     PrintMatrix(playerTwoMatrix);
                     Console.WriteLine();
@@ -140,13 +140,13 @@ namespace Battleship.src.Networking
                         PlayerTwoCountShips--;
                         if (PlayerTwoCountShips == 0)
                         {
-                            // Player ONE WIN   
-                            var JSONA = GameControllers.GameDataJSON.ServerJSON("w", 1);
-                            GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
+                            //// Player ONE WIN   
+                            //var JSONA = GameControllers.GameDataJSON.ServerJSON("w", 1);
+                            //GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
 
 
-                            var JSONB = GameControllers.GameDataJSON.ServerJSON("w", 0);
-                            GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
+                            //var JSONB = GameControllers.GameDataJSON.ServerJSON("w", 0);
+                            //GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
 
                         }
                     }
@@ -166,11 +166,11 @@ namespace Battleship.src.Networking
                         {
                             // Player Two WIN 
 
-                            var JSONA = GameControllers.GameDataJSON.ServerJSON("w", 0);
-                            GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
+                            //var JSONA = GameControllers.GameDataJSON.ServerJSON("w", 0);
+                            //GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
 
-                            var JSONB = GameControllers.GameDataJSON.ServerJSON("w", 1);
-                            GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
+                            //var JSONB = GameControllers.GameDataJSON.ServerJSON("w", 1);
+                            //GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
                         }
 
                     }
@@ -182,11 +182,11 @@ namespace Battleship.src.Networking
 
                 if(shipTwoAttack && shipOneAttack)
                 {
-                    var JSONA = GameControllers.GameDataJSON.ServerJSON("a",isEffectiveShootOne, tempAttackPositionOne);
-                    GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
+                    //var JSONA = GameControllers.GameDataJSON.ServerJSON("a",isEffectiveShootOne, tempAttackPositionOne);
+                    //GameControllers.GameNetworking.Server.SendDataToClient(Players[0], JSONA);
 
-                    var JSONB = GameControllers.GameDataJSON.ServerJSON("a", isEffectiveShootTwo, tempAttackPositionTwo);
-                    GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
+                    //var JSONB = GameControllers.GameDataJSON.ServerJSON("a", isEffectiveShootTwo, tempAttackPositionTwo);
+                    //GameControllers.GameNetworking.Server.SendDataToClient(Players[1], JSONB);
 
                     shipOneAttack = false;
                     shipTwoAttack = false;

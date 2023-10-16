@@ -23,43 +23,25 @@ namespace Battleship.src.Controllers.Ships
             this.GameControllers = GameControllers;
             this.TextureLoader = GameControllers.TextureLoader;
             this._Scene = GameControllers.Scene;
-
-            // Definir las posiciones de las naves en la parte derecha de la pantalla
-            Vector2 positionBattleShip = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionCarrier = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionCruiser = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
-            Vector2 positionPatrolBoat = new Vector2(Constants.PIX_SCREEN_WIDTH / 2, Constants.PIX_SCREEN_HEIGHT);
-
-            // Crear y agregar las naves al escenario
-
-            /*
-            ShipBase shipCarrier = new ShipBase(TextureLoader._gameTextures["ship_Carrier"], this);
-            ShipsList.Add(shipCarrier);
-            
-            ShipBase shipCruiser = new ShipBase(TextureLoader._gameTextures["ship_Cruiser"], this);
-            ShipsList.Add(shipCruiser);
-
-            ShipBase shipBattleShip = new ShipBase(TextureLoader._gameTextures["ship_BattleShip"], this);
-            ShipsList.Add(shipBattleShip);
-            */
-
-            // Patrol 1 GRID
-            // Destructor 2 GRIDS
-            // Submarine 3 GRIDS
-
-            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], this);
-            ShipsList.Add(shipPatrolBoat);
-
-            ShipBase shipDestructor = new ShipBase(TextureLoader._gameTextures["ship_Destructor"], this);
-            ShipsList.Add(shipDestructor);
+            createShips();
+        }
+        public void createShips()
+        {
             ShipBase shipSubmarine = new ShipBase(TextureLoader._gameTextures["ship_submarine"], this);
             ShipsList.Add(shipSubmarine);
 
+            ShipBase shipDestructor = new ShipBase(TextureLoader._gameTextures["ship_Destructor"], this);
+            ShipsList.Add(shipDestructor);
+
+            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], this);
+            ShipsList.Add(shipPatrolBoat);
         }
+
 
         public void deploy()
         {
-            
+
+
             foreach (ShipBase ship in ShipsList)
             {
                 while (!ship.isReady)
@@ -68,12 +50,14 @@ namespace Battleship.src.Controllers.Ships
                 }
                 if (ship.isReady)
                 {
-                    _Scene.AddEntity(ship);
+
+                     _Scene.AddEntity(ship);
+                    
                 }
             }
-            
-
         }
+
+
         public void canMove()
         {
             foreach (ShipBase ship in ShipsList)
@@ -103,7 +87,7 @@ namespace Battleship.src.Controllers.Ships
                 ship.LocalPosition = ship.GridLinkedToShip.LocalPosition;
 
                 //  Se selecciona una rotacion al azar
-                var listRotations = new List<int>() { 0, 90, 180, 270 };
+                var listRotations = new List<int>() { 0};
                 var randRotation = Nez.Random.NextInt(listRotations.Count);
                 var tempRotation = listRotations[randRotation];
 

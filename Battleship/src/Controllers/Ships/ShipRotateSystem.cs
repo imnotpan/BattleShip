@@ -26,6 +26,12 @@ namespace Battleship.src.Controllers.Ships
             var GameControllers = ShipBase.GameControllers;
 
 
+            if (nextRotation >= 90)
+            {
+                nextRotation = 270;
+            }
+
+
             if (nextRotation >= 360)
             {
                 nextRotation = 0;
@@ -69,6 +75,7 @@ namespace Battleship.src.Controllers.Ships
                     .Start();
                 }
             }
+
          }
     }
 }
