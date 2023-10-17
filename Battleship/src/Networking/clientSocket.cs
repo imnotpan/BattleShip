@@ -18,6 +18,8 @@ namespace Battleship.src.Networking
         public string action { get; set; }
         public int status { get; set; }
         public int[] position { get; set; }
+        public string reserva1 {  get; set; }
+        public string reserva2 { get; set; }
     }
 
 
@@ -109,11 +111,14 @@ namespace Battleship.src.Networking
                     }
 
 
+
                     if (receivedStringData.action == "b" && receivedStringData.status == 1 && canBuild)
                     {
-                        Console.WriteLine("BUIIILD");
+                        GameControllers.GameHud.Initialize();
+                        GameControllers.GameHud.setRedyViewHUD();
                         canBuild = false;
                     }
+
 
 
                     if (receivedStringData.action == "t" && receivedStringData.status == 1)

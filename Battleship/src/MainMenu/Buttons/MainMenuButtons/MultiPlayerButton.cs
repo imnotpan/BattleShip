@@ -19,7 +19,24 @@ namespace Battleship.src.MainMenu.Buttons.MainMenuButtons
         public override void onClick()
         {
             base.onClick();
-            //GameControllers.MainMenuController.MultiplayerMenuInitialize();
+            try
+            {
+
+
+                var PORT = Convert.ToInt32(GameControllers.MainMenuController.PORT_CONNECTION);
+                var IP = GameControllers.MainMenuController.IP_CONNECTION;
+
+                GameControllers.GameNetworking.clientSocket.Connect(IP, PORT);
+
+                var msg = GameControllers.GameNetworking.GameDataJSON.ClientJSON("s", 0);
+                GameControllers.GameNetworking.clientSocket.sendData(msg);
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[ vs Bot] " + ex);
+            }
         }
     }
 }

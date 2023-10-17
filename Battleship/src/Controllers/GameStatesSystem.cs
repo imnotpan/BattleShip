@@ -43,9 +43,7 @@ namespace Battleship.src.Controllers
             GameControllers.Board.InitializeTinyBoard();
             GameControllers.ShipsDeploy.deploy();
 
-            //GameHUD
-            GameControllers.GameHud.Initialize();
-            GameControllers.GameHud.setRedyViewHUD();
+
 
             // Se desabilitan los Grids
             GameControllers.Board.setGridsState(false);

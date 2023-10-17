@@ -56,12 +56,13 @@ namespace Battleship.src.Networking
 
         }
 
-        public Vector2 GenerateBombIA()
+        public Vector3 GenerateBombIA()
         {
             while (true)
             {
                 var xPos = Nez.Random.NextInt(20);
                 var yPos = Nez.Random.NextInt(20);
+                var acerto = 0;
                 if (playerOneMatrix[xPos, yPos] == 1)
                 {
                     continue;
@@ -70,11 +71,11 @@ namespace Battleship.src.Networking
                 if (playerOneMatrix[xPos, yPos] == 2)
                 {
                     PlayerOneCountShips--;
-                    Console.WriteLine("SHOOOT EFFECTIVE");
+                    acerto = 1;
                 }
 
                 playerOneMatrix[xPos, yPos] = 1;
-                return new Vector2(xPos, yPos);
+                return new Vector3(xPos, yPos,acerto);
             }
         }
 
@@ -139,11 +140,32 @@ namespace Battleship.src.Networking
 
         }
 
+
+
         public int attackPosition(int[] pos, IPEndPoint peer)
         {
             Console.WriteLine(pos[0] + " " + pos[1]);
 
             if (SinglePlayer)
+            {
+                // Comprobacion contra IA
+                if (Players[0].ToString() == peer.ToString())
+                {
+                    if (playerTwoMatrix[pos[0], pos[1]] == 2)
+                    {
+                        playerTwoMatrix[pos[0], pos[1]] = 1;
+                        PlayerTwoCountShips--;
+                        return 1;
+                    }
+                    else
+                    {
+                        playerTwoMatrix[pos[0], pos[1]] = 1;
+                        return 0;
+                    }
+                }
+            }
+
+            if (!SinglePlayer)
             {
                 if (Players[0].ToString() == peer.ToString())
                 {
@@ -176,11 +198,15 @@ namespace Battleship.src.Networking
                 }
             }
 
+      
             return 0;
         }
 
+
+
         public void addShips(int[] p, int[] b, int[] s, int[,] Matrix )
         {
+
             for(int i = 0; i < 3; i++)
             {
                 if (p[2] == 0)

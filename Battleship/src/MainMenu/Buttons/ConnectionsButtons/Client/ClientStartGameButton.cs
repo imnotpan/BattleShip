@@ -17,11 +17,11 @@ namespace Battleship.src.MainMenu.Buttons.ConnectionsButtons.Client
         public override void onClick()
         {
             base.onClick();
-            /*
-            var GameNetworking = GameControllers.GameNetworking;
-            var JSON = GameControllers.GameDataJSON.ClientJSON("c", 0);
-            GameNetworking.Client.SendDataToServer(JSON);
-            */
+            
+            //var GameNetworking = GameControllers.GameNetworking;
+            //var msg = GameNetwor
+            //GameNetworking.Client.SendDataToServer(JSON);
+            
         }
     }   
 }

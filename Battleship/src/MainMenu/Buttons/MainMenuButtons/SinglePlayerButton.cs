@@ -29,7 +29,6 @@ namespace Battleship.src.MainMenu.Buttons.MainMenuButtons
                 GameControllers.GameNetworking.clientSocket.sendData(msg);
 
 
-
             }
             catch (Exception ex)
             {

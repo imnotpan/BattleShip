@@ -13,7 +13,7 @@ namespace Battleship.src.Networking
         {
 
             public int[] p { get; set; }
-            public int[] b { get; set; }
+            public int[] d { get; set; }
             public int[] s { get; set; }
         }
 
@@ -38,7 +38,7 @@ namespace Battleship.src.Networking
 
                 if (count >= 2)
                 {
-                    miBarco.b = new int[] { (int)_shipsPositions[1].X, (int)_shipsPositions[1].Y, (int)_shipsPositions[1].Z };
+                    miBarco.d = new int[] { (int)_shipsPositions[1].X, (int)_shipsPositions[1].Y, (int)_shipsPositions[1].Z };
                 }
 
                 if (count >= 3)
@@ -60,6 +60,8 @@ namespace Battleship.src.Networking
                 bot = _bot,
                 ships = miBarco,
                 position = ataqueJson,
+                reserva1 = "",
+                reserva2 = ""
             };
 
 
@@ -80,6 +82,8 @@ namespace Battleship.src.Networking
                 action = _action,
                 status = _status, // 0 or 1
                 position = varPosition,
+                reserva1 = "",
+                reserva2 = ""
             };
 
 
