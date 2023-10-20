@@ -13,7 +13,7 @@ namespace Battleship.src.Controllers
     public class Board
     {
         // Var's
-        public const int BOARD_DIM = 20;
+        public const int BOARD_DIM = 5;
         private const int CELL_SPACE = 1;
 
         //General Controllers
@@ -36,9 +36,9 @@ namespace Battleship.src.Controllers
 
         public void InitializeMatrix(int[,] Matrix)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < BOARD_DIM; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < BOARD_DIM; j++)
                 {
                     Matrix[i, j] = 0;
                 }

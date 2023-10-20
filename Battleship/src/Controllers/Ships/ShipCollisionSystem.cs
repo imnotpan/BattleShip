@@ -34,7 +34,7 @@ namespace Battleship.src.Controllers.Ships
             var orientation = (int)Math.Ceiling(_rotation / 90);
 
 
-            var BOARDDIM = 20;
+            var BOARDDIM = 5;
 
             if (orientation == 0 &&
                 (gridRelativePosition.Y - fromButtom >= 0 &&

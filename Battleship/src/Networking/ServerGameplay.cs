@@ -10,8 +10,8 @@ namespace Battleship.src.Networking
     public class ServerGameplay
     {
         public List<IPEndPoint> Players;
-        public int[,] playerOneMatrix = new int[20, 20];
-        public int[,] playerTwoMatrix = new int[20, 20];
+        public int[,] playerOneMatrix = new int[5, 5];
+        public int[,] playerTwoMatrix = new int[5, 5];
         public int PlayerOneCountShips = 0;
         public int PlayerTwoCountShips = 0;
         public GameControllers GameControllers;
@@ -50,9 +50,6 @@ namespace Battleship.src.Networking
             GenerateIAShip(2);
             GenerateIAShip(1);
             
-            printMatrix(playerOneMatrix);
-
-            printMatrix(playerTwoMatrix);
 
         }
 
@@ -60,8 +57,8 @@ namespace Battleship.src.Networking
         {
             while (true)
             {
-                var xPos = Nez.Random.NextInt(20);
-                var yPos = Nez.Random.NextInt(20);
+                var xPos = Nez.Random.NextInt(4);
+                var yPos = Nez.Random.NextInt(4);
                 var acerto = 0;
                 if (playerOneMatrix[xPos, yPos] == 1)
                 {
@@ -81,8 +78,8 @@ namespace Battleship.src.Networking
 
         public void GenerateIAShip(int shipSize)
         {
-            var randomPositionGridX = Nez.Random.NextInt(20);
-            var randomPositionGridY = Nez.Random.NextInt(20);
+            var randomPositionGridX = Nez.Random.NextInt(4);
+            var randomPositionGridY = Nez.Random.NextInt(4);
             List<int> listRotations = new List<int>() { 0, 1 };
 
             var orientation = Nez.Random.NextInt(listRotations.Count);

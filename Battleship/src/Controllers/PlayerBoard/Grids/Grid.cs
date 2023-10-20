@@ -56,7 +56,6 @@ namespace Battleship.src.Controllers.Grids
 
         public void GridClickAnim()
         {
-
             this.TweenLocalScaleTo(new Vector2(1.25f, 1.25f), 0.05f)
             .SetEaseType(EaseType.ExpoOut)
             .SetCompletionHandler((x) =>

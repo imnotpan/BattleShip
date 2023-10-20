@@ -59,8 +59,8 @@ namespace Battleship.src
 
 
         // Boards 
-        public int[,] playerMatrix = new int[20, 20];
-        public int[,] enemyMatrix = new int[20, 20];
+        public int[,] playerMatrix = new int[5, 5];
+        public int[,] enemyMatrix = new int[5, 5];
         public Vector2 mousePosition;
 
         //Bullets
@@ -223,6 +223,10 @@ namespace Battleship.src
                 if (grid.Collider.Bounds.Contains(mousePosition))
                 {
                     MouseInGrid = grid;
+                    if (Input.LeftMouseButtonPressed)
+                    {
+                        Console.WriteLine(grid._relativePosition);
+                    }
                 }
             }
 

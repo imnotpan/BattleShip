@@ -165,9 +165,6 @@ namespace Battleship.src.Networking
                     if (receivedStringData.action == "d")
                     {
 
-
-
-
                         Console.WriteLine("Desconexión exitosa.");
                         GameControllers.GameStatesSystem.BackToMainMenu();
                         client.Close();

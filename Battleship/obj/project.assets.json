@@ -326,23 +326,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\imnot\\.nuget\\packages\\": {},
+    "C:\\Users\\crist\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
+      "projectUniqueName": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
       "projectName": "Battleship",
-      "projectPath": "E:\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
-      "packagesPath": "C:\\Users\\imnot\\.nuget\\packages\\",
-      "outputPath": "E:\\Proyectos\\BattleShip\\Battleship\\obj\\",
+      "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\Battleship.csproj",
+      "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+      "outputPath": "C:\\--PAN\\Proyectos\\BattleShip\\Battleship\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\imnot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -358,11 +358,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
-              "projectPath": "E:\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
+            "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj": {
+              "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\LiteNetLib\\LiteNetLib\\LiteNetLib.csproj"
             },
-            "E:\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
-              "projectPath": "E:\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
+            "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj": {
+              "projectPath": "C:\\--PAN\\Proyectos\\BattleShip\\Nez\\Nez.Portable\\Nez.csproj"
             }
           }
         }
@@ -406,7 +406,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

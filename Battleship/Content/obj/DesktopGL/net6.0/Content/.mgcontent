@@ -4,25 +4,25 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Fonts/rockinRecordFont.spritefont</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Shaders/ScribbleEffect.fx</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Shaders/Textures/NoiseTexture.jpeg</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Celda.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Flag.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/GridEnemy.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/AttackButton.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/CircleBlue.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/CircleRed.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/ShipsInPositionButton.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/MainMenu/Multiplayer.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/MainMenu/SinglePlayer.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/Mouse.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/ship_BattleShip.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Ship_Carrier.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Ship_Cruiser.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_Destructor.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_PatrolBoat.png</File>
-    <File>E:/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_submarine.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Fonts/rockinRecordFont.spritefont</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Shaders/ScribbleEffect.fx</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Shaders/Textures/NoiseTexture.jpeg</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Celda.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Flag.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/GridEnemy.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/AttackButton.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/CircleBlue.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/CircleRed.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/GameHud/ShipsInPositionButton.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/MainMenu/Multiplayer.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/MainMenu/SinglePlayer.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/HUD/Mouse.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/ship_BattleShip.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ship_Carrier.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ship_Cruiser.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_Destructor.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_PatrolBoat.png</File>
+    <File>C:/--PAN/Proyectos/BattleShip/Battleship/Content/Sprites/Ships/ship_submarine.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -45,6 +45,7 @@ namespace Battleship.src.Networking
 
         public ServerGameplay ServerGameplay;
 
+        public bool canSendS = false;
 
         public ServerSocket(GameDataJSON GameDataJSON, GameControllers GameControllers)
         {
@@ -103,6 +104,7 @@ namespace Battleship.src.Networking
                     if(receivedStringData.action == "s")
                     {
 
+                        //contra bots
                         if(receivedStringData.bot == 1)
                         {
                             ServerGameplay.SinglePlayer = true;
@@ -114,24 +116,21 @@ namespace Battleship.src.Networking
                             SendResponse(buildRequest, ServerGameplay.Players[0]);
 
                         }
+                        if (receivedStringData.bot == 0 && canSendS)
+                        {
 
-                        if (receivedStringData.bot == 0)
+                            string sRequestP1 = GameDataJSON.ServerJSON("s", 1);
+                            SendResponse(sRequestP1, ServerGameplay.Players[0]);
+
+                            string sRequestP2 = GameDataJSON.ServerJSON("s", 1);
+                            SendResponse(sRequestP2, ServerGameplay.Players[1]);
+                        }
+                        if (receivedStringData.bot == 0 && !canSendS)
                         {
                             ServerGameplay.SinglePlayer = false;
-                            if(ServerGameplay.Players.Count == 1)
-                            {
-                                string msg = GameDataJSON.ServerJSON("s", 1);
-                                SendResponse(msg, ServerGameplay.Players[0]);
-
-                            }else if (ServerGameplay.Players.Count == 2)
-                            {
-                                string msg = GameDataJSON.ServerJSON("s", 1);
-                                SendResponse(msg, ServerGameplay.Players[1]);
-
-                                string buildRequest = GameDataJSON.ServerJSON("b", 1);
-                                SendResponse(buildRequest, ServerGameplay.Players[0]);
-                            }
+                            canSendS = true;
                         }
+                 
                     }
 
 
@@ -198,6 +197,8 @@ namespace Battleship.src.Networking
 
                     if (receivedStringData.action == "a") {
 
+                        Console.WriteLine("P1 Ships: " + ServerGameplay.PlayerOneCountShips);
+                        Console.WriteLine("P2 Ships: " + ServerGameplay.PlayerOneCountShips);
 
                         if (ServerGameplay.SinglePlayer)
                         {
@@ -266,6 +267,7 @@ namespace Battleship.src.Networking
                         Console.WriteLine(ServerGameplay.PlayerOneCountShips);
                         Console.WriteLine(ServerGameplay.PlayerTwoCountShips);
                     }
+
                     if(receivedStringData.action == "d")
                     {
                         
