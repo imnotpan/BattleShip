@@ -26,6 +26,7 @@ namespace Battleship.src.Networking
 
         public void Update()
         {
+ 
         }
     }
 }

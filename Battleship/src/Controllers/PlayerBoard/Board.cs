@@ -73,8 +73,8 @@ namespace Battleship.src.Controllers
             var distanceCellTinyBoard = _gridTinyBoard.Width + CELL_SPACE;
             var boardWidthTiny = BOARD_DIM * distanceCellTinyBoard;
             var boardHeightTiny = BOARD_DIM * distanceCellTinyBoard;
-            var startXTinyBoard = (Constants.PIX_SCREEN_WIDTH - boardWidthTiny) / 1.15f;
-            var startYTinyBoard = (Constants.PIX_SCREEN_HEIGHT - boardHeightTiny) / 1.45f + 10;
+            var startXTinyBoard = (Constants.PIX_SCREEN_WIDTH - boardWidthTiny) / 3f + 128;
+            var startYTinyBoard = (Constants.PIX_SCREEN_HEIGHT - boardHeightTiny) / 2 + 7;
 
             const int cellCounts = BOARD_DIM * BOARD_DIM;
 

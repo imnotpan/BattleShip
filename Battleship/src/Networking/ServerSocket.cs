@@ -212,6 +212,14 @@ namespace Battleship.src.Networking
                             string turnJSONP1 = GameDataJSON.ServerJSON("t", 0);
                             SendResponse(turnJSONP1, clientEndPoint);
 
+                            if (ServerGameplay.PlayerTwoCountShips == 0)
+                            {
+                                string win2 = GameDataJSON.ServerJSON("w", 1);
+                                SendResponse(win2, ServerGameplay.Players[0]);
+                                ServerGameplay = new ServerGameplay();
+                                return;
+                            }
+
                             // Ataque IA
                             var IABomb = ServerGameplay.GenerateBombIA();
                             var position = new Vector2(IABomb.X, IABomb.Y);
@@ -219,8 +227,18 @@ namespace Battleship.src.Networking
                             string bombIAJSON = GameDataJSON.ServerJSON("a",(int)IABomb.Z, position);
                             SendResponse(bombIAJSON, clientEndPoint);
 
+
+                            if (ServerGameplay.PlayerOneCountShips == 0)
+                            {
+                                string win2 = GameDataJSON.ServerJSON("w", 0);
+                                SendResponse(win2, ServerGameplay.Players[0]);
+                                ServerGameplay = new ServerGameplay();
+                                return;
+                            }
+
                             string turnJSON = GameDataJSON.ServerJSON("t", 1);
                             SendResponse(turnJSON, clientEndPoint);
+
                         }
                         if (!ServerGameplay.SinglePlayer)
                         {
@@ -230,6 +248,18 @@ namespace Battleship.src.Networking
                                 var pos = new Vector2(receivedStringData.position[0], receivedStringData.position[1]);
                                 string posP1JSON = GameDataJSON.ServerJSON("a", attackValue, pos);
                                 SendResponse(posP1JSON, clientEndPoint);
+
+                                if (ServerGameplay.PlayerTwoCountShips == 0)
+                                {
+                                    string win2 = GameDataJSON.ServerJSON("w", 1);
+                                    SendResponse(win2, ServerGameplay.Players[0]);
+
+                                    string win = GameDataJSON.ServerJSON("w", 0);
+                                    SendResponse(win2, ServerGameplay.Players[1]);
+
+                                    ServerGameplay = new ServerGameplay();
+                                    return;
+                                }
 
 
                                 var atkValP2 = ServerGameplay.attackPosition(receivedStringData.position,
@@ -250,6 +280,18 @@ namespace Battleship.src.Networking
                                 string posP1JSON = GameDataJSON.ServerJSON("a", attackValue, pos);
                                 SendResponse(posP1JSON, clientEndPoint);
 
+                                if (ServerGameplay.PlayerOneCountShips == 0)
+                                {
+                                    string win2 = GameDataJSON.ServerJSON("w", 0);
+                                    SendResponse(win2, ServerGameplay.Players[0]);
+
+                                    string win = GameDataJSON.ServerJSON("w", 1);
+                                    SendResponse(win2, ServerGameplay.Players[1]);
+
+                                    ServerGameplay = new ServerGameplay();
+                                    return;
+                                }
+
                                 var atkValP2 = ServerGameplay.attackPosition(receivedStringData.position,
                                                   ServerGameplay.Players[0]);
                                 string posP2JSON = GameDataJSON.ServerJSON("a", atkValP2, pos);
@@ -264,6 +306,8 @@ namespace Battleship.src.Networking
                             }
 
                         }
+                     
+
                         Console.WriteLine(ServerGameplay.PlayerOneCountShips);
                         Console.WriteLine(ServerGameplay.PlayerTwoCountShips);
                     }
@@ -312,28 +356,30 @@ namespace Battleship.src.Networking
         public bool canWin = true;
         public void Update()
         {
-            if(canWin && ServerGameplay.PlayerOneCountShips == 0)
+            if (ServerGameplay != null)
             {
-                string win = GameDataJSON.ServerJSON("w", 1);
-                SendResponse(win, ServerGameplay.Players[1]);
+                if (canWin && ServerGameplay.PlayerOneCountShips == 0)
+                {
+                    string win = GameDataJSON.ServerJSON("w", 1);
+                    SendResponse(win, ServerGameplay.Players[1]);
 
-                string win2 = GameDataJSON.ServerJSON("w", 0);
-                SendResponse(win2, ServerGameplay.Players[0]);
+                    string win2 = GameDataJSON.ServerJSON("w", 0);
+                    SendResponse(win2, ServerGameplay.Players[0]);
 
-                canWin = false;
+                    canWin = false;
+                }
+
+                if (canWin && ServerGameplay.PlayerTwoCountShips == 0)
+                {
+                    string win = GameDataJSON.ServerJSON("w", 0);
+                    SendResponse(win, ServerGameplay.Players[1]);
+
+                    string win2 = GameDataJSON.ServerJSON("w", 1);
+                    SendResponse(win2, ServerGameplay.Players[0]);
+
+                    canWin = false;
+                }
             }
-
-            if (canWin && ServerGameplay.PlayerTwoCountShips == 0)
-            {
-                string win = GameDataJSON.ServerJSON("w", 0);
-                SendResponse(win, ServerGameplay.Players[1]);
-
-                string win2 = GameDataJSON.ServerJSON("w", 1);
-                SendResponse(win2, ServerGameplay.Players[0]);
-
-                canWin = false;
-            }
-
 
         }
     }
