@@ -36,6 +36,7 @@ namespace Battleship.src.MainMenu.Buttons.AbstractClasses
             _textEntity = new TextEntity(Text, _position, GameControllers.textFont);
             originalScale = _textEntity.Scale;
             scaleOver = originalScale + new Vector2(0.1f, 0.1f);
+            
 
             Collider = new BoxCollider(_textEntity._textComponent.Width, _textEntity._textComponent.Height);
             AddComponent(Collider);

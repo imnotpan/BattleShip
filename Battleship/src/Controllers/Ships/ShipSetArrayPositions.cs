@@ -18,11 +18,11 @@ namespace Battleship.src.Controllers.Ships
         public List<Vector2> PositionValuesList(float _rotation, Grid gridLinked)
         {
             var positionList = new List<Vector2>();
-            var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 16);
-            var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 16);
+            var fromButtom = (int)(ShipBase.SpriteRenderer.Origin.Y / 32);
+            var fromOrigin = (int)Math.Ceiling((ShipBase._texture.Height - ShipBase.SpriteRenderer.Origin.Y) / 32);
             var orientation = (int)Math.Ceiling(_rotation / 90);
 
-            if((fromButtom + fromOrigin) == 0)
+            if ((fromButtom + fromOrigin) == 0)
             {
                 fromButtom = 1;
             }
@@ -34,6 +34,8 @@ namespace Battleship.src.Controllers.Ships
             positionList.Add(relativePosition);
 
             Console.WriteLine("ORINTATION SET ARRAY POS: " + orientation);
+            Console.WriteLine("fromButton: " + fromButtom + "fromOrigin: " + fromOrigin);
+
 
             if (orientation == 0)
             {
@@ -77,7 +79,7 @@ namespace Battleship.src.Controllers.Ships
                     positionList.Add(fromOriginPosition);
                 }
             }
-            else if (orientation == 3 || orientation == -10)
+            else if (orientation == 3 || orientation == -10 || orientation == -1)
             {
                 for (int i = 0; i < fromButtom; i++)
                 {

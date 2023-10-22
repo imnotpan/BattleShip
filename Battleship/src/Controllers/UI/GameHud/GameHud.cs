@@ -33,18 +33,18 @@ namespace Battleship.src.Controllers.UI.GameHud
         {
 
 
-            var RedyButtonPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 5 - 16,
+            var RedyButtonPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 2,
                                     Constants.PIX_SCREEN_HEIGHT / 2 - 64);
-            RedyButton = new RedyButton("SHIPS ON POSITION", RedyButtonPosition, GameControllers);
+            RedyButton = new RedyButton("SHIPS", RedyButtonPosition, GameControllers);
 
-
-            var AttackButtonPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 5 - 16,
+            var AttackButtonPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 2,
                                     Constants.PIX_SCREEN_HEIGHT / 2 - 32);
             AttackButton = new AttackButton("ATTACK", AttackButtonPosition, GameControllers);
 
-            var clientDisconnectPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 5 - 16,
+            var clientDisconnectPosition = new Vector2(Constants.PIX_SCREEN_WIDTH - Constants.PIX_SCREEN_WIDTH / 2,
                           Constants.PIX_SCREEN_HEIGHT / 2 - 96);
             ClientDisconnect = new ClientDisconnect("DISCONNECT", clientDisconnectPosition, GameControllers);
+
 
             // Se despliegan botones
             RedyButton.AddOnScene(GameControllers.Scene);

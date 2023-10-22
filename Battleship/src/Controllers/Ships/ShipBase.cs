@@ -52,7 +52,7 @@ namespace Battleship.src.Controllers.Ships
             //this.Position = position;
 
             var textureHeight = _texture.Height;
-            var yOffset = (textureHeight / 16) % 2 == 0 ? -8 : 0;
+            var yOffset = (textureHeight / 32) % 2 == 0 ? -8 : 0;
 
             /* Componentes */
             SpriteRenderer = new SpriteRenderer(shipTexture);

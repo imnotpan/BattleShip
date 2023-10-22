@@ -24,7 +24,6 @@ namespace Battleship.src.Controllers.UI.GameHud
             spriteRenderer.RenderLayer = -15;
             spriteRenderer.Origin = new Vector2(texture.Width / 2, texture.Height / 2);
             AddComponent(spriteRenderer);
-            
             WiggleEffect = new WiggleEffect(this);
 
             this.Position = position;
@@ -35,9 +34,8 @@ namespace Battleship.src.Controllers.UI.GameHud
         public override void Update() 
         { 
             base.Update();
-            //this.Position = this.Position + WiggleEffect.Wiggle();
             this.Scale = WiggleEffect.WiggleScale();
-            this.Position = this.Position+ WiggleEffect.WiggleSinWave();
+            this.Position = this.Position+ (WiggleEffect.WiggleSinWave() * 0.25f);
             linkedText.Position = this.Position - new Vector2(0,0);
         }
 
@@ -45,15 +43,15 @@ namespace Battleship.src.Controllers.UI.GameHud
         {
             linkedText = new TextEntity("0", this.Position + new Vector2(5, 0), GameControllers.textFont);
             linkedText._textComponent.RenderLayer = this.spriteRenderer.RenderLayer - 10;
-            //linkedText.GenerateShadowClone();
             Scene.AddEntity(linkedText);
             Scene.AddEntity(this);
         }
 
-        public void setStateEntity(bool state)
+        public void destroyEntity()
         {
-            this.Enabled = state;
-            linkedText.Enabled = state;
+            this.Destroy();
+            linkedText.DestroyFromScene();
         }
+
     }
 }
