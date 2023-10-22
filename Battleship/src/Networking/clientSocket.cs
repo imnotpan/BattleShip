@@ -176,6 +176,18 @@ namespace Battleship.src.Networking
                         receiveThread.Join();
                     }
 
+                    if(receivedStringData.action == "l" && receivedStringData.status == 1)
+                    {
+                        Console.WriteLine("PARTIDA PERDIDA");
+
+                    }
+
+
+                    if (receivedStringData.action == "w" && receivedStringData.status == 1)
+                    {
+                        Console.WriteLine("PARTIDA GANADA");
+
+                    }
 
                 }
                 catch (Exception ex)
