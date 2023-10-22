@@ -70,8 +70,8 @@ namespace Battleship.src.Controllers
             Console.WriteLine(" [ " + SIDE + "] " + "X: " + shipsPosition[0] + " Y: " + shipsPosition[1]);
             if (shipsPosition != null)
             {
-                GameControllers.enemyMatrix[shipsPosition[0], shipsPosition[1]] = 2;
-                GameControllers.enemyShipsPositions.Add(new Vector2(shipsPosition[0], shipsPosition[1]));
+                GameControllers.enemyMatrix[shipsPosition[1], shipsPosition[0]] = 2;
+                GameControllers.enemyShipsPositions.Add(new Vector2(shipsPosition[1], shipsPosition[0]));
             }
         }
 
@@ -103,10 +103,10 @@ namespace Battleship.src.Controllers
 
                 if(jsonOrientation == 0)
                 {
-                    jsonOrientation = 1; 
+                    jsonOrientation = 0; 
                 } else if(jsonOrientation == 1)
                 {
-                    jsonOrientation = 0;
+                    jsonOrientation = 1;
                 }
 
 
@@ -118,7 +118,7 @@ namespace Battleship.src.Controllers
                 {
                     mainPosition = ship.inUsePositions[0];
                 }
-                mainShipPositions.Add(new Vector3(mainPosition.X, mainPosition.Y, jsonOrientation));
+                mainShipPositions.Add(new Vector3(mainPosition.Y, mainPosition.X, jsonOrientation));
             }
 
 
@@ -144,7 +144,7 @@ namespace Battleship.src.Controllers
             {
                 foreach (Vector2 gridPos in GameControllers.playerSelectedGrids)
                 {
-                    var msg = GameControllers.GameNetworking.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.X, gridPos.Y));
+                    var msg = GameControllers.GameNetworking.GameDataJSON.ClientJSON("a", 0, null, new Vector2(gridPos.Y, gridPos.X));
                     GameControllers.GameNetworking.clientSocket.sendData(msg);
                 }
                 GameControllers.GameHud.AttackButton.setSceneState(false);
@@ -178,7 +178,7 @@ namespace Battleship.src.Controllers
 
 
 
-                GameControllers.playerMatrix[(int)bombPosition.X, (int)bombPosition.Y] = 1;
+                GameControllers.playerMatrix[(int)bombPosition.Y, (int)bombPosition.X] = 1;
             }
 
             GameControllers.enemySelectedGrids.Clear();

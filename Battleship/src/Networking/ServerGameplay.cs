@@ -128,7 +128,7 @@ namespace Battleship.src.Networking
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.Write(matrix[j, i] + " "); 
+                    Console.Write(matrix[i, j] + " "); 
                 }
                 Console.WriteLine();
             }
@@ -141,7 +141,9 @@ namespace Battleship.src.Networking
 
         public int attackPosition(int[] pos, IPEndPoint peer)
         {
-            Console.WriteLine(pos[0] + " " + pos[1]);
+            printMatrix(playerOneMatrix);
+            printMatrix(playerTwoMatrix);
+            Console.WriteLine(">>>>> JUGADA <<<<<<");
 
             if (SinglePlayer)
             {
@@ -195,7 +197,7 @@ namespace Battleship.src.Networking
                 }
             }
 
-      
+
             return 0;
         }
 
@@ -204,45 +206,41 @@ namespace Battleship.src.Networking
         public void addShips(int[] p, int[] b, int[] s, int[,] Matrix )
         {
 
-            for(int i = 0; i < 3; i++)
-            {
-                if (p[2] == 0)
-                {
-                    Matrix[p[0] + i, p[1]] = 2;
-                }
-                if (p[2] == 1) 
-                {
-                    Matrix[p[0], p[1] + i] = 2;
 
-                }
+            Matrix[p[0], p[1]] = 2;
+
+
+            if (b[2] == 0)
+            {
+                Matrix[b[0] , b[1]] = 2;
+                Matrix[b[0] +1, b[1]] = 2;
+
+            }
+            if (b[2] == 1)
+            {
+                Matrix[b[0], b[1]] = 2;
+                Matrix[b[0], b[1] + 1] = 2;
             }
 
-            for (int i = 0; i < 2; i++)
-            {
-                if (b[2] == 0)
-                {
-                    Matrix[b[0] + i, b[1]] = 2;
-                }
-                if (b[2] == 1)
-                {
-                    Matrix[b[0], b[1] + i] = 2;
 
-                }
-            }
-            for (int i = 0; i < 1; i++)
+            if (s[2] == 0)
             {
-                if (s[2] == 0)
-                {
-                    Matrix[s[0] + i, s[1]] = 2;
-                }
-                if (s[2] == 1)
-                {
-                    Matrix[s[0], s[1] + i] = 2;
+                Matrix[s[0], s[1]] = 2;
+                Matrix[s[0] + 1, s[1]] = 2;
+                Matrix[s[0] + 2, s[1]] = 2;
 
-                }
             }
+            if (s[2] == 1)
+            {
+                Matrix[s[0], s[1]] = 2;
+                Matrix[s[0], s[1] + 1] = 2;
+                Matrix[s[0], s[1] + 2] = 2;
+            }
+
             PlayerOneCountShips = 6;
-            
+            PlayerTwoCountShips = 6;
+
+
         }
     }
 }

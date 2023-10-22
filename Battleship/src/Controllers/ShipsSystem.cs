@@ -27,14 +27,17 @@ namespace Battleship.src.Controllers.Ships
         }
         public void createShips()
         {
-            ShipBase shipSubmarine = new ShipBase(TextureLoader._gameTextures["ship_submarine"], this);
-            ShipsList.Add(shipSubmarine);
+
+            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], this);
+            ShipsList.Add(shipPatrolBoat);
 
             ShipBase shipDestructor = new ShipBase(TextureLoader._gameTextures["ship_Destructor"], this);
             ShipsList.Add(shipDestructor);
 
-            ShipBase shipPatrolBoat = new ShipBase(TextureLoader._gameTextures["ship_PatrolBoat"], this);
-            ShipsList.Add(shipPatrolBoat);
+            ShipBase shipSubmarine = new ShipBase(TextureLoader._gameTextures["ship_submarine"], this);
+            ShipsList.Add(shipSubmarine);
+
+
         }
 
 

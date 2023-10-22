@@ -13,7 +13,7 @@ namespace Battleship.src.Networking
         {
 
             public int[] p { get; set; }
-            public int[] d { get; set; }
+            public int[] b { get; set; }
             public int[] s { get; set; }
         }
 
@@ -38,7 +38,7 @@ namespace Battleship.src.Networking
 
                 if (count >= 2)
                 {
-                    miBarco.d = new int[] { (int)_shipsPositions[1].X, (int)_shipsPositions[1].Y, (int)_shipsPositions[1].Z };
+                    miBarco.b = new int[] { (int)_shipsPositions[1].X, (int)_shipsPositions[1].Y, (int)_shipsPositions[1].Z };
                 }
 
                 if (count >= 3)

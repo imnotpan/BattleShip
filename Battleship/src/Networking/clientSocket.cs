@@ -111,7 +111,6 @@ namespace Battleship.src.Networking
                     }
 
 
-
                     if (receivedStringData.action == "b" && receivedStringData.status == 1 && canBuild)
                     {
                         GameControllers.GameHud.Initialize();
@@ -119,7 +118,10 @@ namespace Battleship.src.Networking
                         canBuild = false;
                     }
 
-
+                    if(receivedStringData.action == "t" && receivedStringData.status == 0)
+                    {
+                        isMyTurn = false;
+                    }
 
                     if (receivedStringData.action == "t" && receivedStringData.status == 1)
                     {
@@ -129,8 +131,8 @@ namespace Battleship.src.Networking
 
                     if (receivedStringData.action == "a" && !isMyTurn)
                     {
-                        Console.WriteLine("IS MY TURN + " + receivedStringData.position[0] + " " + receivedStringData.position[1]);
-                        var relPos = new Vector2(receivedStringData.position[0], receivedStringData.position[1]);
+                        Console.WriteLine("IS MY TURN + " + receivedStringData.position[1] + " " + receivedStringData.position[0]);
+                        var relPos = new Vector2(receivedStringData.position[1], receivedStringData.position[0]);
                         foreach(GridTiny grid in GameControllers.tinyBoardGrids)
                         {
                             if(grid._relativePosition == relPos)
@@ -143,10 +145,9 @@ namespace Battleship.src.Networking
 
                     if (receivedStringData.action == "a" && isMyTurn)
                     {
-                        isMyTurn = false;
                         foreach (Grid grid in GameControllers.GridsList)
                         {
-                            if (grid._relativePosition == new Vector2(receivedStringData.position[0], receivedStringData.position[1]))
+                            if (grid._relativePosition == new Vector2(receivedStringData.position[1], receivedStringData.position[0]))
                             {
                                 grid.currentColor = Color.Red;
                                 grid.isDestroy = true;
