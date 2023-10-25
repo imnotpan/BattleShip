@@ -155,6 +155,9 @@ namespace Battleship.src.Networking
                         string msg = GameDataJSON.ServerJSON("b", 1);
                         SendResponse(msg, clientEndPoint);
 
+                        Console.WriteLine("PLAYER MATRIX: ");
+                        ServerGameplay.printMatrix(ServerGameplay.playerOneMatrix);
+
 
                         if (ServerGameplay.SinglePlayer)
                         {
@@ -236,7 +239,7 @@ namespace Battleship.src.Networking
 
                             if (ServerGameplay.PlayerOneCountShips == 0)
                             {
-                                string win2 = GameDataJSON.ServerJSON("w", 0);
+                                string win2 = GameDataJSON.ServerJSON("l", 1);
                                 SendResponse(win2, ServerGameplay.Players[0]);
                                 ServerGameplay = new ServerGameplay();
                                 return;

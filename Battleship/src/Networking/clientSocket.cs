@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading;
 using Battleship.src.Controllers.Enemy;
 using Battleship.src.Controllers.Grids;
+using Battleship.src.Scenes;
 using LiteNetLib.Utils;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json; // Asegúrate de tener instalado el paquete Newtonsoft.Json para trabajar con JSON
-
+using Nez;
 
 namespace Battleship.src.Networking
 {
@@ -101,6 +102,7 @@ namespace Battleship.src.Networking
                     if(receivedStringData.action == "c" && receivedStringData.status == 0)
                     {
                         Disconnect();
+
                     }
 
                     if(receivedStringData.action == "s" && receivedStringData.status == 1)
@@ -108,6 +110,7 @@ namespace Battleship.src.Networking
                         GameControllers.MainMenuController.StartGame();
                         GameControllers.GameStatesSystem.StartGame();
                         GameControllers.Board.setGridsState(false);
+
                     }
 
 
@@ -174,11 +177,13 @@ namespace Battleship.src.Networking
 
                         isConnected = false;
                         receiveThread.Join();
+
                     }
 
-                    if(receivedStringData.action == "l" && receivedStringData.status == 1)
+                    if (receivedStringData.action == "l" && receivedStringData.status == 1)
                     {
                         Console.WriteLine("PARTIDA PERDIDA");
+                        Core.Scene = new looseScreen();
 
                     }
 
@@ -186,6 +191,7 @@ namespace Battleship.src.Networking
                     if (receivedStringData.action == "w" && receivedStringData.status == 1)
                     {
                         Console.WriteLine("PARTIDA GANADA");
+                        Core.Scene = new winScreen();
 
                     }
 
